@@ -1,2 +1,2 @@
-# ProViewer
-Protein Visualisation plugin to Galaxy
+# mzIdentMLExtractor
+A java library to extract proteomics data from mzIdentML file
