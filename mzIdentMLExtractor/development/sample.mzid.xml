@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MzIdentML id="MS-GF+">
+    <SequenceCollection xmlns="http://psidev.info/psi/pi/mzIdentML/1.1">
+        <DBSequence length="146" id="DBSeq143">
+            <cvParam cvRef="PSI-MS" accession="MS:1001088"></cvParam>
+        </DBSequence>
+        <Peptide id="Pep7">
+            <PeptideSequence>MFLSFPTTK</PeptideSequence>
+            <Modification location="1" monoisotopicMassDelta="15.994915">
+                <cvParam cvRef="UNIMOD" accession="UNIMOD:35" name="Oxidation"></cvParam>
+            </Modification>
+        </Peptide>
+        <PeptideEvidence dBSequence_ref="DBSeq143" id="PepEv_160_1_18"></PeptideEvidence>
+        <PeptideEvidence dBSequence_ref="DBSeq143" id="PepEv_275_8_133"></PeptideEvidence>
+    </SequenceCollection>
+</MzIdentML>
