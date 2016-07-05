@@ -102,5 +102,3 @@ sudo sh run.sh
 
 * http://www.psidev.info/mzidentml
 * https://galaxyproject.org
-
-
