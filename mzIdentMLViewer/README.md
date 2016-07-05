@@ -1,29 +1,14 @@
 # mzIdentMLViewer
 
-This is an interactive web visualisation plug-in for the mzIdentML file within the Galaxy bioinformatics platform. mzIdentML is the standard format for reporting protein identification results in the context of mass spectrometry.
+This is an interactive web visualisation plug-in for the mzIdentML file within the Galaxy bioinformatics platform. mzIdentML is the standard format for reporting identifications in MS-based proteomics experiments.
 
 ## Installation
 
-This repository contains web plugin files along with galaxy local installation files. However, it is highly recommended to follow the instructions if you are integrating this plugin to your existing galaxy instance.
+Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already have Galaxy, please refer link: https://wiki.galaxyproject.org/Admin/GetGalaxy
 
-#### Step 1 - Install Galaxy Instance
+#### Step 1 - Install Galaxy Visualisation Plugin
 
-```bash
-# Clone the repository
-% git clone https://github.com/galaxyproject/galaxy/
-
-# Shift to master branch
-% cd galaxy
-% git checkout -b master origin/master
-
-# Run the server
-% sudo sh run.sh
-```
-You can find more details about galaxy installation at https://wiki.galaxyproject.org/Admin/GetGalaxy
-
-#### Step 2 - Install Galaxy Visualisation Plugin
-
-* First, you need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in <your galaxy directory>/config/) and search for visualization_plugins_directory setting. The defalut setting is as bellow:
+* First, you need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in <your galaxy directory>/config/) and search for visualization_plugins_directory setting. There, assign your visualisation directory as below, if it is not already asigned:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -33,13 +18,15 @@ visualization_plugins_directory = config/plugins/visualizations
 ```
 For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
-* Secondly, copy entire protviewer folder located in galaxy/config/plugins/visualizations in the repository to <your galaxy directory>/config/plugins/visualizations folder
-* Thirdly, go to galaxy/lib/galaxy/webapps/galaxy/api/ repository location. copy following files to exact location of your instance:
+* Secondly, copy entire protviewer folder to <your galaxy directory>/config/plugins/visualizations folder
+* Thirdly, go to <your galaxy directory>/lib/galaxy/webapps/galaxy/api/ location. There, copy following files which are in the webcontroller folder:
   * MzIdentMLHandler.py
   * MzIdentMLHandler.pyc
   * SequenceExtractor.py
   * SequenceExtractor.pyc
-* Finally, There is a file called datasets.py in the same location(galaxy/lib/galaxy/webapps/galaxy/api/). Import these modules first:
+* Finally, in your galaxy, you sould be able to find a file called datasets.py. There copy and paste following codes:
+
+1. Import these modules first:
 
 ```python
 from SequenceExtractor import SequenceExtractor
@@ -47,17 +34,17 @@ import os.path
 import subprocess
 ```
 
-* There, paste following code inside Class DatasetsController -> method show -> inside elif data_type == 'mzidentml' block:
+2. There, paste following code inside Class DatasetsController -> method show -> inside elif data_type == 'mzidentml' block:
 
 ```python
 datasetId = kwd.get('datasetId')
 filename = kwd.get('filename')
 rval = filename
 
-fname = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+fname = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
 if kwd.get('mode') == 'init':
   if os.path.isfile(fname) == False:
-    return subprocess.call(['java', '-jar', '/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLExtractor/dist/mzidParser.jar', filename, datasetId])
+    return subprocess.call(['java', '-jar', '/Users/myname/Documents/mzIdentMLVisualiser/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar', filename, datasetId])
   else:
     print "Info: Data loaded from the cache!"
 elif kwd.get('mode') == 'sequence':
@@ -71,15 +58,15 @@ elif kwd.get('mode') == 'sequence':
 
 Warning: mind your indentation!
 
-fname is the filename of your output json file. And also mzidParser.jar is the java library runnning in the background.
-Set these paths accoringly.
+3. set your file paths. fname is the filename of your output json file. And also mzIdentMLExtractor.jar is the java library runnning in the background.Set these paths here accoringly.
 
 ## Install Galaxy Tool
 
 #### Step 1 - Configure tool
 
 Locate the tool_conf.xml configuration file in <your galaxy directory>/config/ location.
-Add these parameters to anyware of  the file under <toolbox> tag
+Add these parameters to anyware of  the file under <toolbox> tag:
+
 ```XML
 <section name="mzIdentMLToJSON" id="mzIdentMLToJSON">
     <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
@@ -87,13 +74,17 @@ Add these parameters to anyware of  the file under <toolbox> tag
 ```
 #### Step 2 - copy tool
 
-Copy mzIdentMLToJSON tool located in galaxy/tools/mzIdentMLToJSON in the repository to the same location of your galaxy instance(<your galaxy directory>/tools/mzIdentMLToJSON)
+Copy mzIdentMLToJSON folder to your instance(<your galaxy directory>/tools/)
+This folder contains 
+ 1. wrapper(mzIdentMLToJSON.xml) 
+ 2. Python script(mzIdentMLToJSON.py)
+ 3. and java library(mzIdentMLExtractor.jar) for this tool
 
 Again, you need to change the output file path in mzIdentMLToJSON.py file similar to galaxy plugin
 
 ## Other details
 
-If you received any error called "port is already in used", this is nothing to do with plugin. However you can terminate the process and restart the server.
+If you received any error called "port is already in used", this is nothing to do with plugin. However, workaround for this would be terminating the process and restarting the server:
 
 ```bash
 # find the process. This will list down all the processes containing name python
