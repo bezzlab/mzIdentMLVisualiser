@@ -48,7 +48,7 @@ if kwd.get('mode') == 'init':
   else:
     print "Info: Data loaded from the cache!"
 elif kwd.get('mode') == 'sequence':
-  dbSequenceId =  kwd.get('dbSequenceId')
+  dbSequenceId = kwd.get('dbSequenceId')
   # extract the sequence
   seqEx = SequenceExtractor()
   sequence = seqEx.extract(filename, dbSequenceId)
