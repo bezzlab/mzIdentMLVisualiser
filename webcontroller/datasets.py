@@ -76,20 +76,29 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
             elif data_type == 'genome_data':
                 rval = self._get_genome_data( trans, dataset, kwd.get('dbkey', None) )
             elif data_type == 'mzidentml':
+                # unique security encoded ID for mzIdentML file
                 datasetId = kwd.get('datasetId')
+                # absolute filepath for the mzIdentML file which is trying to visualise
                 filename = kwd.get('filename')
+                # not a mantetory step
                 rval = filename
                 # CHANGE ROOT HERE
                 root = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/"
+                # protein.json temporary file path
                 tempFile = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
+                # java library path
                 libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+                # check whether it is an initial call (first time loading)
                 if kwd.get('mode') == 'init':
                     # could check for other temporary files too. Since protein is the main file, only it has been cheked
                     if os.path.isfile(tempFile) == False:
+                        # call java library with parameters
                         return subprocess.call(['java', '-jar', libraryLocation, filename, datasetId])
                     else:
                         print "Info: Data loaded from the cache!"
+                # if user expand a protein record, this get fired
                 elif kwd.get('mode') == 'sequence':
+                    # grab the unique ID of the protein record in mzIdentML
                     dbSequenceId =  kwd.get('dbSequenceId')
                     # extract the sequence
                     seqEx = SequenceExtractor()
