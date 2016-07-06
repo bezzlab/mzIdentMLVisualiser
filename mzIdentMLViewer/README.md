@@ -4,7 +4,7 @@ This is an interactive web visualisation plug-in for the [mzIdentML](http://www.
 
 ## Installation
 
-Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already have Galaxy, please refer link [here](https://wiki.galaxyproject.org/Admin/GetGalaxy)
+Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already have Galaxy, please refer link [here](https://wiki.galaxyproject.org/Admin/GetGalaxy).
 
 #### Step 1 - Install Galaxy Visualisation Plugin
 
@@ -53,7 +53,7 @@ elif data_type == 'mzidentml':
    return rval
 ```
     Warning: mind your indentation!
-  * set your file paths. 
+  * Set your file paths. 
     * tempfile - file path of your output json file. 
     * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder. 
     Set these paths here accoringly.
@@ -74,11 +74,11 @@ Add these parameters to anyware of  the file under <toolbox> tag:
 
 Copy mzIdentMLToJSON folder to your instance(<your galaxy directory>/tools/)
 This folder contains 
- 1. wrapper(mzIdentMLToJSON.xml) 
- 2. Python script(mzIdentMLToJSON.py)
- 3. and java library(mzIdentMLExtractor.jar) for this tool
+ 1. wrapper - mzIdentMLToJSON.xml 
+ 2. Python script - mzIdentMLToJSON.py
+ 3. java library - mzIdentMLExtractor.jar
 
-Again, you need to change the output file path in mzIdentMLToJSON.py file similar to galaxy plugin
+Again, you need to change the output file path in mzIdentMLToJSON.py file similar to you did in galaxy plugin installation.
 
 ## Useful links
 
