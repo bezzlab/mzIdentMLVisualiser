@@ -1,6 +1,6 @@
 # mzIdentMLViewer
 
-This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org).Here, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary files to speed up data loading for visualisation plugin. Although it is optional to use, We strongly recommend using the galaxy tool with your workflows prior visualisation plugin for a instant visualisation.
+This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). Here, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary files to speed up data loading for visualisation plugin. Although it is optional to use, We strongly recommend using the galaxy tool with your workflows prior visualisation plugin for a instant visualisation.
 
 ## Installation
 
