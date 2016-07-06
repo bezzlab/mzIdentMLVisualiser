@@ -43,7 +43,7 @@ You can find a sample configuration file in *sampleConfig* folder. For more deta
         datasetId = kwd.get('datasetId')
         
         # CHANGE ROOT HERE
-        root = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/"
+        root = "www.yoursite.com/your_galaxy/"
         tempFile = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
         libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
         
