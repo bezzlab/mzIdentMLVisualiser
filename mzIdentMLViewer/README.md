@@ -34,24 +34,24 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
    ```
   * There, paste following code inside Class DatasetsController -> method show:
    ```python
-elif data_type == 'mzidentml':
- filename = kwd.get('filename')
- datasetId = kwd.get('datasetId')
- javalib = "/Users/myname/Documents/mzIdentMLViewer/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
- tempfile = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
- if kwd.get('mode') == 'init':
-   if os.path.isfile(tempfile) == False:
-     return subprocess.call(['java', '-jar',javalib, filename, datasetId])
-   else:
-     print "Info: Data loaded from the cache!"
- elif kwd.get('mode') == 'sequence':
-   dbSequenceId = kwd.get('dbSequenceId')
-   # extract the sequence
-   seqEx = SequenceExtractor()
-   sequence = seqEx.extract(filename, dbSequenceId)
-   rval = sequence
-   return rval
-```
+      elif data_type == 'mzidentml':
+        filename = kwd.get('filename')
+        datasetId = kwd.get('datasetId')
+        javalib = "/Users/myname/Documents/mzIdentMLViewer/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+        tempfile = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+        if kwd.get('mode') == 'init':
+          if os.path.isfile(tempfile) == False:
+            return subprocess.call(['java', '-jar',javalib, filename, datasetId])
+          else:
+            print "Info: Data loaded from the cache!"
+        elif kwd.get('mode') == 'sequence':
+          dbSequenceId = kwd.get('dbSequenceId')
+          # extract the sequence
+          seqEx = SequenceExtractor()
+          sequence = seqEx.extract(filename, dbSequenceId)
+          rval = sequence
+          return rval
+    ```
     Warning: mind your indentation!
   * Set your file paths. 
     * tempfile - file path of your output json file. 
@@ -75,7 +75,7 @@ Add these parameters to anyware of  the file under <toolbox> tag:
 Copy mzIdentMLToJSON folder to your instance(<your galaxy directory>/tools/)
 This folder contains 
  1. wrapper - mzIdentMLToJSON.xml 
- 2. Python script - mzIdentMLToJSON.py
+ 2. python script - mzIdentMLToJSON.py
  3. java library - mzIdentMLExtractor.jar
 
 Again, you need to change the output file path in mzIdentMLToJSON.py file similar to you did in galaxy plugin installation.
