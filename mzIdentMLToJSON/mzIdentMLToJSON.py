@@ -21,9 +21,9 @@ def __main__():
 	datasetId = options.datasetid
 
 	root = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/"
-	fname = root+"config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
 
-	libraryLocation = '/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar'
+	fname = root+"config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+	libraryLocation = root+"tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
 
 	try:
 		# if file not already exists
