@@ -55,7 +55,7 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
     Warning: mind your indentation!
   * Set your file paths. 
     * tempfile - file path of your output json file. 
-    * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder. 
+    * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder(see Install Galaxy Tool section). 
     Set these paths here accoringly.
 
 ## Install Galaxy Tool
