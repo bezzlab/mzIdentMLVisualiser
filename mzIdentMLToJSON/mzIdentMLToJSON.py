@@ -22,12 +22,12 @@ def __main__():
 
 	root = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/"
 
-	fname = root+"config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+	tempFile = root+"config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
 	libraryLocation = root+"tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
 
 	try:
 		# if file not already exists
-		if os.path.isfile(fname) == False:
+		if os.path.isfile(tempFile) == False:
 			return subprocess.call(['java', '-jar', libraryLocation, filename, datasetId])
 		else:
 			print "Info: Data loaded from the cache!";

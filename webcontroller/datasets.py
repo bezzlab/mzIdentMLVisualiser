@@ -81,11 +81,11 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
                 rval = filename
                 # CHANGE ROOT HERE
                 root = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/"
-                fname = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
+                tempFile = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
                 libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
                 if kwd.get('mode') == 'init':
                     # could check for other temporary files too. Since protein is the main file, only it has been cheked
-                    if os.path.isfile(fname) == False:
+                    if os.path.isfile(tempFile) == False:
                         return subprocess.call(['java', '-jar', libraryLocation, filename, datasetId])
                     else:
                         print "Info: Data loaded from the cache!"
