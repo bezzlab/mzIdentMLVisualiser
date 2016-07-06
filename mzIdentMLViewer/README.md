@@ -1,10 +1,10 @@
 # mzIdentMLViewer
 
-This is an interactive web visualisation plug-in for the mzIdentML file within the Galaxy bioinformatics platform.
+This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). We strongly recommend to use galaxy tool with your workflows prior using visualisation plugin, as it will facilitate instant visualisation of the file.
 
 ## Installation
 
-Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already have Galaxy, please refer link: https://wiki.galaxyproject.org/Admin/GetGalaxy
+Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already have Galaxy, please refer link [here](https://wiki.galaxyproject.org/Admin/GetGalaxy)
 
 #### Step 1 - Install Galaxy Visualisation Plugin
 
@@ -37,23 +37,24 @@ import subprocess
 2. There, paste following code inside Class DatasetsController -> method show -> inside elif data_type == 'mzidentml' block:
 
 ```python
-datasetId = kwd.get('datasetId')
-filename = kwd.get('filename')
-rval = filename
+elif data_type == 'mzidentml':
+ datasetId = kwd.get('datasetId')
+ filename = kwd.get('filename')
+ rval = filename
 
-fname = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
-if kwd.get('mode') == 'init':
-  if os.path.isfile(fname) == False:
-    return subprocess.call(['java', '-jar', '/Users/myname/Documents/mzIdentMLVisualiser/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar', filename, datasetId])
-  else:
-    print "Info: Data loaded from the cache!"
-elif kwd.get('mode') == 'sequence':
-  dbSequenceId = kwd.get('dbSequenceId')
-  # extract the sequence
-  seqEx = SequenceExtractor()
-  sequence = seqEx.extract(filename, dbSequenceId)
-  rval = sequence
-  return sequence
+ fname = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+ if kwd.get('mode') == 'init':
+   if os.path.isfile(fname) == False:
+     return subprocess.call(['java', '-jar', '/Users/myname/Documents/mzIdentMLVisualiser/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar', filename, datasetId])
+   else:
+     print "Info: Data loaded from the cache!"
+ elif kwd.get('mode') == 'sequence':
+   dbSequenceId = kwd.get('dbSequenceId')
+   # extract the sequence
+   seqEx = SequenceExtractor()
+   sequence = seqEx.extract(filename, dbSequenceId)
+   rval = sequence
+   return sequence
 ```
 
 Warning: mind your indentation!
