@@ -28,7 +28,7 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
   * MzIdentMLHandler.pyc
   * SequenceExtractor.py
   * SequenceExtractor.pyc
-* Then, in your galaxy, you sould be able to find a file called datasets.py. There, copy and paste following codes:
+* Then, in your galaxy, you sould be able to find a file called **datasets.py**. There, copy and paste following codes:
 
   * Import these modules first:
    ```python
@@ -36,7 +36,7 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
       import os.path
       import subprocess
    ```
-  * There, paste following code inside Class *DatasetsController* -> method *show*:
+  * There, paste following code inside Class **DatasetsController** -> method **show**:
    ```python
       elif data_type == 'mzidentml':
         filename = kwd.get('filename')
