@@ -79,8 +79,3 @@ This folder contains
  3. java library - mzIdentMLExtractor.jar
 
 Again, you need to change the output file path in mzIdentMLToJSON.py file similar to you did in galaxy plugin installation.
-
-## Useful links
-
-* http://www.psidev.info/mzidentml
-* https://galaxyproject.org
