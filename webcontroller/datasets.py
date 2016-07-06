@@ -110,23 +110,6 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
             trans.response.status = 500
         return rval
 
-    # def _run_mzidparser( self, filename, **kwd):
-    #    print "function called"
-    #    return "hi"
-
-    # def get_Protein_seq(self, proteinid):
-    #     from Bio import Entrez
-    #     from Bio import SeqIO
-    #     from Bio.SeqRecord import SeqRecord
-
-    #     Entrez.email = "someone@qmul.ac.uk"
-    #     handle = Entrez.efetch(db="protein", id="Q9Y490", rettype="fasta", retmode="text")
-
-    #     for seq_record in SeqIO.parse(handle, "fasta"):
-    #         print ""
-    #     handle.close()
-    #     return seq_record.seq
-
     def _dataset_state( self, trans, dataset, **kwargs ):
         """
         Returns state of dataset.
