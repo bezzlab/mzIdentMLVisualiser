@@ -26,17 +26,14 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
   * SequenceExtractor.pyc
 * Finally, in your galaxy, you sould be able to find a file called datasets.py. There copy and paste following codes:
 
- 1. Import these modules first:
-
-```python
-from SequenceExtractor import SequenceExtractor
-import os.path
-import subprocess
-```
-
- 2. There, paste following code inside Class DatasetsController -> method show:
-
-```python
+  * Import these modules first:
+   ```python
+      from SequenceExtractor import SequenceExtractor
+      import os.path
+      import subprocess
+   ```
+  * There, paste following code inside Class DatasetsController -> method show:
+   ```python
 elif data_type == 'mzidentml':
  filename = kwd.get('filename')
  datasetId = kwd.get('datasetId')
@@ -55,13 +52,11 @@ elif data_type == 'mzidentml':
    rval = sequence
    return rval
 ```
-
-Warning: mind your indentation!
-
- 3. set your file paths. 
-  * tempfile - file path of your output json file. 
-  * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder. 
- Set these paths here accoringly.
+    Warning: mind your indentation!
+  * set your file paths. 
+    * tempfile - file path of your output json file. 
+    * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder. 
+    Set these paths here accoringly.
 
 ## Install Galaxy Tool
 
