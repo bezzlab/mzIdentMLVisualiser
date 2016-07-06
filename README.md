@@ -61,7 +61,7 @@ You can find a sample configuration file in *sampleConfig* folder. For more deta
           return rval
     ```
     Warning: Mind your indentation!
-  * Set your root path to **root** variable. 
+  * Set your root path to **root** variable. Root variable are used in two places: 
     * tempfile - file path of your output json file. 
     * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder(see Install Galaxy Tool section).
     
