@@ -6,9 +6,10 @@ This is an interactive web visualisation plug-in for the [mzIdentML](http://www.
 
 Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already have Galaxy, please refer link [here](https://wiki.galaxyproject.org/Admin/GetGalaxy).
 
-#### Step 1 - Install Galaxy Visualisation Plugin
+### Install Galaxy Visualisation Plugin
 
-* First, you need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in <your galaxy directory>/config/) and search for visualization_plugins_directory setting. There, assign your visualisation directory as below, if it is not already asigned:
+#### Step 1 - Enable visualisation from the configuration file 
+* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in <your galaxy directory>/config/) and search for visualization_plugins_directory setting. There, assign your visualisation directory as below, if it is not already asigned:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -18,8 +19,11 @@ visualization_plugins_directory = config/plugins/visualizations
 ```
 For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
-* Secondly, copy entire protviewer folder to <your galaxy directory>/config/plugins/visualizations folder
-* Thirdly, go to <your galaxy directory>/lib/galaxy/webapps/galaxy/api/ location. There, copy following files which are in the webcontroller folder:
+#### Step 2 - Copy visualisation plugin into visualizations folder
+* Copy entire protviewer folder to <your galaxy directory>/config/plugins/visualizations folder
+
+#### Step 3 - Copy Web Controller section
+* Go to <your galaxy directory>/lib/galaxy/webapps/galaxy/api/ location. There, copy following files which are in the webcontroller folder:
   * MzIdentMLHandler.py
   * MzIdentMLHandler.pyc
   * SequenceExtractor.py
@@ -58,7 +62,7 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
     * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder(see Install Galaxy Tool section). 
     Set these paths here accoringly.
 
-## Install Galaxy Tool
+### Install Galaxy Tool
 
 #### Step 1 - Configure tool
 
