@@ -9,7 +9,7 @@ Installation instructions are provided below. These instructions assume that you
 ### Install Galaxy Visualisation Plugin
 
 #### Step 1 - Enable visualisation from the configuration file 
-* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in ```<your galaxy directory>/config/```) and search for visualization_plugins_directory setting. There, assign your visualisation directory as below, if it is not already asigned:
+* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in ```<your galaxy directory>/config/```) and search for *visualization_plugins_directory* setting. There, assign your visualisation directory as below, if it is not already asigned:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -17,7 +17,7 @@ Installation instructions are provided below. These instructions assume that you
 # with '/'.
 visualization_plugins_directory = config/plugins/visualizations
 ```
-For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
+Sample configuration file is given in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
 #### Step 2 - Copy visualisation plugin into visualizations folder
 * Copy entire protviewer folder to <your galaxy directory>/config/plugins/visualizations folder
@@ -74,6 +74,9 @@ Add these parameters to anyware of  the file under <toolbox> tag:
     <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
 </section>
 ```
+
+Sample configuration file is given in *sampleConfig* folder.
+
 #### Step 2 - copy tool
 
 Copy mzIdentMLToJSON folder to your instance(```<your galaxy directory>/tools/```)
