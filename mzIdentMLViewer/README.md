@@ -9,7 +9,7 @@ Installation instructions are provided below. These instructions assume that you
 ### Install Galaxy Visualisation Plugin
 
 #### Step 1 - Enable visualisation from the configuration file 
-* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in <your galaxy directory>/config/) and search for visualization_plugins_directory setting. There, assign your visualisation directory as below, if it is not already asigned:
+* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in ```<your galaxy directory>/config/```) and search for visualization_plugins_directory setting. There, assign your visualisation directory as below, if it is not already asigned:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -23,12 +23,12 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 * Copy entire protviewer folder to <your galaxy directory>/config/plugins/visualizations folder
 
 #### Step 3 - Copy Web Controller section
-* Go to <your galaxy directory>/lib/galaxy/webapps/galaxy/api/ location. There, copy following files which are in the webcontroller folder:
+* Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location. There, copy following files which are in the webcontroller folder:
   * MzIdentMLHandler.py
   * MzIdentMLHandler.pyc
   * SequenceExtractor.py
   * SequenceExtractor.pyc
-* Finally, in your galaxy, you sould be able to find a file called datasets.py. There copy and paste following codes:
+* Then, in your galaxy, you sould be able to find a file called datasets.py. There, copy and paste following codes:
 
   * Import these modules first:
    ```python
@@ -66,7 +66,7 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
 #### Step 1 - Configure tool
 
-Locate the tool_conf.xml configuration file in <your galaxy directory>/config/ location.
+Locate the tool_conf.xml configuration file in ```<your galaxy directory>/config/``` location.
 Add these parameters to anyware of  the file under <toolbox> tag:
 
 ```XML
@@ -76,7 +76,7 @@ Add these parameters to anyware of  the file under <toolbox> tag:
 ```
 #### Step 2 - copy tool
 
-Copy mzIdentMLToJSON folder to your instance(<your galaxy directory>/tools/)
+Copy mzIdentMLToJSON folder to your instance(```<your galaxy directory>/tools/```)
 This folder contains 
  1. wrapper - mzIdentMLToJSON.xml 
  2. python script - mzIdentMLToJSON.py
