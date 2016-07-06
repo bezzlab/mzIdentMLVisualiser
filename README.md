@@ -20,7 +20,7 @@ visualization_plugins_directory = config/plugins/visualizations
 Sample configuration file is given in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
 #### Step 2 - Copy visualisation plugin into visualizations folder
-* Copy entire protviewer folder to <your galaxy directory>/config/plugins/visualizations folder
+* Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations``` folder
 
 #### Step 3 - Copy Web Controller section
 * Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location. There, copy following files which are in the webcontroller folder:
