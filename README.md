@@ -41,8 +41,12 @@ You can find a sample configuration file in *sampleConfig* folder. For more deta
       elif data_type == 'mzidentml':
         filename = kwd.get('filename')
         datasetId = kwd.get('datasetId')
-        javalib = "/Users/yourname/Documents/mzIdentMLViewer/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
-        tempfile = "/Users/yourname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+        
+        # CHANGE ROOT HERE
+        root = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLViewer/galaxy/"
+        tempFile = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
+        libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+        
         if kwd.get('mode') == 'init':
           if os.path.isfile(tempfile) == False:
             return subprocess.call(['java', '-jar',javalib, filename, datasetId])
@@ -57,10 +61,11 @@ You can find a sample configuration file in *sampleConfig* folder. For more deta
           return rval
     ```
     Warning: Mind your indentation!
-  * Set your file paths. 
+  * Set your root path to **root** variable. 
     * tempfile - file path of your output json file. 
-    * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder(see Install Galaxy Tool section). 
-    Set these paths here accoringly.
+    * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder(see Install Galaxy Tool section).
+    
+Make sure you have set these paths accurately. You can find a sample *datasets.py* file in *webcontroller* folder
 
 ### Install Galaxy Tool
 
@@ -85,6 +90,6 @@ This folder contains
  2. python script - mzIdentMLToJSON.py
  3. java library - mzIdentMLExtractor.jar
 
-Again, you need to change the output file path in mzIdentMLToJSON.py file similar to you did in galaxy plugin installation.
+Again, you need to set your root path to **root** variable in mzIdentMLToJSON.py file.
 
 **Note:** You need to restart server to reflect the changes. Users have to login to the server in order to use visualisation functionality.
