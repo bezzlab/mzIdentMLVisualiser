@@ -9,7 +9,7 @@ Installation instructions are provided below. These instructions assume that you
 ### Install Galaxy Visualisation Plugin
 
 #### Step 1 - Enable visualisation from the configuration file 
-* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your galaxy.ini file (located in ```<your galaxy directory>/config/```) and search for *visualization_plugins_directory* setting. There, assign your visualisation directory as below, if it is not already asigned:
+* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```) and search for *visualization_plugins_directory* setting. There, assign your visualisation directory as below, if it is not already asigned:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -17,10 +17,10 @@ Installation instructions are provided below. These instructions assume that you
 # with '/'.
 visualization_plugins_directory = config/plugins/visualizations
 ```
-Sample configuration file is given in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
+You can find a sample configuration file in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
 #### Step 2 - Copy visualisation plugin into visualizations folder
-* Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations``` folder
+* Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
 
 #### Step 3 - Copy Web Controller section
 * Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location. There, copy following files which are in the webcontroller folder:
@@ -41,8 +41,8 @@ Sample configuration file is given in *sampleConfig* folder. For more details: h
       elif data_type == 'mzidentml':
         filename = kwd.get('filename')
         datasetId = kwd.get('datasetId')
-        javalib = "/Users/myname/Documents/mzIdentMLViewer/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
-        tempfile = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+        javalib = "/Users/yourname/Documents/mzIdentMLViewer/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+        tempfile = "/Users/yourname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
         if kwd.get('mode') == 'init':
           if os.path.isfile(tempfile) == False:
             return subprocess.call(['java', '-jar',javalib, filename, datasetId])
@@ -56,7 +56,7 @@ Sample configuration file is given in *sampleConfig* folder. For more details: h
           rval = sequence
           return rval
     ```
-    Warning: mind your indentation!
+    Warning: Mind your indentation!
   * Set your file paths. 
     * tempfile - file path of your output json file. 
     * javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder(see Install Galaxy Tool section). 
