@@ -1,6 +1,6 @@
 # mzIdentMLViewer
 
-This is an interactive web visualisation plug-in for the mzIdentML file within the Galaxy bioinformatics platform. mzIdentML is the standard format for reporting identifications in MS-based proteomics experiments.
+This is an interactive web visualisation plug-in for the mzIdentML file within the Galaxy bioinformatics platform.
 
 ## Installation
 
@@ -81,22 +81,6 @@ This folder contains
  3. and java library(mzIdentMLExtractor.jar) for this tool
 
 Again, you need to change the output file path in mzIdentMLToJSON.py file similar to galaxy plugin
-
-## Other details
-
-If you received any error called "port is already in used", this is nothing to do with plugin. However, workaround for this would be terminating the process and restarting the server:
-
-```bash
-# find the process. This will list down all the processes containing name python
-ps -fA | grep python
-
-# find which one is related with galaxy.ini and find process id (ps_id)
-# terminate process
-sudo kill ps_id
-
-# restart galaxy
-sudo sh run.sh
-```
 
 ## Useful links
 
