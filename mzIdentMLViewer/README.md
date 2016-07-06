@@ -34,18 +34,17 @@ import os.path
 import subprocess
 ```
 
-2. There, paste following code inside Class DatasetsController -> method show -> inside elif data_type == 'mzidentml' block:
+2. There, paste following code inside Class DatasetsController -> method show:
 
 ```python
 elif data_type == 'mzidentml':
- datasetId = kwd.get('datasetId')
  filename = kwd.get('filename')
- rval = filename
-
- fname = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+ datasetId = kwd.get('datasetId')
+ javalib = "/Users/myname/Documents/mzIdentMLViewer/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+ tempfile = "/Users/myname/Documents/mzIdentMLViewer/galaxy/config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
  if kwd.get('mode') == 'init':
-   if os.path.isfile(fname) == False:
-     return subprocess.call(['java', '-jar', '/Users/myname/Documents/mzIdentMLVisualiser/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar', filename, datasetId])
+   if os.path.isfile(tempfile) == False:
+     return subprocess.call(['java', '-jar',javalib, filename, datasetId])
    else:
      print "Info: Data loaded from the cache!"
  elif kwd.get('mode') == 'sequence':
@@ -54,12 +53,15 @@ elif data_type == 'mzidentml':
    seqEx = SequenceExtractor()
    sequence = seqEx.extract(filename, dbSequenceId)
    rval = sequence
-   return sequence
+   return rval
 ```
 
 Warning: mind your indentation!
 
-3. set your file paths. fname is the filename of your output json file. And also mzIdentMLExtractor.jar is the java library runnning in the background.Set these paths here accoringly.
+3. set your file paths. 
+*** tempfile - file path of your output json file. 
+*** javalib - file path of the java library(mzIdentMLExtractor.jar) located in mzIdentMLToJSON folder. 
+Set these paths here accoringly.
 
 ## Install Galaxy Tool
 
