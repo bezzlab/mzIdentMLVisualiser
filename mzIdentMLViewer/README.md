@@ -36,7 +36,7 @@ For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
       import os.path
       import subprocess
    ```
-  * There, paste following code inside Class DatasetsController -> method show:
+  * There, paste following code inside Class *DatasetsController* -> method *show*:
    ```python
       elif data_type == 'mzidentml':
         filename = kwd.get('filename')
