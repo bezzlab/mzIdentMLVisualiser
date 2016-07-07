@@ -17,7 +17,7 @@ Installation instructions are provided below. These instructions assume that you
 # with '/'.
 visualization_plugins_directory = config/plugins/visualizations
 ```
-As a guidance for step 1, we have provided a sample configuration file in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
+As a guidance to above step, we have provided a sample configuration file(galaxy.ini) in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
 #### Step 2 - Copy visualisation plugin into visualizations folder
 * Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
