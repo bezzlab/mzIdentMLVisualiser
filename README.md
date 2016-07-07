@@ -41,7 +41,7 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
       elif data_type == 'mzidentml':
         filename = kwd.get('filename')
         datasetId = kwd.get('datasetId')
-        
+        rval = filename
         # CHANGE ROOT HERE
         root = "www.yoursite.com/your_galaxy/"
         tempFile = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
