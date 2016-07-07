@@ -1,6 +1,6 @@
 # mzIdentMLVisualiser
 
-This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). Here, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary files to speed up data loading for visualisation plugin. Although it is optional to use, We strongly recommend using the galaxy tool with your workflows prior visualisation plugin for a instant visualisation.
+This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). Here, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. Although it is optional to use, we strongly recommend to use this galaxy tool prior to visualize mzIdentML files for a much faster visualising speed.
 
 ## Installation
 
@@ -17,7 +17,7 @@ Installation instructions are provided below. These instructions assume that you
 # with '/'.
 visualization_plugins_directory = config/plugins/visualizations
 ```
-You can find a sample configuration file in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
+As a guidance for step 1, we have provided a sample configuration file in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
 #### Step 2 - Copy visualisation plugin into visualizations folder
 * Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
