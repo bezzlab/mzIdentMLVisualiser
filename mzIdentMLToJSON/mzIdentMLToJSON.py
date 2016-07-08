@@ -11,9 +11,6 @@ usage: ProViewer.py  --filename="$input" --datasetid=$__app__.security.encode_id
 import optparse
 import os
 import subprocess
-#import ConfigParser
-# Python 3.0 onwords
-#import configparser
 
 
 def __main__():
@@ -25,20 +22,11 @@ def __main__():
    	(options, args) = parser.parse_args()
 	inputfile = options.filename
 	datasetId = options.datasetid
-
-	# load parameters from the config/galaxy.ini configuration file
-	#config = ConfigParser.ConfigParser()
-	# Python 3.0 onwords
-	#config = configparser.ConfigParser()
-	#config.read('../../config/galaxy.ini')
-	#root = config.get('mzidentml','root')
-	#print "root", root
-
-	# CHANGE ROOT HERE - absolute file path to your galaxy directory
-	root = "/Users/sureshhewapathirana/Downloads/galaxy/"
-	outputfile = root + "config/plugins/visualizations/protviewer/static/data/"
-	tempFile = root + "config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
-	libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+	print os.getcwd()
+	# navigate to <your galaxy directory> and append paths
+	outputfile = os.path.join(os.path.abspath('../../../../..'),  "config/plugins/visualizations/protviewer/static/data/")
+	tempFile = os.path.join(os.path.abspath('../../../../..'),  "config/plugins/visualizations/protviewer/static/data/", datasetId, "_protein.json")
+	libraryLocation = os.path.join(os.path.abspath('../../../../..'),  "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar")
 	multithreading = "true"
 
 	try:

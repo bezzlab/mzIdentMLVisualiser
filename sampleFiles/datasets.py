@@ -79,28 +79,31 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
             elif data_type == 'genome_data':
                 rval = self._get_genome_data( trans, dataset, kwd.get('dbkey', None) )
             elif data_type == 'mzidentml':
+                # input mzIdentML file
                 inputfile = kwd.get('filename')
+                # unique sequrity encoded id assigned for the input file
                 datasetId = kwd.get('datasetId')
                 rval = inputfile
-                # CHANGE ROOT HERE - absolute file path to your galaxy directory
-                root = "/Users/sureshhewapathirana/Downloads/galaxy/"
-                outputfile = root + "config/plugins/visualizations/protviewer/static/data/"
-                tempFile = root + "config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
-                libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+                # <your galaxy directory> + paths
+                outputfile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/"
+                tempFile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
+                libraryLocation = os.getcwd() + "/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
                 multithreading = "true"
-
+                # initial run
                 if kwd.get('mode') == 'init':
-                  if os.path.isfile(tempFile) == False:
-                    return subprocess.call(['java', '-jar',libraryLocation, inputfile, outputfile, datasetId, multithreading])
-                  else:
-                    print "Info: Data loaded from the cache!"
+                    # if temporary JSON files not generated
+                    if os.path.isfile(tempFile) == False:
+                        # call mzIdentMLExtractor java library
+                        return subprocess.call(['java', '-jar',libraryLocation, inputfile, outputfile, datasetId, multithreading])
+                    else:
+                        print "Info: Data loaded from the cache!"
                 elif kwd.get('mode') == 'sequence':
-                  dbSequenceId = kwd.get('dbSequenceId')
-                  # extract the sequence
-                  seqEx = SequenceExtractor()
-                  sequence = seqEx.extract(inputfile, dbSequenceId)
-                  rval = sequence
-                  return rval
+                    dbSequenceId = kwd.get('dbSequenceId')
+                    # extract the sequence
+                    seqEx = SequenceExtractor()
+                    sequence = seqEx.extract(inputfile, dbSequenceId)
+                    rval = sequence
+                    return rval
             else:
                 # Default: return dataset as dict.
                 if hda_ldda == 'hda':
