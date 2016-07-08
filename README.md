@@ -93,12 +93,12 @@ Add these parameters to anyware of  the file under <toolbox> tag:
 </section>
 ```
 
-As a giudance for above step, sample configuration file is given in *sampleFiles* folder.
+We have created a seperate section called "mzIdentMLToJSON" in the tool panel. However, you can add this tool to one of your existing sections. As a giudance for above step, sample configuration file is given in *sampleFiles* folder.
 
 #### Step 2 - copy tool
 
-Copy mzIdentMLToJSON folder to your instance(```<your galaxy directory>/tools/```)
-This folder contains
+Copy mzIdentMLToJSON folder of the downloaded repository to your galaxy instance at ```<your galaxy directory>/tools/```.
+This folder contains:
  1. wrapper - mzIdentMLToJSON.xml
  2. python script - mzIdentMLToJSON.py
  3. java library - mzIdentMLExtractor.jar
