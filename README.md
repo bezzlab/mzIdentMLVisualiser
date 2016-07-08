@@ -56,10 +56,9 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
         root = "www.yoursite.com/your_galaxy/"
         tempFile = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
         libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
-        
         if kwd.get('mode') == 'init':
           if os.path.isfile(tempFile) == False:
-            return subprocess.call(['java', '-jar',javalib, filename, datasetId])
+            return subprocess.call(['java', '-jar',libraryLocation, filename, datasetId])
           else:
             print "Info: Data loaded from the cache!"
         elif kwd.get('mode') == 'sequence':
