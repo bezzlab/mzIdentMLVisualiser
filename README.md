@@ -8,7 +8,7 @@ This is an interactive web visualisation plug-in for the [mzIdentML](http://www.
 * webcontroller - Galaxy plugin (Server side)
 
 Galaxy visualisation plugin files are splitted into two folders which are called protviewer and webcontroller.
-Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You need to integrate both plugin and tool in order to work with the plugin, because galaxy tool contains dependancy files for the plugin. Although it is mandatory to integrate both plugin and tool, after the integration, you can use only plugin alone without using galaxy tool. However, we strongly recommend to use this galaxy tool prior to visualize mzIdentML files for a much faster visualising speed.
+Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You need to integrate both plugin and tool in order to work with the visualisation, because galaxy tool contains dependancy files for the visualisation plugin. Although it is mandatory to integrate both plugin and tool, after the integration, you can use plugin alone without using galaxy tool. However, we strongly recommend to use this galaxy tool prior to visualize mzIdentML files for a much faster visualising speed.
 
 ## Installation
 
@@ -19,7 +19,7 @@ In order to proceed, please download this repository to your machine by cloning 
 ### Install Galaxy Visualisation Plugin
 
 #### Step 1 - Enable visualisation from the configuration file 
-* You need to make sure you have enabled visualisation plugins on your Galaxy installation. Go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```) and search for *visualization_plugins_directory* setting. There, assign your visualisation directory as below, if it is not already asigned:
+* You need to make sure, you have enabled visualisation plugins on your Galaxy installation. Go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```) and search for *visualization_plugins_directory* setting. There, assign your visualisation directory as below, if it is not already asigned:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -27,7 +27,7 @@ In order to proceed, please download this repository to your machine by cloning 
 # with '/'.
 visualization_plugins_directory = config/plugins/visualizations
 ```
-As a guidance to above step, we have provided a sample configuration file(galaxy.ini) in *sampleConfig* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
+As a guidance to above step, we have provided a sample configuration file(galaxy.ini) in *sampleFiles* folder. For more details: https://wiki.galaxyproject.org/VisualizationsRegistry
 
 #### Step 2 - Copy visualisation plugin into visualizations folder
 * Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
