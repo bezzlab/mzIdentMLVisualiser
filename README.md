@@ -108,6 +108,6 @@ This folder contains:
 
 ## How to use
 
-<img src="sampleFiles/snapshots/menu.png" alt="menu" style="width: 100px;height: 300px;"/>
+<img src="sampleFiles/snapshots/menu.png" alt="menu"  width="248" height="333"/>
 
 
