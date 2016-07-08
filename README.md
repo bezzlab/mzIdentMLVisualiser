@@ -58,7 +58,7 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
         libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
         
         if kwd.get('mode') == 'init':
-          if os.path.isfile(tempfile) == False:
+          if os.path.isfile(tempFile) == False:
             return subprocess.call(['java', '-jar',javalib, filename, datasetId])
           else:
             print "Info: Data loaded from the cache!"
