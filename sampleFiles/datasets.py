@@ -98,7 +98,7 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
                   dbSequenceId = kwd.get('dbSequenceId')
                   # extract the sequence
                   seqEx = SequenceExtractor()
-                  sequence = seqEx.extract(filename, dbSequenceId)
+                  sequence = seqEx.extract(inputfile, dbSequenceId)
                   rval = sequence
                   return rval
             else:
