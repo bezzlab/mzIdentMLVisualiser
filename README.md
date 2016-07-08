@@ -113,3 +113,8 @@ Users *MUST* login to the server in order to use visualisation functionality. Th
 <img src="sampleFiles/snapshots/menu.png" alt="menu"  width="248" height="333"/>
 
 Time taken to load data is depends on the file size. 
+
+## How to use visualisation tool
+
+<img src="sampleFiles/snapshots/galaxytool.png" alt="How to used Galaxy Tool"/>
+
