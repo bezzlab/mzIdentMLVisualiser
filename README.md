@@ -78,7 +78,7 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
                 rval = sequence
                 return rval
     ```
-    Warning: Mind your indentation! As a giudance for above step, you can find a sample *datasets.py* file in *sampleFiles* folder
+    Warning: Mind your indentation! As a guidance for above step, you can find a sample *datasets.py* file in *sampleFiles* folder
 
 ### Install Galaxy Tool
 
@@ -93,7 +93,7 @@ Add these parameters to anyware of  the file under <toolbox> tag:
 </section>
 ```
 
-We have created a seperate section called "mzIdentMLToJSON" in the tool panel. However, you can add this tool to one of your existing sections. As a giudance for above step, sample configuration file is given in *sampleFiles* folder.
+We have created a seperate section called "mzIdentMLToJSON" in the tool panel. However, you can add this tool to one of your existing sections. As a guidance for above step, sample configuration file is given in *sampleFiles* folder.
 
 #### Step 2 - copy tool
 
