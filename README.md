@@ -106,9 +106,9 @@ This folder contains:
 
 **Note:** You need to restart server to reflect the changes. 
 
-## How to use
+## How to use visualisation plugin
 
-Users *MUST* login to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). You can select visualisation menu by click on the visualisation button:
+Users *MUST* login to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). You can select visualisation menu by click on the visualisation button of the data file from the history panel:
 
 <img src="sampleFiles/snapshots/menu.png" alt="menu"  width="248" height="333"/>
 
