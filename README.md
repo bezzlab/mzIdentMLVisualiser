@@ -108,5 +108,6 @@ This folder contains:
 
 ## How to use
 
-![Alt text](sampleFiles/snapshots/menu.png)
+<img src="sampleFiles/snapshots/menu.png" alt="menu" style="width: 100px;height: 300px;"/>
+
 
