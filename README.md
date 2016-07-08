@@ -105,3 +105,8 @@ This folder contains:
  4. java library dependancies - lib folder
 
 **Note:** You need to restart server to reflect the changes. Users have to login to the server in order to use visualisation functionality.
+
+## How to use
+
+![Alt text](sampleFiles/snapshots/menu.png)
+
