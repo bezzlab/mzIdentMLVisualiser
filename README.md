@@ -104,10 +104,12 @@ This folder contains:
  3. java library - mzIdentMLExtractor.jar
  4. java library dependancies - lib folder
 
-**Note:** You need to restart server to reflect the changes. Users have to login to the server in order to use visualisation functionality.
+**Note:** You need to restart server to reflect the changes. 
 
 ## How to use
 
+Users *MUST* login to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). You can select visualisation menu by click on the visualisation button:
+
 <img src="sampleFiles/snapshots/menu.png" alt="menu"  width="248" height="333"/>
 
-
+Time taken to load data is depends on the file size. 
