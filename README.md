@@ -48,27 +48,28 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
    ```
   * There, paste following code inside Class **DatasetsController** -> method **show**:
    ```python
-      elif data_type == 'mzidentml':
-        filename = kwd.get('filename')
-        datasetId = kwd.get('datasetId')
-        rval = filename
-        # CHANGE ROOT HERE
-        root = "www.yoursite.com/your_galaxy/"
-        tempFile = root + "config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
-        libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
-        
-        if kwd.get('mode') == 'init':
-          if os.path.isfile(tempfile) == False:
-            return subprocess.call(['java', '-jar',javalib, filename, datasetId])
-          else:
-            print "Info: Data loaded from the cache!"
-        elif kwd.get('mode') == 'sequence':
-          dbSequenceId = kwd.get('dbSequenceId')
-          # extract the sequence
-          seqEx = SequenceExtractor()
-          sequence = seqEx.extract(filename, dbSequenceId)
-          rval = sequence
-          return rval
+        elif data_type == 'mzidentml':
+         inputfile = kwd.get('filename')
+         datasetId = kwd.get('datasetId')
+         rval = inputfile
+         # CHANGE ROOT HERE - absolute file path to your galaxy directory
+         root = "/Users/sureshhewapathirana/Downloads/galaxy/"
+         outputfile = root + "config/plugins/visualizations/protviewer/static/data/"
+         tempFile = root + "config/plugins/visualizations/protviewer/static/data/"+datasetId+"_protein.json"
+         libraryLocation = root + "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+         multithreading = "true"
+         if kwd.get('mode') == 'init':
+           if os.path.isfile(tempFile) == False:
+             return subprocess.call(['java', '-jar',libraryLocation, inputfile, outputfile, datasetId, multithreading])
+           else:
+             print "Info: Data loaded from the cache!"
+         elif kwd.get('mode') == 'sequence':
+           dbSequenceId = kwd.get('dbSequenceId')
+           # extract the sequence
+           seqEx = SequenceExtractor()
+           sequence = seqEx.extract(inputfile, dbSequenceId)
+           rval = sequence
+           return rval
     ```
     Warning: Mind your indentation!
   * Set your root path to **root** variable. As a giudance for above step, you can find a sample *datasets.py* file in *sampleFiles* folder
@@ -95,7 +96,7 @@ This folder contains
  1. wrapper - mzIdentMLToJSON.xml 
  2. python script - mzIdentMLToJSON.py
  3. java library - mzIdentMLExtractor.jar
- 4. library dependancies - lib folder
+ 4. java library dependancies - lib folder
 
 Again, you need to set your root/absolute path of <your galaxy directory> to **root** variable in mzIdentMLToJSON.py file.
 
