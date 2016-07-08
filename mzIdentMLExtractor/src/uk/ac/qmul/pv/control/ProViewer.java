@@ -7,10 +7,6 @@ package uk.ac.qmul.pv.control;
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.XMLConfiguration;
 import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.qmul.pv.db.DatabaseAccess;
@@ -29,24 +25,15 @@ public class ProViewer {
         String outputFile = "";
         boolean isThreading = true;
 
-        try {
-            XMLConfiguration config = new XMLConfiguration("config.xml");
-
-            outputFile = config.getString("OutputFilePath");
-            isThreading = Boolean.parseBoolean(config.getString("MultiThreading"));
-
-            // if input file passed as a argument, take it; 
-            // otherviews read from the configuration XML file 
-            if (args.length == 2) {
-                inputFile = args[0];
-                datasetId = args[1];
-            } else {
-                inputFile = config.getString("InputFile");
-            }
-
-        } catch (ConfigurationException ex) {
-            System.out.println("Configuration Error:" + ex.getMessage());
-            Logger.getLogger(ProViewer.class.getName()).log(Level.SEVERE, null, ex);
+        // get parameters from the command line
+        if (args.length == 4) {
+            inputFile = args[0];
+            outputFile = args[1];
+            datasetId = args[2];
+            isThreading = Boolean.parseBoolean(args[3]);
+        } else {
+            System.out.println("You must pass 4 parameters!");
+            System.exit(0);
         }
 
         // appending datasetId to outpuf filenames
@@ -58,12 +45,11 @@ public class ProViewer {
         System.out.println("Input File :" + inputFile);
         System.out.println("outputFile:" + outputFile);
 
-
         DatabaseAccess db = DatabaseAccess.getInstance(inputFile);
-       
+
         Map<String, DBSequence> dbSequenceIdHashMap = db.getDbSequenceIdHashMap();
-        Map<String, PeptideEvidence> peptideEvidenceMap = db.getPeptideEvidenceIdHashMap();  
-        
+        Map<String, PeptideEvidence> peptideEvidenceMap = db.getPeptideEvidenceIdHashMap();
+
         DataExtractor metadataHandler = new MetadataExtractor(inputFile, outputFile + "_metadata.json");
         DataExtractor proteinHandler = new ProteinExtractor(inputFile, outputFile + "_protein.json", dbSequenceIdHashMap, peptideEvidenceMap);
         DataExtractor peptideHandler = new PeptideExtractor(inputFile, outputFile + "_peptide.json", dbSequenceIdHashMap, peptideEvidenceMap);

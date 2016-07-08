@@ -63,10 +63,8 @@ public class DatabaseAccess {
     public static DatabaseAccess getInstance(String inputfile) {
         try {
             if (instance == null) {
-                System.out.println("First instance is null");
                 synchronized (DatabaseAccess.class) {
                     if (instance == null) {
-                        System.out.println("Second instance is null");
                         instance = new DatabaseAccess(inputfile);
                     }
                 }

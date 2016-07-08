@@ -13,7 +13,7 @@ class MzIdentMLHandler(xml.sax.ContentHandler):
     This is a handler class which override the functionality of default SAX handler.
     This provides overridden methods of SAX handler interface. This contains main
     three methods: startElement,endElement and characters. While streaming the file,
-    once we found the sequence, we immediately terminate the execution by forcibly 
+    once we found the sequence, we immediately terminate the execution by forcibly
     raising an exception along with the sequence.
     """
 
