@@ -114,13 +114,12 @@ That's it! You are ready to use the visualisation tool.
 
 ## How to use visualisation plugin
 
-Users *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). You can select visualisation menu by click on the visualisation button of the data file from the history panel:
-
 <img src="sampleFiles/snapshots/how_to_use.png" alt="menu"  width="1137" height="373"/>
 
-Time taken to load data is depends on the file size.
+Users *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). Once you upload mzIdentML file(.mzid file extension), it will appear in the history panel. You can select visualisation menu by click on the visualisation button of the input file.Time taken to load data is depends on the file size.
 
 ## How to use visualisation tool
 
 <img src="sampleFiles/snapshots/galaxytool.png" alt="How to used Galaxy Tool"/>
 
+You can integrate tool into your protein identification workflows or can execute seperately. The output mzIdentML file is the input for the tool.
