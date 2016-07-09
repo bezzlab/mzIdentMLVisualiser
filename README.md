@@ -35,7 +35,7 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
 * Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
 
 #### Step 3 - Copy Web Controller section
-*  *webcontroller* directory of the downloaded repository contains following four files:
+*  *webcontroller* directory of the downloaded repository(zip folder) contains following four files:
   * MzIdentMLHandler.py
   * MzIdentMLHandler.pyc
   * SequenceExtractor.py
