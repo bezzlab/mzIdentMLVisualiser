@@ -21,7 +21,7 @@ In order to proceed, please download this repository to your machine by cloning 
 ### Install Galaxy Visualisation Plugin
 
 #### Step 1 - Enable visualisation from the configuration file
-* You need to make sure, you have enabled visualisation plugins on your Galaxy installation. Go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```) and search for *visualization_plugins_directory* setting. There, assign your visualisation directory as below, if it is not already asigned:
+* You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory as below by uncommenting the line :
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -29,13 +29,13 @@ In order to proceed, please download this repository to your machine by cloning 
 # with '/'.
 visualization_plugins_directory = config/plugins/visualizations
 ```
-As a guidance to above step, we have provided a sample configuration file(galaxy.ini) in *sampleConfig* folder.
+As a guidance to above step, we have provided a sample configuration file(galaxy.ini) in *sampleFiles* folder.
 
-#### Step 2 - Copy visualisation plugin into visualizations folder
-* Copy entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
+#### Step 2 - Copy visualisation plugin into your visualisations directory
+* Copy the given entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
 
-#### Step 3 - Copy Web Controller section
-*  *webcontroller* directory of the downloaded repository(zip folder) contains following four files:
+#### Step 3 - Copy Web Controller files
+*  You are given four files in the *webcontroller* folder with the mzIdentMLVisualiser repository which are namely:
   * MzIdentMLHandler.py
   * MzIdentMLHandler.pyc
   * SequenceExtractor.py
@@ -84,31 +84,39 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
 
 #### Step 1 - Configure tool
 
-Locate the tool_conf.xml configuration file in ```<your galaxy directory>/config/``` location.
-Add these parameters to anyware of  the file under <toolbox> tag:
+Locate the *tool_conf.xml* configuration file in ```<your galaxy directory>/config/``` location. If you dont find a *tool_conf.xml* file, but have *tool_conf.xml.sample* file, make a copy of it and rename new file as *tool_conf.xml*
+There, add these parameters to anyware of  the file under <toolbox> tag:
 
 ```XML
-<section name="mzIdentMLToJSON" id="mzIdentMLToJSON">
+<section id="PSI" name="PSI Standards" >
     <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
 </section>
 ```
 
-We have created a seperate section called "mzIdentMLToJSON" in the tool panel. However, you can add this tool to one of your existing sections. As a guidance for above step, sample configuration file is given in *sampleFiles* folder.
+We have created a seperate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing sections by only specifying <tool> tag as below:
+
+```XML
+<tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
+```
+
+As a guidance for above step, sample configuration file is given in *sampleFiles* folder.
 
 #### Step 2 - copy tool
 
-Copy mzIdentMLToJSON folder of the downloaded repository to your galaxy instance at ```<your galaxy directory>/tools/```.
+Copy given *mzIdentMLToJSON* folder to your galaxy instance at ```<your galaxy directory>/tools/```.
 This folder contains:
  1. wrapper - mzIdentMLToJSON.xml
  2. python script - mzIdentMLToJSON.py
  3. java library - mzIdentMLExtractor.jar
  4. java library dependancies - lib folder
 
-**Note:** You need to restart server to reflect the changes. 
+That's it! You are ready to use the visualisation tool.
+
+**Note:** You need to **restart server** to reflect the changes. 
 
 ## How to use visualisation plugin
 
-Users *MUST* login to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). You can select visualisation menu by click on the visualisation button of the data file from the history panel:
+Users *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). You can select visualisation menu by click on the visualisation button of the data file from the history panel:
 
 <img src="sampleFiles/snapshots/menu.png" alt="menu"  width="248" height="333"/>
 
