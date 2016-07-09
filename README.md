@@ -116,7 +116,7 @@ That's it! You are ready to use the visualisation tool.
 
 Users *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). You can select visualisation menu by click on the visualisation button of the data file from the history panel:
 
-<img src="sampleFiles/snapshots/menu.png" alt="menu"  width="248" height="333"/>
+<img src="sampleFiles/snapshots/how_to_use.png" alt="menu"  width="248" height="333"/>
 
 Time taken to load data is depends on the file size.
 
