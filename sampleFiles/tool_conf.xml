@@ -112,7 +112,7 @@
     <tool file="plotting/boxplot.xml" />
     <tool file="maf/vcf_to_maf_customtrack.xml" />
   </section>
-  <section name="mzIdentMLToJSON" id="mzIdentMLToJSON">
+  <section id="PSI" name="PSI Standards" >
     <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
   </section>
 </toolbox>

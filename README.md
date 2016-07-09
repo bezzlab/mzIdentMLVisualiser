@@ -35,11 +35,9 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
 * Copy the given entire *protviewer* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
 
 #### Step 3 - Copy Web Controller files
-*  You are given four files in the *webcontroller* folder with the mzIdentMLVisualiser repository which are namely:
+*  You are given two files in the *webcontroller* folder with the mzIdentMLVisualiser repository which are namely:
   * MzIdentMLHandler.py
-  * MzIdentMLHandler.pyc
-  * SequenceExtractor.py
-  * SequenceExtractor.pyc. They has to be copied into your galaxy instance at ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location.
+  * SequenceExtractor.py They has to be copied into your galaxy instance at ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location.
 
 * Then, in your galaxy, you sould be able to find a file called **datasets.py**. There, copy and paste following codes:
 
@@ -112,7 +110,7 @@ This folder contains:
 
 That's it! You are ready to use the visualisation tool.
 
-**Note:** You need to **restart server** to reflect the changes. 
+**Note:** You need to **restart server** to reflect the changes.
 
 ## How to use visualisation plugin
 
@@ -120,7 +118,7 @@ Users *MUST* **login** to the server in order to use visualisation functionality
 
 <img src="sampleFiles/snapshots/menu.png" alt="menu"  width="248" height="333"/>
 
-Time taken to load data is depends on the file size. 
+Time taken to load data is depends on the file size.
 
 ## How to use visualisation tool
 
