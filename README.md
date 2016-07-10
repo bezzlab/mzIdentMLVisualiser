@@ -14,7 +14,7 @@ Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates tem
 
 ## Installation
 
-Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already have Galaxy, please refer link [here](https://wiki.galaxyproject.org/Admin/GetGalaxy).
+Installation instructions are provided below. These instructions assume that you already have Galaxy installed and have admin access to that installation. If you do not already installed Galaxy or not having admin access, please refer link [here](https://wiki.galaxyproject.org/Admin/GetGalaxy).
 
 In order to proceed, please download this repository to your machine by cloning the repository. If you downloaded as a zip file, then extract the zip file.
 
