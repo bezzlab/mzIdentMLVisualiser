@@ -2,14 +2,14 @@
 
 ![Alt text](samples/snapshots/protein.png)
 
-This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). This repository provides you source code of the java library and other installation files to integrate visualisation plugin into your existing galaxy instanse. There are four main folders:
-* source - Java library(mzIdentMLExtractor) which converts proteomics data of mzIdentML to JSON files [Not required for the installation]
+This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). This repository provides you java library source code and other installation files to integrate visualisation plugin into your existing galaxy instance. There are four main folders:
+* source - mzIdentMLExtractor java library which converts proteomics data of mzIdentML to JSON files [Not required for the installation]
 * plugin - Galaxy visualisation plugin
 * tool - Galaxy tool
 * samples - sample configurations and other sample files
 
-Galaxy visualisation plugin files are splitted into two folders which are called protviewer and webcontroller.
-Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You need to integrate both plugin and tool in order to work with the visualisation, because galaxy tool contains dependancy files for the visualisation plugin. Although it is mandatory to integrate both plugin and tool, after the integration, you can use plugin alone without using galaxy tool. However, we strongly recommend to use this galaxy tool prior to visualize mzIdentML files for a much faster visualising speed.
+Galaxy visualisation plugin files were split into two folders which are called protviewer and webcontroller.
+Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You need to integrate both plugin and tool in order to work with the visualisation, because galaxy tool contains dependency files for the visualisation plugin. Although it is mandatory to integrate both plugin and tool, after the integration, you can use plugin alone without using galaxy tool. However, we strongly recommend to use this galaxy tool prior to visualize mzIdentML files for a much faster visualising speed.
 
 ## Installation
 
@@ -38,7 +38,7 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
   * MzIdentMLHandler.py
   * SequenceExtractor.py They has to be copied into your galaxy instance at ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location.
 
-* Then, in your galaxy, you sould be able to find a file called **datasets.py** at the same location. There, copy and paste following codes:
+* Then, in your galaxy, you should be able to find a file called **datasets.py** at the same location. There, copy and paste following codes:
 
   * Import these modules first:
    ```python
@@ -51,7 +51,7 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
         elif data_type == 'mzidentml':
             # input mzIdentML file
             inputfile = kwd.get('filename')
-            # unique sequrity encoded id assigned for the input file
+            # unique security encoded id assigned for the input file
             datasetId = kwd.get('datasetId')
             rval = inputfile
             # <your galaxy directory> + paths
@@ -81,8 +81,8 @@ As a guidance to above step, we have provided a sample configuration file(galaxy
 
 #### Step 1 - Configure tool
 
-Locate the *tool_conf.xml* configuration file in ```<your galaxy directory>/config/``` location. If you dont find a *tool_conf.xml* file, but have *tool_conf.xml.sample* file, make a copy of it and rename new file as *tool_conf.xml*
-There, add these parameters to anyware of  the file under <toolbox> tag:
+Locate the *tool_conf.xml* configuration file in ```<your galaxy directory>/config/``` location. If you do not find a *tool_conf.xml* file, but have *tool_conf.xml.sample* file, make a copy of it and rename new file as *tool_conf.xml*
+There, add these parameters anywhere of  the file under <toolbox> tag:
 
 ```XML
 <section id="PSI" name="PSI Standards" >
@@ -90,7 +90,7 @@ There, add these parameters to anyware of  the file under <toolbox> tag:
 </section>
 ```
 
-We have created a seperate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing sections by only specifying <tool> tag as below:
+We have created a separate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing sections by only specifying <tool> tag as below:
 
 ```XML
 <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
@@ -105,7 +105,7 @@ This folder contains:
  1. wrapper - mzIdentMLToJSON.xml
  2. python script - mzIdentMLToJSON.py
  3. java library - mzIdentMLExtractor.jar
- 4. java library dependancies - lib folder
+ 4. java library dependencies - lib folder
 
 That's it! You are ready to use the visualisation tool.
 
@@ -115,10 +115,10 @@ That's it! You are ready to use the visualisation tool.
 
 <img src="samples/snapshots/how_to_use.png" alt="menu"  width="1137" height="373"/>
 
-Users *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). Once you upload mzIdentML file(.mzid file extension), it will appear in the history panel. You can select visualisation menu by click on the visualisation button of the input file.Time taken to load data is depends on the file size.
+Users *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled only for mzIdentML files(.mzid file format). Once you upload mzIdentML file(.mzid file extension), it will appear in the history panel. You can select visualisation menu by click on the visualisation button of the input file. Time taken to load data is depends on the file size.
 
 ## How to use visualisation tool
 
 <img src="samples/snapshots/galaxytool.png" alt="How to used Galaxy Tool"/>
 
-You can integrate tool into your protein identification workflows or can execute seperately. The output mzIdentML file is the input for the tool.
+You can integrate tool into your protein identification workflows or can execute separately. The output mzIdentML file is the input for the tool.
