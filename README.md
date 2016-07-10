@@ -90,7 +90,7 @@ There, add these parameters anywhere of  the file under <toolbox> tag:
 </section>
 ```
 
-We have created a separate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing sections by only specifying <tool> tag as below:
+We have created a separate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing sections by only specifying ```<tool>``` tag as below:
 
 ```XML
 <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
