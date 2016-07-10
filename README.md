@@ -8,7 +8,7 @@ This is an interactive web visualisation plug-in for the [mzIdentML](http://www.
 * tool - Galaxy tool
 * samples - sample configurations and other sample files
 
-Galaxy visualisation plugin files were split into two folders which are called protviewer and webcontroller.
+Galaxy visualisation plugin files are split into two folders which are called protviewer and webcontroller.
 Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You need to integrate both plugin and tool in order to work with the visualisation, because galaxy tool contains dependency files for the visualisation plugin. Although it is mandatory to integrate both plugin and tool, after the integration, you can use plugin alone without using galaxy tool. However, we strongly recommend to use this galaxy tool prior to visualize mzIdentML files for a much faster visualising speed.
 
 ## Installation
