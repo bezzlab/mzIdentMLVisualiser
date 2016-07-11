@@ -7,7 +7,7 @@ This is an interactive web visualisation plug-in for the [mzIdentML](http://www.
 * plugin - Galaxy visualisation plugin
 * tool - Galaxy tool
 * samples - sample configurations and other sample files
-* source - mzIdentMLExtractor java library which converts proteomics data of mzIdentML to JSON files [Not required for the installation]
+* source - mzIdentMLExtractor java library [Not required for the installation]
 
 Galaxy visualisation plugin files are organised into two folders which are called *protviewer* and *webcontroller*.
 Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You must integrate both plugin and tool in order to work with the visualisation, as galaxy tool contains dependency files for the visualisation plugin too. Although the integration of both plugin and tool is mandatory for installation, you can use plugin independently without using galaxy tool. However, we strongly recommend to use our galaxy tool prior to visualise mzIdentML files for a much faster visualising speed.
@@ -32,7 +32,7 @@ visualization_plugins_directory = config/plugins/visualizations
 As a guidance to above step, we have provided you a sample configuration file(galaxy.ini) in *samples* folder.
 
 #### Step 2 - Copy *protviewer* folder into your visualisations directory
-* Copy the given entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
+* Copy the entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
 *  You are given two files in the *webcontroller* folder in the *plugin* folder with the mzIdentMLVisualiser repository which are namely:
