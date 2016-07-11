@@ -2,11 +2,12 @@
 
 ![Alt text](samples/snapshots/protein.png)
 
-This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). This repository provides you the source code of the java library and other installation files to integrate visualisation plugin into your existing galaxy instance. There are four main folders:
-* source - mzIdentMLExtractor java library which converts proteomics data of mzIdentML to JSON files [Not required for the installation]
+This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). In the repository, we provide the necessary files to install mzIdentML Viewer plugin into your existing Galaxy instance accomplished with the source codes of the underneath functionality which converts mzIdentML into JSON files to be viewed in the main panel. There are four main folders:
+
 * plugin - Galaxy visualisation plugin
 * tool - Galaxy tool
 * samples - sample configurations and other sample files
+* source - mzIdentMLExtractor java library which converts proteomics data of mzIdentML to JSON files [Not required for the installation]
 
 Galaxy visualisation plugin files are organised into two folders which are called *protviewer* and *webcontroller*.
 Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You must integrate both plugin and tool in order to work with the visualisation, as galaxy tool contains dependency files for the visualisation plugin too. Although the integration of both plugin and tool is mandatory for installation, you can use plugin independently without using galaxy tool. However, we strongly recommend to use our galaxy tool prior to visualise mzIdentML files for a much faster visualising speed.
