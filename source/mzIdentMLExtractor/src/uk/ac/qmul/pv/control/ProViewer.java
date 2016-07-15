@@ -32,7 +32,11 @@ public class ProViewer {
             datasetId = args[2];
             isThreading = Boolean.parseBoolean(args[3]);
         } else {
-            System.out.println("You must pass 4 parameters!");
+            System.err.println("You must pass four parameters!"
+                    + "\n 1.Input mzIdentML file"
+                    + "\n 2. Output directory for JSON files"
+                    + "\n 3. Unique dataset ID for output files"
+                    + "\n 4. Enable/disable multithreading");
             System.exit(0);
         }
 
