@@ -6,7 +6,7 @@ Convert mzIdentML to JSON
 This script invokes mzidParser.jar java library to read mzIdentML file and generate four json files
 which inclides protein, peptide,  PSM and metadata.
 
-usage: ProViewer.py  --filename="$input" --datasetid=$__app__.security.encode_id($input.id)
+usage: ProViewer.py  --filename="$input" --datasetid=$__app__.security.encode_id($input.id) --root=$__root_dir__
 """
 import optparse
 import os
@@ -19,20 +19,29 @@ def __main__():
 	parser = optparse.OptionParser()
 	parser.add_option( '-F', '--filename', dest='filename', help='mzIdentML filename' )
 	parser.add_option( '-D', '--datasetid', dest='datasetid', help='datasetid' )
+	parser.add_option( '-R', '--root', dest='root', help='root directory of the galaxy instance' )
    	(options, args) = parser.parse_args()
 	inputfile = options.filename
 	datasetId = options.datasetid
-	print os.getcwd()
-	# navigate to <your galaxy directory> and append paths
-	outputfile = os.path.join(os.path.abspath('../../../../..'),  "config/plugins/visualizations/protviewer/static/data/")
-	tempFile = os.path.join(os.path.abspath('../../../../..'),  "config/plugins/visualizations/protviewer/static/data/", datasetId, "_protein.json")
-	libraryLocation = os.path.join(os.path.abspath('../../../../..'),  "tools/mzIdentMLToJSON/mzIdentMLExtractor.jar")
+	root = options.root
+
+	outputfile = root + "/config/plugins/visualizations/protviewer/static/data/"
+	tempFile = root + "/config/plugins/visualizations/protviewer/static/data/" + datasetId+ "_protein.json"
+	javalib = root + "/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+
+	# debuging purpose only
+	print "Root directory: " + root
+	print "outputfile : "+ outputfile
+	print "tempFile : "+ tempFile
+	print "javalib : "+ javalib
+
 	multithreading = "true"
 
 	try:
 		# if file not already exists
 		if os.path.isfile(tempFile) == False:
-			return subprocess.call(['java', '-jar',libraryLocation, inputfile, outputfile, datasetId, multithreading])
+			# execute mzIdentMLExtractor java library
+			return subprocess.call(['java', '-jar',javalib, inputfile, outputfile, datasetId, multithreading])
 		else:
 			print "Info: Data loaded from the cache!"
 	except Exception as err:
