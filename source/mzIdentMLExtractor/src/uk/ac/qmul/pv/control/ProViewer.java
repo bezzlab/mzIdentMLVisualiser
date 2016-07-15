@@ -12,9 +12,14 @@ import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.qmul.pv.db.DatabaseAccess;
 
 /**
- * This is the controller class to handle Protein and PSM data
- *
+ * This is the controller class to handle the flow of execution
+ * This library is should be executed in a command-line
+ * 
  * @author Suresh Hewapathirana
+ * 
+ * USAGE: java -jar "mzIdentMLExtractor.jar" <inputFile> <OutputDirectory> <UniqueID> <boolean value for Multithreading>
+ * 
+ * EXAMPLE: java -jar "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/source/mzIdentMLExtractor/dist/mzIdentMLExtractor.jar" "/Users/sureshhewapathirana/Downloads/galaxy/database/files/000/dataset_1.dat" "/Users/sureshhewapathirana/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/" "f2db41e1fa331b3e" "true"
  */
 public class ProViewer {
 
@@ -36,11 +41,11 @@ public class ProViewer {
                     + "\n 1.Input mzIdentML file"
                     + "\n 2. Output directory for JSON files"
                     + "\n 3. Unique dataset ID for output files"
-                    + "\n 4. Enable/disable multithreading");
-            System.exit(0);
+                    + "\n 4. Boolean value to enable/disable multithreading");
+            System.exit(0); // immediate exit
         }
 
-        // appending datasetId to outpuf filenames
+        // appending datasetId(unique id) to output filenames
         outputFile = outputFile + datasetId;
 
         // for the testing purpose only
@@ -49,11 +54,14 @@ public class ProViewer {
         System.out.println("Input File :" + inputFile);
         System.out.println("outputFile:" + outputFile);
 
+        // initialised database access object
         DatabaseAccess db = DatabaseAccess.getInstance(inputFile);
-
+        
+        // get protein sequence and peptide evidance records from input file
         Map<String, DBSequence> dbSequenceIdHashMap = db.getDbSequenceIdHashMap();
         Map<String, PeptideEvidence> peptideEvidenceMap = db.getPeptideEvidenceIdHashMap();
-
+        
+        // instantiate extractor classes
         DataExtractor metadataHandler = new MetadataExtractor(inputFile, outputFile + "_metadata.json");
         DataExtractor proteinHandler = new ProteinExtractor(inputFile, outputFile + "_protein.json", dbSequenceIdHashMap, peptideEvidenceMap);
         DataExtractor peptideHandler = new PeptideExtractor(inputFile, outputFile + "_peptide.json", dbSequenceIdHashMap, peptideEvidenceMap);
@@ -80,7 +88,8 @@ public class ProViewer {
             proteinHandler.export();
             long end = System.currentTimeMillis();
             System.out.println(LocalDateTime.now() + ": Protein : Finished!!!");
-            System.out.println("Protein : Data extraction took " + TimeUnit.MILLISECONDS.toSeconds(end - start) + " milliseconds");
+            System.out.println("Protein : Data extraction took " 
+                    + TimeUnit.MILLISECONDS.toSeconds(end - start) + " milliseconds");
 
         } else {
 

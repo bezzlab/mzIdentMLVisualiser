@@ -14,23 +14,30 @@ package uk.ac.qmul.pv.util;
  * @author sureshhewapathirana
  */
 public class CV {
-    //[Term]
-        //id: MS:1001097
-        //name: distinct peptide sequences
-        //def: "This counts distinct sequences hitting the protein 
-        // without regard to a minimal confidence threshold." [PSI:PI]
-        //xref: value-type:xsd\:nonNegativeInteger "The allowed value-type for this CV term."
-        //is_a: MS:1001116 ! single protein result details
+    
+//        [Term]
+//        id: MS:1001097
+//        name: distinct peptide sequences
+//        def: "This counts distinct sequences hitting the protein 
+//         without regard to a minimal confidence threshold." [PSI:PI]
+//        xref: value-type:xsd\:nonNegativeInteger "The allowed value-type for this CV term."
+//        is_a: MS:1001116 ! single protein result details
         public static final String DISTINCT_PEPTIDES = "MS:1001097";
 
-        //[Term]
-        //id: MS:1002235
-        //name: ProteoGrouper:PDH score
-        //def: "A score assigned to a single protein accession (modelled as 
-        // ProteinDetectionHypothesis in mzIdentML), based on summed peptide level scores." [PSI:PI]
-        //xref: value-type:xsd\:double "The allowed value-type for this CV term."
-        //is_a: MS:1001116 ! single protein result details
+//        [Term]
+//        id: MS:1002235
+//        name: ProteoGrouper:PDH score
+//        def: "A score assigned to a single protein accession (modelled as 
+//         ProteinDetectionHypothesis in mzIdentML), based on summed peptide level scores." [PSI:PI]
+//        xref: value-type:xsd\:double "The allowed value-type for this CV term."
+//        is_a: MS:1001116 ! single protein result details
         public static final String PDH_SCORE = "MS:1002235";
         
+//        [Term]
+//        id: MS:1001171
+//        name: Mascot:score
+//        def: "The Mascot result 'Score'." [PSI:PI]
+//        xref: value-type:xsd\:double "The allowed value-type for this CV term."
+//        is_a: MS:1001143 ! PSM-level search engine specific statistic
         public static final String MASCOT_SCORE = "MS:1001171";
 }
