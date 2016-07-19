@@ -35,7 +35,7 @@ public class ProteinAccessionParser {
 
         ProteinRecord protein = new ProteinRecord();
         String speciesName = "NA";
-        final String PROTEIN_DESCRIPTION = "MS:1001088";
+        
 
         // 1) Set accession
         String proteinDbAccession = proteinDbSeq.getAccession();
@@ -49,7 +49,7 @@ public class ProteinAccessionParser {
         Iterator<CvParam> it = DbSeqCvParamList.iterator();
         while (it.hasNext()) {
             CvParam DbSeqCvParam = it.next();
-            if (DbSeqCvParam.getAccession().equals(PROTEIN_DESCRIPTION)) {
+            if (DbSeqCvParam.getAccession().equals(CV.PROTEIN_DESCRIPTION)) {
 
                 String proteinNameFull = DbSeqCvParam.getValue();
 
@@ -78,7 +78,12 @@ public class ProteinAccessionParser {
                 Matcher matcherName = patternName.matcher(proteinNameFull);
                 if (matcherName.find()) {
                     protein.setProteinName(matcherName.group(1));
-                    // System.out.println("ProteinName: "+ matcherName.group(1));
+                }else{
+                    // shorten protein description
+                    if(proteinNameFull.length()>50){
+                        proteinNameFull = proteinNameFull.substring(0, 50) + "...";
+                    }
+                    protein.setProteinName(proteinNameFull);
                 }
             }
         }

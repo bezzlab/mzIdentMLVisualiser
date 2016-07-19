@@ -106,6 +106,24 @@ public class ProteinExtractor implements DataExtractor {
                     // Accession, OS, Protein Name, #Distinct, score
                     protein = pdhToProtein(representativePHD);
                 }
+                
+                // if still couldn't find the score value, try to find them in CV parameters of ProteinAmbiguityGroup.
+                // For example Peptide shaker report score like this.
+                if(protein.getPhdScore()== -1){
+                    Iterator<CvParam> pegcvParam = pag.getCvParam().iterator();
+                    while (pegcvParam.hasNext()) {
+                
+                        // get the current cv parameter
+                        CvParam cvParam = pegcvParam.next();
+                         if (cvParam.getAccession().equals(CV.PEPTIDESHAKER_SCORE)){
+                             protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+                         }
+                    }
+                }
+                // if still cannot find score, make it 0
+                if(protein.getPhdScore()== -1){
+                    protein.setPhdScore(0.00);
+                }
                 // add protein into protein list as json object
                 proteinList.add(JavaToJSON.proteinToJsonArray(protein));
             }
@@ -174,6 +192,9 @@ public class ProteinExtractor implements DataExtractor {
 
         ProteinRecord protein;
         ProteinAccessionParser accessionParser = new ProteinAccessionParser();
+        
+        // assume protein coverage has not reported in mzIdentML file
+        boolean isCoverageAvailable = false; 
 
         // get mapping protein(DBSequence) associated with protein ambigiuty group
         DBSequence dbSeq = dbSequenceIdHashMap.get(pdh.getDBSequenceRef());
@@ -183,9 +204,6 @@ public class ProteinExtractor implements DataExtractor {
 
         // DbSequence unique ID
         protein.setId(dbSeq.getId());
-
-        // protein coverage
-        protein.setCoverage(getProteinCoverage(pdh));
         
         // travel though each CV Parameter to find the score and #distinct peptides
         Iterator<CvParam> it = pdh.getCvParam().iterator();
@@ -194,22 +212,36 @@ public class ProteinExtractor implements DataExtractor {
             // get the current CvParam
             CvParam cvParam = it.next();
             if (cvParam.getValue() != null) {
-                
-                // match with CV parameters
-                switch (cvParam.getAccession()) {
-                    case CV.DISTINCT_PEPTIDES:
-                        protein.setDistinctPeptides(Integer.parseInt(cvParam.getValue()));
-                    case CV.PDH_SCORE:
-                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
-                        break;
-                    case CV.MASCOT_SCORE:
-                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
-                        break;
-                     case CV.PEPTIDESHAKER_SCORE:
-                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
-                        break;
+                if(cvParam.getAccession().equals(CV.DISTINCT_PEPTIDES)){
+                    protein.setDistinctPeptides(Integer.parseInt(cvParam.getValue()));
                 }
+                if (cvParam.getName().toLowerCase().contains("score") || (cvParam.getAccession().equals(CV.SCAFFOLD_PROTEIN_PROBABILITY))){
+                    protein.setPhdScore(Double.parseDouble(cvParam.getValue())); 
+                }
+                if(cvParam.getAccession().equals(CV.SEQUENCE_COVERAGE)){
+                    protein.setCoverage(Double.parseDouble(cvParam.getValue()));
+                    isCoverageAvailable = true;
+                }
+                
+//                // match with CV parameters
+//                switch (cvParam.getAccession()) {
+//                    case CV.DISTINCT_PEPTIDES:
+//                        protein.setDistinctPeptides(Integer.parseInt(cvParam.getValue()));
+//                    case CV.PDH_SCORE:
+//                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+//                        break;
+//                    case CV.MASCOT_SCORE:
+//                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+//                        break;
+//                     case CV.PEPTIDESHAKER_SCORE:
+//                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+//                        break;
+//                }
             }
+        }
+        // protein coverage
+        if(isCoverageAvailable == false){
+            protein.setCoverage(getProteinCoverage(pdh));
         }
         return protein;
     }

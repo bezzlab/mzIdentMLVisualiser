@@ -5,6 +5,9 @@
         <group>
             <file>file:/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/source/mzIdentMLExtractor/src/uk/ac/qmul/pv/util/CV.java</file>
             <file>file:/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/source/mzIdentMLExtractor/src/uk/ac/qmul/pv/control/ProViewer.java</file>
+            <file>file:/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/source/mzIdentMLExtractor/src/uk/ac/qmul/pv/model/ProteinRecord.java</file>
+            <file>file:/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/source/mzIdentMLExtractor/src/uk/ac/qmul/pv/control/PeptideExtractor.java</file>
+            <file>file:/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/source/mzIdentMLExtractor/src/uk/ac/qmul/pv/control/PeptideLocation.java</file>
             <file>file:/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/source/mzIdentMLExtractor/src/uk/ac/qmul/pv/control/ProteinExtractor.java</file>
         </group>
     </open-files>

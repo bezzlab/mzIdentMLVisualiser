@@ -68,4 +68,10 @@ public class CV {
 //        is_a: MS:1002368 ! search engine specific score for protein groups
 //        relationship: has_order MS:1002108 ! higher score better
     public static final String PEPTIDESHAKER_SCORE = "MS:1002470";
+    
+    public static final String  SCAFFOLD_PROTEIN_PROBABILITY = "MS:1001579";
+    
+    public static final String  PROTEIN_DESCRIPTION = "MS:1001088";
+    
+    public static final String  SEQUENCE_COVERAGE = "MS:1001093";
 }

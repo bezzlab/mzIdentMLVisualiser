@@ -25,8 +25,8 @@ public class ProViewer {
 
     public static void main(String[] args) {
 
-        String inputFile = "/Users/sureshhewapathirana/Downloads/Galaxy5-[MSGF__MSMS_Search_on_data_33_and_data_3].mzid";
-        String datasetId = "Galaxy5";
+        String inputFile = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/TestData/inspector-example-files-master/Myrimatch/sh_072808p_E_coli_ABRF_red.mzid";
+        String datasetId = "sh_072808p_E_coli_ABRF_red";
         String outputFile = "/Users/sureshhewapathirana/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/";
         boolean isThreading = true;
 

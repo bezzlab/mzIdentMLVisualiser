@@ -21,7 +21,7 @@ public class ProteinRecord {
     private String speciesName = "Not available";
     private String proteinName = "Not available";
     private int distinctPeptides = 0;
-    private double phdScore = 0;
+    private double score = -1;
     private double coverage = 0;
 
     /**
@@ -81,20 +81,20 @@ public class ProteinRecord {
     }
 
     /**
-     * @return the phdScore
+     * @return the score
      */
     public double getPhdScore() {
-        return phdScore;
+        return score;
     }
 
     /**
-     * @param phdScore the phdScore to set
+     * @param phdScore the score to set
      */
     public void setPhdScore(double phdScore) {
 
         // round to two decimal places
         DecimalFormat df = new DecimalFormat("#.00");
-        this.phdScore = Double.valueOf(df.format(phdScore));
+        this.score = Double.valueOf(df.format(phdScore));
     }
 
     /**
@@ -139,7 +139,7 @@ public class ProteinRecord {
                 + "speciesName : " + this.speciesName
                 + "proteinName : " + this.proteinName
                 + "distinctPeptides : " + this.distinctPeptides
-                + "phdScore : " + this.phdScore
+                + "phdScore : " + this.score
                 + "coverage : " + this.coverage;
     }
 

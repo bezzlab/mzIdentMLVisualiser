@@ -76,8 +76,12 @@ public class PeptideExtractor implements Runnable, DataExtractor {
             PeptideRecord peptideRecord = new PeptideRecord();
 
             peptideRecord.setID(peptideEvidence.getId());
-            peptideRecord.setStartPossion(peptideEvidence.getStart());
-            peptideRecord.setEndPossion(peptideEvidence.getEnd());
+            if(peptideEvidence.getStart() != null){
+                peptideRecord.setStartPossion(peptideEvidence.getStart());
+            }
+            if(peptideEvidence.getEnd() != null){
+                peptideRecord.setEndPossion(peptideEvidence.getEnd());
+            }
 
             DBSequence dbSeq = dbSequenceIdHashMap.get(peptideEvidence.getDBSequenceRef());
             if (dbSeq != null) {
