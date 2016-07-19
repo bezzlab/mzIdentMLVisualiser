@@ -4,13 +4,11 @@
 %>
     <!DOCTYPE html>
     <html>
-
     <head>
         <meta charset="UTF-8">
         <title>MzIdentML Viewer</title>
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <!-- ${h.stylesheet_link( app_root + 'css/pviz-core.css' )} -->
         ${h.stylesheet_link( app_root + 'css/materialize.min.css' )}
         ${h.stylesheet_link( app_root + 'css/jquery.dataTables.min.css' )}
         ${h.stylesheet_link( app_root + 'css/proviewer.css' )}
@@ -18,7 +16,6 @@
         <!--Let browser know website is optimized for mobile-->
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     </head>
-
     <body>
         <nav>
             <div class="nav-wrapper blue darken-4" width="100%">
@@ -26,16 +23,16 @@
             </div>
         </nav>
         <div class="container">
-            <!--  ------------------------ Progress bar modal  ------------------------  -->
+            <!-- Progress bar modal -->
             <div id="progress-bar" class="modal modal-trigger">
                 <div class="modal-content">
-                    <h4>Please wait 1-2 minutes while this file is being prepared for viewing for the first time</h4>
+                    <h3>Please wait 1-2 minutes while this file is being prepared for viewing for the first time</h3>
                     <div class="progress">
                         <div class="indeterminate"></div>
                     </div>
                 </div>
             </div>
-            <!--  ------------------------ Main section  ------------------------  -->
+            <!-- Main section -->
             <br/>
             <div id="tabs" class="row">
                 <div class="col s12">
@@ -45,7 +42,7 @@
                         <li id="tab-3" class="tab col s3"><a href="#peptide-section">Peptides</a></li>
                     </ul>
                 </div>
-                <!-- --------------------------- Metadata section ---------------------- -->
+                <!-- Metadata section -->
                 <div id="metadata-section" class="col s12">
                     <table id="metadata-table" class="bordered">
                         <tr>
@@ -74,7 +71,7 @@
                         </tr>
                     </table>
                 </div>
-                <!-- ---------------------- Protein section ------------------ -->
+                <!-- Protein section -->
                 <div id="protein-section" class="col s12">
                     <table id="protein-table" class="display" cellspacing="0" width="60%">
                         <thead>
@@ -92,7 +89,7 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- ---------------------- Peptide section ------------------ -->
+                <!-- Peptide section -->
                 <div id="peptide-section" class="col s12">
                     <table id="peptide-table" class="display" cellspacing="0" width="60%">
                         <thead>
@@ -112,7 +109,6 @@
             </div>
         </div>
         ${h.javascript_link( app_root + 'js/jquery-2.2.1.min.js' )}
-        <!-- ${h.javascript_link( app_root + 'js/pviz-bundle.min.js' )} -->
         ${h.javascript_link( app_root + 'js/materialize.min.js' )}
         ${h.javascript_link( app_root + 'js/jquery.dataTables.min.js' )}
         ${h.javascript_link( app_root + 'js/datatable-materialize.js' )}
@@ -123,7 +119,6 @@
         ${h.javascript_link( app_root + 'js/export/vfs_fonts.js')}
         ${h.javascript_link( app_root + 'js/export/buttons.html5.min.js')}
         ${h.javascript_link( app_root + 'js/export/buttons.print.min.js')}
-
         <script type="text/javascript" charset="utf-8">
 
         $(document).ready(function() {
@@ -132,8 +127,6 @@
             var peptidetable;
             var psmtable;
             var dataLocation = "/plugins/visualizations/protviewer/static/data/";
-            var dataAbsoluteLocation  = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/ProViewer/galaxy/config/plugins/visualizations/protviewer/static/data/";
-            // var dataLocation = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/ProViewer/galaxy/database/job_working_directory/";
             var hdaId = "${trans.security.encode_id( hda.id )}";
             var filename = "${hda.file_name}";
             var extension = "mzidentml";
@@ -153,21 +146,20 @@
                             "oLanguage": {
                                 "sStripClasses": "",
                                 "sSearch": "",
-                                "sSearchPlaceholder": "Enter Keywords Here",
+                                "sSearchPlaceholder": "Enter Search Term Here",
                                 "sInfo": "Showing _START_ -_END_ of _TOTAL_ protein records",
-                                "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
-                                    '<option value="5">5</option>' +
-                                    '<option value="10">10</option>' +
-                                    '<option value="20">20</option>' +
-                                    '<option value="50">50</option>' +
-                                    '<option value="100">100</option>' +
-                                    '<option value="-1">All</option>' +
-                                    '</select></div>'
+                                "sLengthMenu": '<span>Rows per page:</span>'+
+                                                '<select class="browser-default">' +
+                                                    '<option value="5">5</option>' +
+                                                    '<option value="10">10</option>' +
+                                                    '<option value="20">20</option>' +
+                                                    '<option value="50">50</option>' +
+                                                    '<option value="100">100</option>' +
+                                                    '<option value="-1">All</option>' +
+                                                '</select></div>'
                             },
-                           dom: 'frtlipB',
-                            buttons: [
-                                ['csv', 'print']
-                            ],
+                            dom: 'frtlipB',
+                            buttons: [['csv', 'print']],
                             "ajax": dataLocation + hdaId + "_protein.json",
                             bAutoWidth: false,
                             "columns": [{
@@ -196,20 +188,19 @@
                             "oLanguage": {
                                 "sStripClasses": "",
                                 "sSearch": "",
-                                "sSearchPlaceholder": "Enter Keywords Here",
+                                "sSearchPlaceholder": "Enter Search Term Here",
                                 "sInfo": "Showing _START_ -_END_ of _TOTAL_ peptide records",
-                                "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
-                                    '<option value="10">10</option>' +
-                                    '<option value="20">20</option>' +
-                                    '<option value="50">50</option>' +
-                                    '<option value="100">100</option>' +
-                                    '<option value="-1">All</option>' +
-                                    '</select></div>'
+                                "sLengthMenu": '<span>Rows per page:</span>' +
+                                                '<select class="browser-default">' +
+                                                    '<option value="10">10</option>' +
+                                                    '<option value="20">20</option>' +
+                                                    '<option value="50">50</option>' +
+                                                    '<option value="100">100</option>' +
+                                                    '<option value="-1">All</option>' +
+                                                '</select></div>'
                             },
                             dom: 'frtlipB',
-                            buttons: [
-                                ['csv', 'print']
-                            ],
+                            buttons: [['csv', 'print']],
                             "ajax": dataLocation + hdaId + "_peptide.json",
                             bAutoWidth: false,
                             "columns": [{
@@ -436,10 +427,8 @@
                     // finally expand the child row
                     tr.addClass('shown');
                 }
-
             });
         }); // end of document ready
         </script>
     </body>
-
     </html>
