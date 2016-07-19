@@ -11,7 +11,7 @@ select.browser-default {
     height: 30px;
 }
 
-        #metadata-table td {
+#metadata-table td {
     margin-top: 20px;
     margin-bottom: 50px;
 }
@@ -26,11 +26,9 @@ select.browser-default {
 }
 
 span.highlight {
-    /*background-color: #80deea;*/
-    /*background-color: #fff2a8;*/
-    /*F0B70C*/
     border-radius: 3px;
-    border-style: solid 2px;
+    border-width: 2px;
+    border-style: solid;
     text-decoration: none;
     background-color: #26a69a;
     color: #FFFFFF;
@@ -41,10 +39,11 @@ span.highlight {
     color: #009688;
 }*/
 
-span.highlight:hover {
+/*span.highlight:hover {
     background-color: #FFFF00;
     color: #000000;
-}
+}*/
+
 .buttons-csv,
 .buttons-print {
     margin-top: 20px;
