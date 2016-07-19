@@ -29,7 +29,7 @@
             <!--  ------------------------ Progress bar modal  ------------------------  -->
             <div id="progress-bar" class="modal modal-trigger">
                 <div class="modal-content">
-                    <h4>Please wait... This will initially 1-2 minutes</h4>
+                    <h4>Please wait 1-2 minutes while this file is being prepared for viewing for the first time</h4>
                     <div class="progress">
                         <div class="indeterminate"></div>
                     </div>

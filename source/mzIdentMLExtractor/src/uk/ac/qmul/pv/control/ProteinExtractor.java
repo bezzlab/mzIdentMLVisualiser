@@ -29,10 +29,6 @@ import uk.ac.qmul.pv.util.CV;
  */
 public class ProteinExtractor implements DataExtractor {
 
-    // Used to identify the representative protein of each protein group 
-    static final String ANCHOR_PROTEIN_CV_TERM = "MS:1001591";
-    static final String GROUP_REP_PROTEIN_CV_TERM = "MS:1002403";
-
     private String inputFile;
     private String outputFile;
 
@@ -115,6 +111,11 @@ public class ProteinExtractor implements DataExtractor {
             }
             // Convert Protein list to JSON file
             JavaToJSON.toJSON(proteinList, this.outputFile);
+        }else{
+            // add protein into protein list as json object
+            proteinList.add(JavaToJSON.proteinToJsonArray(protein));
+            // Convert Protein list to JSON file
+            JavaToJSON.toJSON(proteinList, this.outputFile);
         }
     }
 
@@ -147,8 +148,8 @@ public class ProteinExtractor implements DataExtractor {
                 CvParam cvParam = itcvParam.next();
                 
                 // check whether the current protein is a representative protein
-                if (cvParam.getAccession().equals(ANCHOR_PROTEIN_CV_TERM)
-                        || cvParam.getAccession().equals(GROUP_REP_PROTEIN_CV_TERM)) {
+                if (cvParam.getAccession().equals(CV.ANCHOR_PROTEIN_CV_TERM)
+                        || cvParam.getAccession().equals(CV.GROUP_REP_PROTEIN_CV_TERM)) {
                     representativePDH = pdh;
                     isRepresentativeFound = true;
                     break;
@@ -198,12 +199,15 @@ public class ProteinExtractor implements DataExtractor {
                 switch (cvParam.getAccession()) {
                     case CV.DISTINCT_PEPTIDES:
                         protein.setDistinctPeptides(Integer.parseInt(cvParam.getValue()));
-                        break;
                     case CV.PDH_SCORE:
                         protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
                         break;
                     case CV.MASCOT_SCORE:
                         protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+                        break;
+                     case CV.PEPTIDESHAKER_SCORE:
+                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+                        break;
                 }
             }
         }

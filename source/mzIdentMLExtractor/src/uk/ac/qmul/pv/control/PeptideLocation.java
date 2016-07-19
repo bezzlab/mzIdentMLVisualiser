@@ -53,7 +53,6 @@ public class PeptideLocation {
                                 peptideCoordinatesList.add(peptideCoordinates);
                                 dbSeqCoordsHashMap.put(dbSeqRef, peptideCoordinatesList);
                             }
-                       
                     });
 
         } catch (Exception e) {

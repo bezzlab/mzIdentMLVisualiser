@@ -5,9 +5,11 @@
 package uk.ac.qmul.pv.db;
 
 import java.io.File;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 import uk.ac.ebi.jmzidml.MzIdentMLElement;
 import uk.ac.ebi.jmzidml.model.mzidml.AnalysisSoftware;
 import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
@@ -50,8 +52,13 @@ public class DatabaseAccess {
             // If no unmarshaller object found, create it;
             // otherwise return existing object.
             if (unmash == null) {
+                System.out.println(LocalDateTime.now() + ": File Unmarshalling: Started!!!");
+                long start = System.currentTimeMillis();
                 unmash = new MzIdentMLUnmarshaller(file);
-                System.out.println("File Unmarshalled!!");
+                long end = System.currentTimeMillis();
+            System.out.println(LocalDateTime.now() + ": File Unmarshalling : Finished!!!");
+            System.out.println("File Unmarshalling took " 
+                    + TimeUnit.MILLISECONDS.toSeconds(end - start) + " milliseconds");
             }
         } else {
             System.out.println("Sorry, Cannot find the input file in :" + inputfile);
