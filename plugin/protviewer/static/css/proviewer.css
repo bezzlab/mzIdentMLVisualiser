@@ -47,10 +47,15 @@ span.highlight {
 .buttons-csv,
 .buttons-print {
     margin-top: 20px;
-    margin-right: 20px;
+    margin-left:20px;
 }
 
 .sequence {
     font-family: Monaco, "Lucida Console", monospace;
     line-height: 150%;
+    font-size: 0.97em;
+}
+
+body{
+    font-size: 0.97em;
 }
