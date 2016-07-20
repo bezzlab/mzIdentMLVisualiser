@@ -41,11 +41,12 @@ def __main__():
 		# if file not already exists
 		if os.path.isfile(tempFile) == False:
 			# execute mzIdentMLExtractor java library
+			print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
 			return subprocess.call(['java', '-jar',javalib, inputfile, outputfile, datasetId, multithreading])
 		else:
-			print "Info: Data loaded from the cache!"
+			print "MzIdentML Viewer INFO: Data loaded from the cache!"
 	except Exception as err:
-		print("ERROR: Java library execution error\n: {0}".format(err))
+		print("MzIdentML Viewer ERROR: Java library execution error\n: {0}".format(err))
 
 if __name__ == "__main__":
     __main__()

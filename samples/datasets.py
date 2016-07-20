@@ -79,24 +79,26 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
             elif data_type == 'genome_data':
                 rval = self._get_genome_data( trans, dataset, kwd.get('dbkey', None) )
             elif data_type == 'mzidentml':
+                print  "MzIdentML Viewer INFO: called Web API controller!"
                 # input mzIdentML file
-                inputfile = kwd.get('filename')
+                inputfile = kwd.get('inputFile')
                 # unique sequrity encoded id assigned for the input file
                 datasetId = kwd.get('datasetId')
                 rval = inputfile
                 # <your galaxy directory> + paths
                 outputfile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/"
                 tempFile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
-                libraryLocation = os.getcwd() + "/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
+                javalib = os.getcwd() + "/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
                 multithreading = "true"
-                # initial run
-                if kwd.get('mode') == 'init':
+                # Web plugin loading time
+                if kwd.get('mode') == 'initial_load':
                     # if temporary JSON files not generated
                     if os.path.isfile(tempFile) == False:
                         # call mzIdentMLExtractor java library
-                        return subprocess.call(['java', '-jar',libraryLocation, inputfile, outputfile, datasetId, multithreading])
+                        print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
+                        return subprocess.call(['java', '-jar',javalib, inputfile, outputfile, datasetId, multithreading])
                     else:
-                        print "Info: Data loaded from the cache!"
+                        print "MzIdentML Viewer INFO: Data loaded from the cache!"
                 elif kwd.get('mode') == 'sequence':
                     dbSequenceId = kwd.get('dbSequenceId')
                     # extract the sequence
@@ -308,7 +310,7 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
 
     @web.expose_api_raw_anonymous
     def display( self, trans, history_content_id, history_id,
-                 preview=False, filename=None, to_ext=None, chunk=None, raw=False, **kwd ):
+                 preview=False, filename=None, to_ext=None, raw=False, **kwd ):
         """
         GET /api/histories/{encoded_history_id}/contents/{encoded_content_id}/display
         Displays history content (dataset).
@@ -327,7 +329,8 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
             if raw:
                 if filename and filename != 'index':
                     file_path = trans.app.object_store.get_filename( hda.dataset,
-                                                                     extra_dir=( 'dataset_%s_files' % hda.dataset.id ), alt_name=filename)
+                                                                     extra_dir=( 'dataset_%s_files' % hda.dataset.id ),
+                                                                     alt_name=filename)
                 else:
                     file_path = hda.file_name
                 rval = open( file_path )
@@ -336,7 +339,7 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
                 display_kwd = kwd.copy()
                 if 'key' in display_kwd:
                     del display_kwd["key"]
-                rval = hda.datatype.display_data( trans, hda, preview, filename, to_ext, chunk, **display_kwd )
+                rval = hda.datatype.display_data( trans, hda, preview, filename, to_ext, **display_kwd )
 
         except Exception as exception:
             log.error( "Error getting display data for dataset (%s) from history (%s): %s",

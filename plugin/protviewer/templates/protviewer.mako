@@ -26,7 +26,7 @@
             <!-- Progress bar modal -->
             <div id="progress-bar" class="modal modal-trigger">
                 <div class="modal-content">
-                    <h3>Please wait 1-2 minutes while this file is being prepared for viewing for the first time</h3>
+                    <h5>Please wait 1-3 minutes while this file is being prepared for viewing for the first time</h5>
                     <div class="progress">
                         <div class="indeterminate"></div>
                     </div>
@@ -83,6 +83,7 @@
                                 <th>#Distinct Peptide</th>
                                 <th>Score</th>
                                 <th>Protein Coverage(%)</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -128,9 +129,9 @@
             var psmtable;
             var dataLocation = "/plugins/visualizations/protviewer/static/data/";
             var hdaId = "${trans.security.encode_id( hda.id )}";
-            var filename = "${hda.file_name}";
+            var inputFile = "${hda.file_name}";
             var extension = "mzidentml";
-            var dataUrl = "${h.url_for( controller='/api/datasets')}/" + hdaId + "?data_type=" + extension + "&filename=" + filename + "&dataLocation=" + dataLocation +"&mode=init" + "&datasetId=" + hdaId;
+            var dataUrl = "${h.url_for( controller='/api/datasets')}/" + hdaId + "?data_type=" + extension + "&inputFile=" + inputFile + "&mode=initial_load" + "&datasetId=" + hdaId;
 
             // Initialisation section
             $('#progress-bar').openModal();
@@ -181,7 +182,18 @@
                                 "data": [5]
                             }, {
                                 "data": [6]
-                            }]
+                            }, {
+                                "visible": false,
+                                "data": [7]
+                            }],
+                            "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull ) {
+                                if ( aData[7] === true ){
+                                    $(nRow).find('td:first').addClass('details-control');
+                                }else{
+                                   $(nRow).find('td:first').removeClass('details-control');
+                                }
+                                return nRow;
+                                }
                         });
 
                         peptidetable = $('#peptide-table').DataTable({
@@ -251,7 +263,7 @@
                 var content = '';
                 var dataUrl = "${h.url_for( controller='/api/datasets')}/" + hdaId +
                                 "?data_type=" + extension +
-                                "&filename=" + filename +
+                                "&inputFile=" + inputFile +
                                 "&mode=sequence" +
                                 "&datasetId=" + hdaId+
                                 "&dbSequenceId=" + dbSeqId;
@@ -280,9 +292,11 @@
                 var tag = "";
                 // travel though each peptide
                 for (var i = 0; i < locations.length; i++) {
+                    // closing tag
                     if(locations[i][1] == index-1){
                         tag += '</span>';
                     }
+                    // opening tag
                     if(locations[i][0] == index){
                         tag += '<span class="highlight" style="border: 1px solid black;">';
                     }

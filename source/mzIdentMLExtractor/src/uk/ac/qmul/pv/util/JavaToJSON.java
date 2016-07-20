@@ -64,7 +64,6 @@ public class JavaToJSON {
 
     public static JsonArray proteinToJsonArray(ProteinRecord prot) {
 
-        
         JsonArray protein = new JsonArray();
         protein.add(new JsonPrimitive(prot.getId()));
 //        protein.add(new JsonPrimitive("<a href=http://www.uniprot.org/uniprot/"
@@ -75,6 +74,7 @@ public class JavaToJSON {
         protein.add(new JsonPrimitive(prot.getDistinctPeptides()));
         protein.add(new JsonPrimitive(prot.getPhdScore()));
         protein.add(new JsonPrimitive(prot.getCoverage()));
+        protein.add(new JsonPrimitive(prot.isIsSequenceAvailable()));
         return protein;
     }
 
@@ -89,36 +89,19 @@ public class JavaToJSON {
         peptide.add(new JsonPrimitive(pep.getAccession()));
         peptide.add(new JsonPrimitive(pep.getModifications()));
         peptide.add(new JsonPrimitive(pep.getNoOfModifications()));
-        
+
         return peptide;
     }
-    
-      public static JsonArray psmToJsonArray(PSMRecord psmRecord) {
+
+    public static JsonArray psmToJsonArray(PSMRecord psmRecord) {
 
         JsonArray psm = new JsonArray();
 
         psm.add(new JsonPrimitive(psmRecord.getId()));
-//        psm.add(new JsonPrimitive(psmRecord.getRank()));
         psm.add(new JsonPrimitive(psmRecord.getChargeState()));
-          psm.add(new JsonPrimitive(psmRecord.getCalculatedMassToCharge()));
+        psm.add(new JsonPrimitive(psmRecord.getCalculatedMassToCharge()));
         psm.add(new JsonPrimitive(psmRecord.getExperimentalMassToCharge()));
-        
+
         return psm;
-    }
-      
-      public static void sequenceToJSON(String sequence, String outputFile) {
-
-        Gson gson = new Gson();
-
-        try ( //write converted json data to a file
-                FileWriter writer = new FileWriter(outputFile)) {
-            writer.write(gson.toJson(sequence));
-
-        } catch (IOException e) {
-            System.out.println("File Input Output Error(JSON): " + e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
-
     }
 }

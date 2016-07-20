@@ -23,6 +23,7 @@ public class ProteinRecord {
     private int distinctPeptides = 0;
     private double score = -1;
     private double coverage = 0;
+    private boolean isSequenceAvailable = false;
 
     /**
      * @return the accessionCode
@@ -141,6 +142,14 @@ public class ProteinRecord {
                 + "distinctPeptides : " + this.distinctPeptides
                 + "phdScore : " + this.score
                 + "coverage : " + this.coverage;
+    }
+
+    public boolean isIsSequenceAvailable() {
+        return isSequenceAvailable;
+    }
+
+    public void setIsSequenceAvailable(boolean isSequenceAvailable) {
+        this.isSequenceAvailable = isSequenceAvailable;
     }
 
 }

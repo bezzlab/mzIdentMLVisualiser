@@ -205,6 +205,10 @@ public class ProteinExtractor implements DataExtractor {
         // DbSequence unique ID
         protein.setId(dbSeq.getId());
         
+        if(dbSeq.getSeq()!= null){
+           protein.setIsSequenceAvailable(true);
+        }
+        
         // travel though each CV Parameter to find the score and #distinct peptides
         Iterator<CvParam> it = pdh.getCvParam().iterator();
         while (it.hasNext()) {
