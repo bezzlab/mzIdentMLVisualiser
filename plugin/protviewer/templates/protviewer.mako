@@ -23,6 +23,9 @@
             </div>
         </nav>
         <div class="container">
+            <div id="errormessage" class="alert alert-danger" style="display:none">
+                <p><strong>Sorry!</strong> An error has occurred. Please contact <a href="mailto:j.fan@qmul.ac.uk?Subject=Mzidentml Viewer Plugin Error&cc=c.bessant@qmul.ac.uk" target="_top">administrator</a></p>
+            </div>
             <!-- Progress bar modal -->
             <div id="progress-bar" class="modal modal-trigger">
                 <div class="modal-content">
@@ -142,6 +145,9 @@
             $.ajax({
                 'url': dataUrl,
                 'dataType': "json",
+                'error':function(){
+                    $("#errormessage").fadeIn(1000);
+                },
                 'success': function(data) {
                         proteintable = $('#protein-table').DataTable({
                             "oLanguage": {
@@ -436,13 +442,17 @@
                     var modif = displayModifications(peptideData[5],peptideData[1]);
                     var psmtab = psmDisplay(peptideData);
                     row.child(modif+psmtab).show();
-                    // add tooltips
+                      // add tooltips
                     $('.tooltipped').tooltip();
                     // finally expand the child row
                     tr.addClass('shown');
                 }
             });
         }); // end of document ready
+
+        $(document).ajaxError(function (event, jqxhr, settings) {
+                $("#errormessage").fadeIn(1000);
+        });
         </script>
     </body>
     </html>
