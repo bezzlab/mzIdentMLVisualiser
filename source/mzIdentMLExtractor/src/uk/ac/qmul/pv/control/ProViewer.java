@@ -25,27 +25,26 @@ public class ProViewer {
 
     public static void main(String[] args) {
 
-        String inputFile = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/TestData/ExampleMod.mzid";
-        String datasetId = "ExampleMod";
-//        String outputFile = "/Users/sureshhewapathirana/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/";
-        String outputFile =  "/Users/sureshhewapathirana/Desktop/";
+        String inputFile = ""; 
+        String datasetId = "";
+        String outputFile = "";
         boolean isThreading = true;
 
-        // get parameters from the command line
-//        if (args.length == 4) {
-//            inputFile = args[0];
-//            outputFile = args[1];
-//            datasetId = args[2];
-//            isThreading = Boolean.parseBoolean(args[3]);
-//        } else {
-//            System.err.println("You must pass four parameters!"
-//                    + "\n 1.Input mzIdentML file"
-//                    + "\n 2. Output directory for JSON files"
-//                    + "\n 3. Unique dataset ID for output files"
-//                    + "\n 4. Boolean value to enable/disable multithreading"
-//                    + "\n\n USAGE: java -jar mzIdentMLExtractor.jar <InputFile> <OutputDir> <UniqueId> <Multithreading>");
-//            System.exit(0); // immediate exit
-//        }
+//         get parameters from the command line
+        if (args.length == 4) {
+            inputFile = args[0];
+            outputFile = args[1];
+            datasetId = args[2];
+            isThreading = Boolean.parseBoolean(args[3]);
+        } else {
+            System.err.println("You must pass four parameters!"
+                    + "\n 1.Input mzIdentML file"
+                    + "\n 2. Output directory for JSON files"
+                    + "\n 3. Unique dataset ID for output files"
+                    + "\n 4. Boolean value to enable/disable multithreading"
+                    + "\n\n USAGE: java -jar mzIdentMLExtractor.jar <InputFile> <OutputDir> <UniqueId> <Multithreading>");
+            System.exit(0); // immediate exit
+        }
 
         // appending datasetId(unique id) to output filenames
         outputFile = outputFile + datasetId;
