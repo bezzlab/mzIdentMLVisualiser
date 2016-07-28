@@ -44,12 +44,10 @@ tool_path = /Users/yourname/Downloads/galaxy/tools/
 error_report_to = j.fan@qmul.ac.uk
 ```
 
-
-
 As a guidance to above step, we have provided you a sample configuration file(galaxy.ini) in *samples* folder.
 
 #### Step 2 - Copy *protviewer* folder into your visualisations directory
-* Copy the entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
+* Copy the entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder. After copying, go to protviewer/templates/protviewer.mako, line Number 134, change your ```bash rootLocation ``` your galaxy root folder path. Further, if you want to change output directory, you can change in line Number 134, change your ```bash dataLocation  ```
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
 *  You are given three files in the *webcontroller* folder in the *plugin* folder with the mzIdentMLVisualiser repository which are namely:
