@@ -20,7 +20,7 @@ In order to proceed, please download our repository to your machine by cloning t
 
 ### Install Galaxy Visualisation Plugin
 
-#### Step 1 - Enable visualisation feature of Galaxy
+#### Step 1 - Edit configuration file
 * You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory/uncomment the line as follows :
 
 ```bash
@@ -29,53 +29,70 @@ In order to proceed, please download our repository to your machine by cloning t
 # with '/'.
 visualization_plugins_directory = config/plugins/visualizations
 ```
+
+Add following settings in the bottom of the *galaxy.ini* file
+
+```bash
+[MzIdentML]
+# This is where tempory file of the plugin will get stored
+output_file_dir = /Users/yourname/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/
+# Absolute path for the java library. We recommend to keep in the mzIdentMLToJSON tool folder
+javalib  = /Users/yourname/Downloads/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar
+# Absolute path for the tool directory in your galaxy instance
+tool_path = /Users/yourname/Downloads/galaxy/tools/
+# If there is an error, whom do you want to send the error message(admin)
+error_report_to = j.fan@qmul.ac.uk
+```
+
+
+
 As a guidance to above step, we have provided you a sample configuration file(galaxy.ini) in *samples* folder.
 
 #### Step 2 - Copy *protviewer* folder into your visualisations directory
 * Copy the entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
-*  You are given two files in the *webcontroller* folder in the *plugin* folder with the mzIdentMLVisualiser repository which are namely:
+*  You are given three files in the *webcontroller* folder in the *plugin* folder with the mzIdentMLVisualiser repository which are namely:
   * MzIdentMLHandler.py
-  * SequenceExtractor.py They has to be copied into your galaxy instance at ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location.
+  * SequenceExtractor.py 
+  * MzIdentMLToJSON.py They has to be copied into your galaxy instance at ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location.
 
 * Then, in your galaxy, you should be able to find a file called **datasets.py** at the same location(```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/```). There, copy and paste following codes:
 
   * Import these modules first:
    ```python
+      from MzIdentMLToJSON import MzIdentMLToJSON
       from SequenceExtractor import SequenceExtractor
       import os.path
       import subprocess
    ```
   * There, paste following code inside Class **DatasetsController** -> method **show**:
    ```python
-        elif data_type == 'mzidentml':
-            # input mzIdentML file
-            inputfile = kwd.get('filename')
-            # unique security encoded id assigned for the input file
-            datasetId = kwd.get('datasetId')
-            rval = inputfile
-            # <your galaxy directory> + paths
-            outputfile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/"
-            tempFile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
-            libraryLocation = os.getcwd() + "/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
-            multithreading = "true"
-            # initial run
-            if kwd.get('mode') == 'init':
-                # if temporary JSON files not generated
-                if os.path.isfile(tempFile) == False:
-                    # call mzIdentMLExtractor java library
-                    return subprocess.call(['java', '-jar',libraryLocation, inputfile, outputfile, datasetId, multithreading])
-                else:
-                    print "Info: Data loaded from the cache!"
-            elif kwd.get('mode') == 'sequence':
-                dbSequenceId = kwd.get('dbSequenceId')
-                # extract the sequence
-                seqEx = SequenceExtractor()
-                sequence = seqEx.extract(inputfile, dbSequenceId)
-                rval = sequence
-                return rval
+      elif data_type == 'mzidentml':
+        rval = self._mzIdentMLProcess(**kwd)
     ```
+    
+  * Just below method **show** method add this function:
+  
+ ```
+      def _mzIdentMLProcess( self, **kwd):
+        print  "MzIdentML Viewer INFO: called Web API controller!"
+        # input mzIdentML file
+        inputfile = kwd.get('inputFile')
+        # unique sequrity encoded id assigned for the input file
+        datasetId = kwd.get('datasetId')
+        # galaxy root directory
+        root = kwd.get('root')
+        rval = inputfile
+        # Web plugin loading time
+        if kwd.get('mode') == 'initial_load':
+            converter = MzIdentMLToJSON()
+            converter.extract(inputfile, datasetId, root)
+        elif kwd.get('mode') == 'sequence':
+            seqEx = SequenceExtractor()
+            rval = seqEx.extract(inputfile, kwd.get('dbSequenceId'))
+        return rval
+ ```
     Warning: **Mind your indentation!** As a guidance for the above step, you can find a sample *datasets.py* file in *sample* folder.
 
 ### Install Galaxy Tool
