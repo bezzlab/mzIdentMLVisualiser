@@ -74,7 +74,7 @@ As a guidance to above step, we have provided you a sample configuration file(ga
     
   * Just below method **show** method add this function:
   
- ```
+ ```python
       def _mzIdentMLProcess( self, **kwd):
         print  "MzIdentML Viewer INFO: called Web API controller!"
         # input mzIdentML file
