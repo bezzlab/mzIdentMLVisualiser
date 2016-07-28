@@ -34,7 +34,7 @@ Add following settings in the bottom of the *galaxy.ini* file
 
 ```bash
 [MzIdentML]
-# This is where tempory file of the plugin will get stored
+# This is where tempory JSON file of the plugin will get stored
 output_file_dir = /Users/yourname/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/
 # Absolute path for the java library. We recommend to keep in the mzIdentMLToJSON tool folder
 javalib  = /Users/yourname/Downloads/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar
