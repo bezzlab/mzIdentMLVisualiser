@@ -47,7 +47,7 @@ error_report_to = j.fan@qmul.ac.uk
 As a guidance to above step, we have provided you a sample configuration file(galaxy.ini) in *samples* folder.
 
 #### Step 2 - Copy *protviewer* folder into your visualisations directory
-* Copy the entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder. After copying, go to protviewer/templates/protviewer.mako, line Number 134, change your ```bash rootLocation ``` your galaxy root folder absolute path. Further, if you want to change output directory, you can change in line Number 134, change your ```bash dataLocation  ```
+* Copy the entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder. After copying, go to protviewer/templates/protviewer.mako, line Number 134, change your ``` rootLocation ``` your galaxy root folder absolute path. Further, if you want to change output directory, you can change in line Number 134, change your ``` dataLocation  ```
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
 *  You are given three files in the *webcontroller* folder in the *plugin* folder with the mzIdentMLVisualiser repository which are namely:
@@ -64,13 +64,13 @@ As a guidance to above step, we have provided you a sample configuration file(ga
       import os.path
       import subprocess
    ```
-  * There, paste following code inside Class **DatasetsController** -> method **show**:
+  * There, search for Class **DatasetsController** -> method **show** and paste following code inside the method **show**:
    ```python
       elif data_type == 'mzidentml':
         rval = self._mzIdentMLProcess(**kwd)
     ```
     
-  * Just below method **show** method add this function:
+  * Just after **show** method add this function(Copy from the sample files provided):
   
  ```python
      def _mzIdentMLProcess( self, **kwd):
