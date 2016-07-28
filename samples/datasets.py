@@ -18,6 +18,7 @@ from galaxy.web.base.controller import BaseAPIController
 from galaxy.web.base.controller import UsesVisualizationMixin
 from galaxy import managers
 
+from MzIdentMLToJSON import MzIdentMLToJSON
 from SequenceExtractor import SequenceExtractor
 import os.path
 import subprocess
@@ -79,33 +80,7 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
             elif data_type == 'genome_data':
                 rval = self._get_genome_data( trans, dataset, kwd.get('dbkey', None) )
             elif data_type == 'mzidentml':
-                print  "MzIdentML Viewer INFO: called Web API controller!"
-                # input mzIdentML file
-                inputfile = kwd.get('inputFile')
-                # unique sequrity encoded id assigned for the input file
-                datasetId = kwd.get('datasetId')
-                rval = inputfile
-                # <your galaxy directory> + paths
-                outputfile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/"
-                tempFile = os.getcwd() + "/config/plugins/visualizations/protviewer/static/data/" + datasetId + "_protein.json"
-                javalib = os.getcwd() + "/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
-                multithreading = "true"
-                # Web plugin loading time
-                if kwd.get('mode') == 'initial_load':
-                    # if temporary JSON files not generated
-                    if os.path.isfile(tempFile) == False:
-                        # call mzIdentMLExtractor java library
-                        print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
-                        return subprocess.call(['java', '-jar',javalib, inputfile, outputfile, datasetId, multithreading])
-                    else:
-                        print "MzIdentML Viewer INFO: Data loaded from the cache!"
-                elif kwd.get('mode') == 'sequence':
-                    dbSequenceId = kwd.get('dbSequenceId')
-                    # extract the sequence
-                    seqEx = SequenceExtractor()
-                    sequence = seqEx.extract(inputfile, dbSequenceId)
-                    rval = sequence
-                    return rval
+                rval = self._mzIdentMLProcess(**kwd)
             else:
                 # Default: return dataset as dict.
                 if hda_ldda == 'hda':
@@ -113,12 +88,30 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
                                                                   view=kwd.get( 'view', 'detailed' ), user=trans.user, trans=trans )
                 else:
                     rval = dataset.to_dict()
-
         except Exception as e:
             rval = "Error in dataset API at listing contents: " + str( e )
             log.error( rval + ": %s" % str(e), exc_info=True )
             trans.response.status = 500
         return rval
+
+    def _mzIdentMLProcess( self, **kwd):
+        print  "MzIdentML Viewer INFO: called Web API controller!"
+        # input mzIdentML file
+        inputfile = kwd.get('inputFile')
+        # unique sequrity encoded id assigned for the input file
+        datasetId = kwd.get('datasetId')
+        # galaxy root directory
+        root = kwd.get('root')
+        rval = inputfile
+        # Web plugin loading time
+        if kwd.get('mode') == 'initial_load':
+            converter = MzIdentMLToJSON()
+            converter.extract(inputfile, datasetId, root)
+        elif kwd.get('mode') == 'sequence':
+            seqEx = SequenceExtractor()
+            rval = seqEx.extract(inputfile, kwd.get('dbSequenceId'))
+        return rval
+
 
     def _dataset_state( self, trans, dataset, **kwargs ):
         """

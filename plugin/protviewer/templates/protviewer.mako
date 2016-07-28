@@ -131,10 +131,16 @@
             var peptidetable;
             var psmtable;
             var dataLocation = "/plugins/visualizations/protviewer/static/data/";
-            var hdaId = "${trans.security.encode_id( hda.id )}";
+            var rootLocation = "/Users/sureshhewapathirana/Downloads/galaxy";
+            var hdaId     = "${trans.security.encode_id( hda.id )}";
             var inputFile = "${hda.file_name}";
             var extension = "mzidentml";
-            var dataUrl = "${h.url_for( controller='/api/datasets')}/" + hdaId + "?data_type=" + extension + "&inputFile=" + inputFile + "&mode=initial_load" + "&datasetId=" + hdaId;
+            var dataUrl   = "${h.url_for( controller='/api/datasets')}/" + hdaId +
+                            "?data_type=" + extension +
+                            "&inputFile=" + inputFile +
+                            "&mode=initial_load" +
+                            "&datasetId=" + hdaId +
+                            "&root=" + rootLocation;
 
             // Initialisation section
             $('#progress-bar').openModal();
@@ -271,8 +277,9 @@
                                 "?data_type=" + extension +
                                 "&inputFile=" + inputFile +
                                 "&mode=sequence" +
-                                "&datasetId=" + hdaId+
-                                "&dbSequenceId=" + dbSeqId;
+                                "&datasetId=" + hdaId +
+                                "&dbSequenceId=" + dbSeqId +
+                                "&root=" + rootLocation;
                 $.ajax({
                     'url': dataUrl,
                     async:false,

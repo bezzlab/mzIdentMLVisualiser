@@ -11,37 +11,33 @@ usage: ProViewer.py  --filename="$input" --datasetid=$__app__.security.encode_id
 import optparse
 import os
 import subprocess
-
+# python 2.7
+import ConfigParser
 
 def __main__():
-
 	#parse command-line arguments
 	parser = optparse.OptionParser()
 	parser.add_option( '-F', '--filename', dest='filename', help='mzIdentML filename' )
 	parser.add_option( '-D', '--datasetid', dest='datasetid', help='datasetid' )
 	parser.add_option( '-R', '--root', dest='root', help='root directory of the galaxy instance' )
    	(options, args) = parser.parse_args()
-	inputfile = options.filename
-	datasetId = options.datasetid
-	root = options.root
+	inputfile 		= options.filename
+	datasetId 		= options.datasetid
+	root 			= options.root
+	print "MzIdentML Viewer INFO:Root folder of the Galaxy: " + root
 
-	outputfile = root + "/config/plugins/visualizations/protviewer/static/data/"
-	tempFile = root + "/config/plugins/visualizations/protviewer/static/data/" + datasetId+ "_protein.json"
-	javalib = root + "/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar"
-
-	# debuging purpose only
-	print "Root directory: " + root
-	print "outputfile : "+ outputfile
-	print "tempFile : "+ tempFile
-	print "javalib : "+ javalib
-
-	multithreading = "true"
+	config 			= ConfigParser.ConfigParser()
+	print config.read(root + '/config/galaxy.ini')
+	outputfile 		= config.get('MzIdentML', 'output_file_dir')
+	javalib 		= config.get('MzIdentML', 'javalib')
+	tempFile 		= outputfile + datasetId + "_protein.json"
+	multithreading 	= "true"
+	print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
 
 	try:
 		# if file not already exists
 		if os.path.isfile(tempFile) == False:
 			# execute mzIdentMLExtractor java library
-			print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
 			return subprocess.call(['java', '-jar',javalib, inputfile, outputfile, datasetId, multithreading])
 		else:
 			print "MzIdentML Viewer INFO: Data loaded from the cache!"
