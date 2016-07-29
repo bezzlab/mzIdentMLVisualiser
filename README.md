@@ -38,10 +38,11 @@ Add following settings in the bottom of the *galaxy.ini* file
 output_file_dir = /Users/yourname/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/
 # Absolute path for the java library. We recommend to keep in the mzIdentMLToJSON tool folder
 javalib  = /Users/yourname/Downloads/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar
-# Absolute path for the tool directory in your galaxy instance
+# Absolute path for the tool directory in your galaxy instance where you have your executable python file
+# see Galaxy tool section further down, step 2
 tool_path = /Users/yourname/Downloads/galaxy/tools/
 # If there is an error, whom do you want to send the error message(admin)
-error_report_to = j.fan@qmul.ac.uk
+error_report_to = admin@somewhere.com
 ```
 
 As a guidance to above step, we have provided you a sample configuration file(galaxy.ini) in *samples* folder.
@@ -119,7 +120,7 @@ As a guidance for above step, sample configuration file is given in *samples* fo
 Copy given entire *mzIdentMLToJSON* folder in the *tool* folder to your galaxy instance at ```<your galaxy directory>/tools/```.
 This folder contains:
  1. wrapper - mzIdentMLToJSON.xml
- 2. python script - mzIdentMLToJSON.py
+ 2. python executable script - mzIdentMLToJSON.py
  3. java library - mzIdentMLExtractor.jar
  4. java library dependencies - lib folder
 
