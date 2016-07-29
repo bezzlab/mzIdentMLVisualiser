@@ -1,0 +1,125 @@
+from sys import argv
+import os
+import shutil
+from distutils.dir_util import copy_tree
+
+def main():
+	os.system('clear')
+
+	print "\n"
+	print " ################################################"
+	print "     Welcome to mzIdentML Viewer Admin Tool!     "
+	print " ################################################\n"
+
+	print "What do you want to do:"
+	print "\t1. Install mzIdentML Viewer"
+	print "\t2. Remove temporary files"
+	print "\t3. Re-run galaxy tool with existing data"
+
+	option = raw_input("\nPlease type option number:")
+	if (option == '1'):
+		install()
+	elif (option == '2'):
+		remove_temp()
+	elif (option == '3'):
+		rerun()
+
+def install():
+	'''
+	This method will copy installation files
+	into  the galaxy server instance
+	'''
+	current_dir = os.getcwd()
+
+	os.system('clear')
+	print "\n"
+	print " ================================================"
+	print "              Install mzIdentML Viewer           "
+	print " ================================================\n"
+
+	print "STEP 1 - Add settings to galaxy"
+	print "----------------------------------\n"
+
+	print "We are going to add settings of the mzIdentML to galaxy.ini congiguration file. If you have already added settings, please skip this step!"
+	confirmation = raw_input("\nDo you really sure, you want to add settings(Y/N):")
+	is_step1_skipped = True
+	if (confirmation == 'Y' or confirmation == 'y'):
+		output_dir 			= raw_input("\t1. Output directory full path\t\t:")
+		rel_output_dir 		= raw_input("\t2. Output directory relative path reference to config folder\t\t:")
+		javalib_dir        	= raw_input("\t3. Where do you want to save mzIdentMLToJSON java library?\t:")
+		tool_path 			= raw_input("\t4. Tool directory full path\t\t\t:")
+		error_report_sent_to= raw_input("\t5. Error report to (email address)\t\t:")
+		galaxy_root_location= raw_input("\t6. Galaxy root location\t\t\t:")
+
+		galaxy_ini = os.path.join(galaxy_root_location, 'config/galaxy.ini')
+		settings = "\n\n# ---- mzIdentML Viewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "mzIdentMLExtractor.jar" + "\ntool_path = " + tool_path + "\nmultithreading = " + multithreading + "\nerror_report_sent_to = " + error_report_sent_to
+		print settings
+
+		confirmation = raw_input("\nAre you sure these settings are correct(Y/N):")
+		if (confirmation == 'Y' or confirmation == 'y'):
+			is_step1_skipped = False
+			if os.path.exists(galaxy_ini):
+				open(galaxy_ini, 'a').write(settings)
+				print "> Success! Settings were added to galaxy.ini config file!\n\n"
+			else:
+				print("\033[1;33;40m Sorry, Galaxy.ini path is invalid!\n")
+				exit()
+
+	print "STEP 2 - Copy Visualisation Plugin"
+	print "----------------------------------\n"
+
+	from_dir    = os.path.join(current_dir, 'plugin/protviewer')
+	to_dir      = raw_input("Visualisation Plugin Directory:")
+	if os.path.isdir(to_dir):
+		copy_tree(from_dir, to_dir)
+		print "> Success! Plugin files were copied/replaced!\n\n"
+	else:
+		print("\033[1;33;40m Sorry, folder path is invalid!\n")
+		exit()
+
+	print "\nSTEP 3 - Copy Web API Files"
+	print "----------------------------------\n"
+
+	from_dir    = os.path.join(current_dir, 'plugin/webcontroller')
+	to_dir      = raw_input("Web API Directory:")
+	if os.path.isdir(to_dir):
+		copy_tree(from_dir, to_dir)
+		print "> Success! Web API files were copied/replaced!\n\n"
+	else:
+		print("\033[1;33;40m Sorry, folder path is invalid!\n")
+		exit()
+
+	print "\nSTEP 4 - Copy Galaxy Tool"
+	print "----------------------------------\n"
+
+	from_dir    = os.path.join(current_dir, 'tool/mzIdentMLToJSON')
+	to_dir      = raw_input("Where do you want to save galaxy tool files\n(mzIdentMLToJSON.xml,mzIdentMLToJSON.py):")
+	if os.path.isdir(to_dir):
+		copy_tree(from_dir, to_dir)
+		print "> Success! Galaxy tools were copied/replaced!\n\n"
+	else:
+		print("\033[1;33;40m Sorry, folder path is invalid!\n")
+		exit()
+	# copy java library to the javalib_dir user specified in step 1
+	from_dir    = os.path.join(current_dir, 'tool/mzIdentMLToJSON/mzIdentMLExtractor.jar')
+	if is_step1_skipped == True:
+		to_dir      = raw_input("Where do you want to save mzIdentMLToJSON java library?:")
+	else:
+		to_dir      = javalib_dir
+
+	if os.path.isdir(to_dir):
+		copy_tree(from_dir, to_dir)
+		print "> Success! Galaxy tools were copied/replaced!\n\n"
+	else:
+		print("\033[1;33;40m Sorry, folder path is invalid!\n")
+		exit()
+
+def remove_temp():
+	print "\033[1;33;40m\n*** Sorry, Under Constructions ***\n"
+
+def rerun():
+	print "\033[1;33;40m\n*** Sorry, Under Constructions ***\n"
+
+
+if __name__ == "__main__":
+    main()
