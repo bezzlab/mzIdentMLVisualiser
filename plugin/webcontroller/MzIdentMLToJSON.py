@@ -20,10 +20,10 @@ class MzIdentMLToJSON():
 		config = ConfigParser.ConfigParser()
 		print config.read(root + "/config/galaxy.ini")
 
-		outputfile 		= config.get('MzIdentML', 'output_file_dir')
+		outputfile 		= config.get('MzIdentML', 'output_dir')
 		javalib 		= config.get('MzIdentML', 'javalib')
+		multithreading 	= config.get('MzIdentML', 'multithreading')
 		tempFile 		= outputfile + datasetId + "_protein.json"
-		multithreading 	= "true"
 		print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
 
 		try:
