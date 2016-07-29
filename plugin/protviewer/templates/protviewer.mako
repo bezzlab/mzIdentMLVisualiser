@@ -1,6 +1,18 @@
 <%
+    import os
+    import ConfigParser
+
     root = h.url_for( "/" )
     app_root = root + "plugins/visualizations/protviewer/static/"
+
+    galaxy_root_dir = os.getcwd()
+    galaxy_ini_file = os.path.join(galaxy_root_dir,'config/galaxy.ini')
+    config          = ConfigParser.ConfigParser()
+    config.read(galaxy_ini_file)
+
+    output_dir      = config.get('MzIdentML', 'output_dir')
+    error_report_to = config.get('MzIdentML', 'error_report_to')
+    rel_output_dir = config.get('MzIdentML', 'rel_output_dir')
 %>
     <!DOCTYPE html>
     <html>
@@ -24,7 +36,7 @@
         </nav>
         <div class="container">
             <div id="errormessage" class="alert alert-danger" style="display:none">
-                <p><strong>Sorry!</strong> An error has occurred. Please contact <a href="mailto:j.fan@qmul.ac.uk?Subject=Mzidentml Viewer Plugin Error&cc=c.bessant@qmul.ac.uk" target="_top">administrator</a></p>
+                <p><strong>Sorry!</strong> An error has occurred. Please report to <a href="mailto:${error_report_to}?Subject=Mzidentml Viewer Plugin Error" target="_top">administrator</a></p>
             </div>
             <!-- Progress bar modal -->
             <div id="progress-bar" class="modal modal-trigger">
@@ -130,8 +142,8 @@
             var proteintable;
             var peptidetable;
             var psmtable;
-            var dataLocation = "/plugins/visualizations/protviewer/static/data/";
-            var rootLocation = "/Users/sureshhewapathirana/Downloads/galaxy";
+            var rootLocation = "${galaxy_root_dir}"; // "/Users/myname/Downloads/galaxy";
+            var dataLocation = "${rel_output_dir}";  // "/plugins/visualizations/protviewer/static/data/";
             var hdaId     = "${trans.security.encode_id( hda.id )}";
             var inputFile = "${hda.file_name}";
             var extension = "mzidentml";
