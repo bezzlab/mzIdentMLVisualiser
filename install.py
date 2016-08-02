@@ -41,15 +41,15 @@ def install():
 	print " ===============================================================================================\n"
 
 	print "Please answer to following questions carefully."
-	print "You can refer examples given below as a guidance.\n\n"
+	print "You can refer examples given below as a guide.\n\n"
 
 	print "-------------------------------------------------------------------------------------------------"
 	print "STEP 1 : Visualisation Plugin Directory 	:\n/Users/sureshhewapathirana/Downloads/test/galaxy/config/plugins/visualizations/\n"
 	print "STEP 2 : Web API Directory 				:\n/Users/sureshhewapathirana/Downloads/test/galaxy/lib/galaxy/webapps/galaxy/api/\n"
 	print "STEP 3 : Tool directory(wrapper) save location:\n/Users/sureshhewapathirana/Downloads/test/galaxy/tools/mzIdentMLToJSON/\n"
-	print "STEP 5 : Output dir where temporay files get saved:\n/Users/sureshhewapathirana/Downloads/test/galaxy/config/plugins/visualizations/protviewer/static/data/\n"
-	print "STEP 5 : Output dir relative path reference to config folder:\n/plugins/visualizations/protviewer/static/data/\n"
-	print "STEP 5 : Galaxy instance root directory:\n/Users/sureshhewapathirana/Downloads/test/galaxy\n"
+	print "STEP 4 : Output dir where temporay files get saved:\n/Users/sureshhewapathirana/Downloads/test/galaxy/config/plugins/visualizations/protviewer/static/data/\n"
+	print "STEP 4 : Output dir relative path reference to config folder:\n/plugins/visualizations/protviewer/static/data/\n"
+	print "STEP 4 : Galaxy instance root directory:\n/Users/sureshhewapathirana/Downloads/test/galaxy\n"
 	print "-------------------------------------------------------------------------------------------------\n"
 
 	# STEP 1 - Copy Visualisation Plugin
@@ -75,7 +75,7 @@ def install():
 	javalib_dir = tool_dir
 
 	# STEP 4 - add settings to configuration file
-	printTitle("STEP 5 - Add settings to galaxy.ini config file")
+	printTitle("STEP 4 - Add settings to galaxy.ini config file")
 	output_dir 			= raw_input("Output dir where temporay files get saved:")
 	rel_output_dir 		= raw_input("Output dir relative path reference to config folder:")
 	galaxy_root_location= raw_input("Galaxy instance root directory:")
@@ -86,15 +86,17 @@ def install():
 	settings = "\n\n# ---- mzIdentML Viewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "mzIdentMLExtractor.jar" + "\ntool_path = " + tool_dir + "\nmultithreading = " + multithreading + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
-	confirmation = raw_input("\nDo you want to add settings to galaxy.ini configuration file?(Y/N):")
+	confirmation = raw_input("\nSettings are accurate?(Y/N):")
 
 	if (confirmation == 'Y' or confirmation == 'y'):
 		setting_location = galaxy_root_location + "/config/mzidentml_setttings.ini"
-		print "saving ... " + setting_location
+		print "Saving at : " + setting_location
 		target = open(setting_location, 'w+')
 		target.write(settings)
 		target.close()
-		print "> Success! Settings were added to mzidentml_setttings.ini config file!\n\n"
+		print "Success! Settings were added to mzidentml_setttings.ini settings file!\n\n"
+
+	print "------------- Installation Completed -------------"
 
 def copy(from_dir, to_dir):
 	'''
