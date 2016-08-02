@@ -24,27 +24,32 @@ import uk.ac.qmul.pv.db.DatabaseAccess;
 public class ProViewer {
 
     public static void main(String[] args) {
-
-        String inputFile = ""; 
-        String datasetId = "";
-        String outputFile = "";
+        
+        String inputFile = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/TestData/Galaxy5-[MSGF__MSMS_Search_on_data_33_and_data_3].mzid"; 
+        String datasetId = "Galaxy5";
+        String outputFile = "/Users/sureshhewapathirana/Desktop/1/";
         boolean isThreading = true;
 
+//        String inputFile = ""; 
+//        String datasetId = "";
+//        String outputFile = "";
+//        boolean isThreading = true;
+
 //         get parameters from the command line
-        if (args.length == 4) {
-            inputFile = args[0];
-            outputFile = args[1];
-            datasetId = args[2];
-            isThreading = Boolean.parseBoolean(args[3]);
-        } else {
-            System.err.println("You must pass four parameters!"
-                    + "\n 1.Input mzIdentML file"
-                    + "\n 2. Output directory for JSON files"
-                    + "\n 3. Unique dataset ID for output files"
-                    + "\n 4. Boolean value to enable/disable multithreading"
-                    + "\n\n USAGE: java -jar mzIdentMLExtractor.jar <InputFile> <OutputDir> <UniqueId> <Multithreading>");
-            System.exit(0); // immediate exit
-        }
+//        if (args.length == 4) {
+//            inputFile = args[0];
+//            outputFile = args[1];
+//            datasetId = args[2];
+//            isThreading = Boolean.parseBoolean(args[3]);
+//        } else {
+//            System.err.println("You must pass four parameters!"
+//                    + "\n 1.Input mzIdentML file"
+//                    + "\n 2. Output directory for JSON files"
+//                    + "\n 3. Unique dataset ID for output files"
+//                    + "\n 4. Boolean value to enable/disable multithreading"
+//                    + "\n\n USAGE: java -jar mzIdentMLExtractor.jar <InputFile> <OutputDir> <UniqueId> <Multithreading>");
+//            System.exit(0); // immediate exit
+//        }
 
         // appending datasetId(unique id) to output filenames
         outputFile = outputFile + datasetId;

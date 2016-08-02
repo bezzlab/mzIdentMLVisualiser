@@ -6,12 +6,12 @@
     app_root = root + "plugins/visualizations/protviewer/static/"
 
     galaxy_root_dir = os.getcwd()
-    galaxy_ini_file = os.path.join(galaxy_root_dir,'config/galaxy.ini')
+    galaxy_ini_file = os.path.join(galaxy_root_dir,'config/mzidentml_setttings.ini')
     config          = ConfigParser.ConfigParser()
     config.read(galaxy_ini_file)
 
     output_dir      = config.get('MzIdentML', 'output_dir')
-    error_report_to = config.get('MzIdentML', 'error_report_to')
+    error_report_to = config.get('MzIdentML', 'error_report_sent_to')
     rel_output_dir = config.get('MzIdentML', 'rel_output_dir')
 %>
     <!DOCTYPE html>
@@ -153,6 +153,11 @@
                             "&mode=initial_load" +
                             "&datasetId=" + hdaId +
                             "&root=" + rootLocation;
+
+            console.log('INFO : galaxy root directory : '+dataLocation);
+            console.log('INFO : Output directory : '+ dataLocation);
+            console.log('INFO : Error report to : '+ "${error_report_to}");
+            console.log('INFO : dataUrl : '+ dataUrl);
 
             // Initialisation section
             $('#progress-bar').openModal();

@@ -27,7 +27,7 @@ def __main__():
 	print "MzIdentML Viewer INFO:Root folder of the Galaxy: " + root
 
 	config 			= ConfigParser.ConfigParser()
-	print config.read(root + '/config/galaxy.ini')
+	print config.read(root + '/config/mzidentml_setttings.ini')
 	outputfile 		= config.get('MzIdentML', 'output_dir')
 	javalib 		= config.get('MzIdentML', 'javalib')
 	multithreading 	= config.get('MzIdentML', 'multithreading')
