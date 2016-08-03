@@ -154,7 +154,7 @@
                             "&datasetId=" + hdaId +
                             "&root=" + rootLocation;
 
-            console.log('INFO : galaxy root directory : '+dataLocation);
+            console.log('INFO : galaxy root directory : '+rootLocation);
             console.log('INFO : Output directory : '+ dataLocation);
             console.log('INFO : Error report to : '+ "${error_report_to}");
             console.log('INFO : dataUrl : '+ dataUrl);
