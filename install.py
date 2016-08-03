@@ -44,12 +44,12 @@ def install():
 	print "You can refer examples given below as a guide.\n\n"
 
 	print "-------------------------------------------------------------------------------------------------"
-	print "STEP 1 : Visualisation Plugin Directory 	:\n/Users/sureshhewapathirana/Downloads/test/galaxy/config/plugins/visualizations/\n"
-	print "STEP 2 : Web API Directory 				:\n/Users/sureshhewapathirana/Downloads/test/galaxy/lib/galaxy/webapps/galaxy/api/\n"
-	print "STEP 3 : Tool directory(wrapper) save location:\n/Users/sureshhewapathirana/Downloads/test/galaxy/tools/mzIdentMLToJSON/\n"
-	print "STEP 4 : Output dir where temporay files get saved:\n/Users/sureshhewapathirana/Downloads/test/galaxy/config/plugins/visualizations/protviewer/static/data/\n"
+	print "STEP 1 : Visualisation Plugin Directory 	:\n/home/galaxy/Downloads/galaxy/config/plugins/visualizations/\n"
+	print "STEP 2 : Web API Directory 				:\n/home/galaxy/Downloads/galaxy/lib/galaxy/webapps/galaxy/api/\n"
+	print "STEP 3 : Tool directory(wrapper) save location:\n/home/galaxy/Downloads/galaxy/tools/mzIdentMLToJSON/\n"
+	print "STEP 4 : Output dir where temporay files get saved:\n/home/galaxy/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/\n"
 	print "STEP 4 : Output dir relative path reference to config folder:\n/plugins/visualizations/protviewer/static/data/\n"
-	print "STEP 4 : Galaxy instance root directory:\n/Users/sureshhewapathirana/Downloads/test/galaxy\n"
+	print "STEP 4 : Galaxy instance root directory:\n/home/galaxy/Downloads/galaxy\n"
 	print "-------------------------------------------------------------------------------------------------\n"
 
 	# STEP 1 - Copy Visualisation Plugin
