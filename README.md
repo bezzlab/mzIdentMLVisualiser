@@ -22,7 +22,8 @@ In order to proceed, please download our repository to your machine by cloning t
 ### Install Galaxy Visualisation Plugin 
 
 #### Step 1 - Edit configuration file
-* You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory/uncomment the line as follows :
+
+You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory/uncomment the line as follows :
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -37,7 +38,7 @@ Go to the downloaded folder of the repository in command-line, and execute insta
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
 
-* Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and you should be able to find a file called **datasets.py**. There, copy and paste following codes:
+Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and you should be able to find a file called **datasets.py**. There, copy and paste following codes:
 
   * Import these modules first:
    ```python
@@ -88,7 +89,7 @@ There, add these parameters anywhere of  the file under ```<toolbox>``` tag:
 </section>
 ```
 
-We have created a separate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing sections by only specifying ```<tool>``` tag as below:
+We have created a separate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing tool sections by only specifying ```<tool>``` tag as below:
 
 ```XML
 <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
