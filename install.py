@@ -32,6 +32,8 @@ def install():
 	This method will copy installation files
 	into  the galaxy server instance
 	'''
+	
+	# get the current working directory. By default it is the galaxy/config folder
 	current_dir = os.getcwd()
 
 	os.system('clear')
@@ -54,6 +56,8 @@ def install():
 
 	# STEP 1 - Copy Visualisation Plugin
 	printTitle("STEP 1 - Copy Visualisation Plugin")
+	# print Visualizations plugin directory: where to look for individual visualization plugins.
+	# Absolute path should be given
 	vis_plugin_dir		= raw_input("Visualisation Plugin Directory :")
 	to_dir 		= os.path.join(vis_plugin_dir, 'protviewer')
 	from_dir    = os.path.join(current_dir, 'plugin/protviewer')
