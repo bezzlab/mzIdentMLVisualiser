@@ -32,7 +32,7 @@ def install():
 	This method will copy installation files
 	into  the galaxy server instance
 	'''
-	
+
 	# get the current working directory. By default it is the galaxy/config folder
 	current_dir = os.getcwd()
 
@@ -45,49 +45,81 @@ def install():
 	print "Please answer to following questions carefully."
 	print "You can refer examples given below as a guide.\n\n"
 
-	print "-------------------------------------------------------------------------------------------------"
-	print "STEP 1 : Visualisation Plugin Directory 	:\n/home/galaxy/Downloads/galaxy/config/plugins/visualizations/\n"
-	print "STEP 2 : Web API Directory 				:\n/home/galaxy/Downloads/galaxy/lib/galaxy/webapps/galaxy/api/\n"
-	print "STEP 3 : Tool directory(wrapper) save location:\n/home/galaxy/Downloads/galaxy/tools/mzIdentMLToJSON/\n"
-	print "STEP 4 : Output dir where temporay files get saved:\n/home/galaxy/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/\n"
-	print "STEP 4 : Output dir relative path reference to config folder:\n/plugins/visualizations/protviewer/static/data/\n"
-	print "STEP 4 : Galaxy instance root directory:\n/home/galaxy/Downloads/galaxy\n"
-	print "-------------------------------------------------------------------------------------------------\n"
+	# STEP 1 - Get galaxy root folder
+	printTitle("STEP 1 - Set your galaxy root directory")
+	print "\nThis is the absolute file path for your galaxy main folder\n"
+	print "\nExample : /home/galaxy/Downloads/galaxy\n"
+	galaxy_root_location= raw_input("Galaxy instance root directory:")
 
-	# STEP 1 - Copy Visualisation Plugin
-	printTitle("STEP 1 - Copy Visualisation Plugin")
-	# print Visualizations plugin directory: where to look for individual visualization plugins.
-	# Absolute path should be given
-	vis_plugin_dir		= raw_input("Visualisation Plugin Directory :")
+	# STEP 2 - Copy Visualisation Plugin
+	printTitle("STEP 2 - Copy Visualisation Plugin")
+    print "\nVisualizations plugin directory: absolute folder path where to look for individual visualization plugins.\n"
+	suggested_path = galaxy_root_location + "/config/plugins/visualizations/"
+	print "Defalut location :" + suggested_path
+	confirm = raw_input("Save to default location(Y/N):")
+	if (confirmation == 'Y' or confirmation == 'y'):
+		vis_plugin_dir = suggested_path
+	else:
+		vis_plugin_dir = raw_input("Customized Visualisation Plugin Directory :")
 	to_dir 		= os.path.join(vis_plugin_dir, 'protviewer')
 	from_dir    = os.path.join(current_dir, 'plugin/protviewer')
 	copy(from_dir, to_dir)
 
-	# STEP 2 - Copy Web API Files
-	printTitle("STEP 2 - Copy Web API Files")
-	web_api_dir			= raw_input("Web API Directory :")
+	# STEP 3 - Copy Web API Files
+	printTitle("STEP 3 - Copy Web API Files")
+	print "\nWeb API directory: absolute folder path where you have galaxy webapp api files\n"
+	suggested_path = galaxy_root_location + "/lib/galaxy/webapps/galaxy/api/"
+	print "Defalut location :" + suggested_path
+	confirm = raw_input("Save to default location(Y/N):")
+	if (confirmation == 'Y' or confirmation == 'y'):
+		web_api_dir = suggested_path
+	else:
+		web_api_dir = raw_input("Customized Web API Directory :")
 	from_dir    = os.path.join(current_dir, 'plugin/webcontroller')
 	copy(from_dir, web_api_dir)
 
-	#STEP 3 - Copy Galaxy Tool
-	printTitle("STEP 3 - Copy Galaxy Tool")
-	tool_dir 	= raw_input("Tool directory(wrapper) save location:")
+	#STEP 4 - Copy Galaxy Tool
+	printTitle("STEP 4 - Copy Galaxy Tool")
+	print "\nGalaxy tool folder: absolute folder path where individual tool saved in galaxy\n"
+	suggested_path = galaxy_root_location + "/tools/mzIdentMLToJSON/"
+	print "Defalut location :" + suggested_path
+	confirm = raw_input("Save to default location(Y/N):")
+	if (confirmation == 'Y' or confirmation == 'y'):
+		tool_dir = suggested_path
+	else:
+		tool_dir 	= raw_input("Customized Tool directory(wrapper):")
 	from_dir    = os.path.join(current_dir, 'tool/mzIdentMLToJSON')
 	copy(from_dir, tool_dir)
 
-	# assume that java library is in the same folder as tool(wrapper)
-	javalib_dir = tool_dir
+	print "\n mzIdentMLExtractor.jar java library saves in the same folder as other tool files\n"
+	confirm = raw_input("Do you want to use default location(Y/N):")
+	if (confirmation == 'Y' or confirmation == 'y'):
+		javalib_dir = tool_dir
+	else:
+		javalib_dir = raw_input("what is the directory you have your mzIdentMLExtractor.jar java library (absolute path):")
 
-	# STEP 4 - add settings to configuration file
-	printTitle("STEP 4 - Add settings to galaxy.ini config file")
-	output_dir 			= raw_input("Output dir where temporay files get saved:")
-	rel_output_dir 		= raw_input("Output dir relative path reference to config folder:")
-	galaxy_root_location= raw_input("Galaxy instance root directory:")
+	# STEP 5 - add settings to configuration file
+	printTitle("STEP 5 - Set output directory")
+	print "\nOutput directory: folder where temporary JSON files generated from java library get saved\n"
+	suggested_path = galaxy_root_location + "/config/plugins/visualizations/protviewer/static/data/"
+	confirm = raw_input("is your Output Directory \n "+ suggested_path +"(Y/N):")
+	if (confirmation == 'Y' or confirmation == 'y'):
+		output_dir = suggested_path
+		rel_output_dir = "/plugins/visualizations/protviewer/static/data/"
+	else:
+		output_dir 			= raw_input("Output dir where temporay files get saved:")
+		rel_output_dir 		= raw_input("Output dir relative path reference to config folder:")
 
 	error_report_sent_to = "admin@somewhere.com"
 	multithreading = "true"
+
+	# STEP 6 - add settings to configuration file
+	printTitle("STEP 6 - create a setting file")
+	print "\nA setting file called mzidentml_setttings.ini will be created in \n"+ galaxy_root_location + "/config/ location\n"
+	print "These settings are only specific to mzIdentML visualization plugin\n"
+
 	galaxy_ini = os.path.join(galaxy_root_location, 'config/galaxy.ini')
-	settings = "\n\n# ---- mzIdentML Viewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "mzIdentMLExtractor.jar" + "\ntool_path = " + tool_dir + "\nmultithreading = " + multithreading + "\nerror_report_sent_to = " + error_report_sent_to
+	settings = "\n\n# ---- mzIdentML Viewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "mzIdentMLExtractor.jar" + "\n + "\nmultithreading = " + multithreading + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
 	confirmation = raw_input("\nSettings are accurate?(Y/N):")
