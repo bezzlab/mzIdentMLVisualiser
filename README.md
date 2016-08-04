@@ -8,6 +8,7 @@ This is an interactive web visualisation plug-in for the [mzIdentML](http://www.
 * tool - Galaxy tool
 * samples - sample configurations and other sample files
 * source - mzIdentMLExtractor java library [Not required for the installation]
+* install.py - installation setup
 
 Galaxy visualisation plugin files are organised into two folders which are called *protviewer* and *webcontroller*.
 Additionally, we have a galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You must integrate both plugin and tool in order to work with the visualisation, as galaxy tool contains dependency files for the visualisation plugin too. Although the integration of both plugin and tool is mandatory for installation, you can use plugin independently without using galaxy tool. However, we strongly recommend to use our galaxy tool prior to visualise mzIdentML files for a much faster visualising speed.
@@ -18,10 +19,11 @@ Installation instructions are provided below. These instructions assume that you
 
 In order to proceed, please download our repository to your machine by cloning the repository. If you download as a zip file, then extract the zip file.
 
-### Install Galaxy Visualisation Plugin
+### Install Galaxy Visualisation Plugin 
 
 #### Step 1 - Edit configuration file
-* You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory/uncomment the line as follows :
+
+You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory/uncomment the line as follows :
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -30,33 +32,13 @@ In order to proceed, please download our repository to your machine by cloning t
 visualization_plugins_directory = config/plugins/visualizations
 ```
 
-Add following settings in the bottom of the *galaxy.ini* file
+#### Step 2 - Run the installation setup file
 
-```bash
-[MzIdentML]
-# This is where tempory JSON file of the plugin will get stored
-output_file_dir = /Users/yourname/Downloads/galaxy/config/plugins/visualizations/protviewer/static/data/
-# Absolute path for the java library. We recommend to keep in the mzIdentMLToJSON tool folder
-javalib  = /Users/yourname/Downloads/galaxy/tools/mzIdentMLToJSON/mzIdentMLExtractor.jar
-# Absolute path for the tool directory in your galaxy instance where you have your executable python file
-# see Galaxy tool section further down, step 2
-tool_path = /Users/yourname/Downloads/galaxy/tools/
-# If there is an error, whom do you want to send the error message(admin)
-error_report_to = admin@somewhere.com
-```
-
-As a guidance to above step, we have provided you a sample configuration file(galaxy.ini) in *samples* folder.
-
-#### Step 2 - Copy *protviewer* folder into your visualisations directory
-* Copy the entire *protviewer* folder in the *plugin* folder to ```<your galaxy directory>/config/plugins/visualizations/``` folder. After copying, go to protviewer/templates/protviewer.mako, line Number 134, change your ``` rootLocation ``` your galaxy root folder absolute path. Further, if you want to change output directory, you can change in line Number 134, change your ``` dataLocation  ```
+Go to the downloaded folder of the repository in command-line, and execute install.py file as ```python install.py``` and follow the given instructions. Examples are provided as a giude. This setup will copy installlation files to your server and add all the plugin settings into a settings file called mzidentml_settings.ini into ```<your galaxy directory>/config/``` location.
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
-*  You are given three files in the *webcontroller* folder in the *plugin* folder with the mzIdentMLVisualiser repository which are namely:
-  * MzIdentMLHandler.py
-  * SequenceExtractor.py 
-  * MzIdentMLToJSON.py They has to be copied into your galaxy instance at ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location.
 
-* Then, in your galaxy, you should be able to find a file called **datasets.py** at the same location(```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/```). There, copy and paste following codes:
+Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and you should be able to find a file called **datasets.py**. There, copy and paste following codes:
 
   * Import these modules first:
    ```python
@@ -107,22 +89,13 @@ There, add these parameters anywhere of  the file under ```<toolbox>``` tag:
 </section>
 ```
 
-We have created a separate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing sections by only specifying ```<tool>``` tag as below:
+We have created a separate section called "PSI Standards" in the tool panel. However, you can add this tool to one of your existing tool sections by only specifying ```<tool>``` tag as below:
 
 ```XML
 <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
 ```
 
 As a guidance for above step, sample configuration file is given in *samples* folder.
-
-#### Step 2 - copy tool
-
-Copy given entire *mzIdentMLToJSON* folder in the *tool* folder to your galaxy instance at ```<your galaxy directory>/tools/```.
-This folder contains:
- 1. wrapper - mzIdentMLToJSON.xml
- 2. python executable script - mzIdentMLToJSON.py
- 3. java library - mzIdentMLExtractor.jar
- 4. java library dependencies - lib folder
 
 That's it! You are ready to use the visualisation plug-in and the tool.
 
@@ -139,3 +112,8 @@ User *MUST* **login** to the server in order to use visualisation functionality.
 <img src="samples/snapshots/galaxytool.png" alt="How to used Galaxy Tool"/>
 
 You can integrate this tool into your protein identification workflows or can execute individually. If you are using search tool in the workflow, the output mzIdentML file of the search tool is the input for this galaxy tool.
+
+## Dependancies
+
+* Python 2.7
+* JRE 8
