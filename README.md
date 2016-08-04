@@ -19,11 +19,7 @@ Installation instructions are provided below. These instructions assume that you
 
 In order to proceed, please download our repository to your machine by cloning the repository. If you download as a zip file, then extract the zip file.
 
-You can either use install.py to install plugin automatically or can install manually.
-
-### Install Galaxy Visualisation Plugin using install.py
-
-### Install Galaxy Visualisation Plugin
+### Install Galaxy Visualisation Plugin 
 
 #### Step 1 - Edit configuration file
 * You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory/uncomment the line as follows :
