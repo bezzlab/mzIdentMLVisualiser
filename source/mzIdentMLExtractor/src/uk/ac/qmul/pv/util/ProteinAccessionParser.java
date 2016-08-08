@@ -87,7 +87,7 @@ public class ProteinAccessionParser {
                 }
             }
         }
-//System.out.println("speciesName: "+ speciesName);
+
         protein.setSpeciesName(speciesName);
 
         return protein;

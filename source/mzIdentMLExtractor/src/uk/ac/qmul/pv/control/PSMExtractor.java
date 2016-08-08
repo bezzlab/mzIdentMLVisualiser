@@ -1,3 +1,8 @@
+/*
+ * @(#) PSMExtractor    Version 1.0.0    02-09-2016
+ *
+ */
+
 package uk.ac.qmul.pv.control;
 
 import com.google.gson.JsonArray;
@@ -6,28 +11,27 @@ import java.util.List;
 import java.util.Map;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidenceRef;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationItem;
-import uk.ac.qmul.pv.db.DatabaseAccess;
+import uk.ac.qmul.pv.db.DataAccess;
 import uk.ac.qmul.pv.model.PSMRecord;
 import uk.ac.qmul.pv.util.JavaToJSON;
 
 /**
- *
+ * This class extracts all the Peptide Spectrum Matches 
+ * 
  * @author sureshhewapathirana
  */
 public class PSMExtractor implements Runnable, DataExtractor {
 
     private String inputfile;
     private String outputfile;
-    // private MzIdentMLUnmarshaller unmash;
-    DatabaseAccess db;
+    DataAccess db;
 
     public PSMExtractor(String inputfile, String outputfile) {
         this.inputfile = inputfile;
         this.outputfile = outputfile;
 
         try {
-            // this.unmash = DatabaseAccess.getUnmarshaller(this.inputfile);
-            db = DatabaseAccess.getInstance(inputfile);
+            db = DataAccess.getInstance(inputfile);
         } catch (Exception e) {
             System.err.println("File Reading Error: " + e.getMessage());
         }
@@ -35,15 +39,11 @@ public class PSMExtractor implements Runnable, DataExtractor {
 
     @Override
     public void export() {
-
-//        Map<String, SpectrumIdentificationItem> siiMap = DatabaseAccess.getSiiHashMap(unmash);
+        
         Map<String, SpectrumIdentificationItem> siiMap = db.getSiiHashMap();
         JsonArray psmList = new JsonArray();
         PSMRecord psmRecord;
         
-//        Iterator<SpectrumIdentificationItem> it = siiMap.values().iterator();
-//        while (it.hasNext()) {
-//            SpectrumIdentificationItem sii = it.next();
         for(SpectrumIdentificationItem sii:siiMap.values()){
             
             
@@ -54,8 +54,8 @@ public class PSMExtractor implements Runnable, DataExtractor {
                 psmRecord.setCalculatedMassToCharge(sii.getCalculatedMassToCharge());
                 psmRecord.setExperimentalMassToCharge(sii.getExperimentalMassToCharge());
                 psmRecord.setChargeState(sii.getChargeState());
-
-//                psmRecord.setRank(sii.getRank());
+                
+                // add PSM to the JSON array
                 psmList.add(JavaToJSON.psmToJsonArray(psmRecord));
             }
         }

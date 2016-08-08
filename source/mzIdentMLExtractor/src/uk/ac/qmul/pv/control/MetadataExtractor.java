@@ -18,7 +18,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.ParamList;
 import uk.ac.ebi.jmzidml.model.mzidml.SearchModification;
 import uk.ac.ebi.jmzidml.model.mzidml.SpecificityRules;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol;
-import uk.ac.qmul.pv.db.DatabaseAccess;
+import uk.ac.qmul.pv.db.DataAccess;
 import uk.ac.qmul.pv.model.MetadataRecord;
 import uk.ac.qmul.pv.util.JavaToJSON;
 
@@ -35,7 +35,7 @@ public class MetadataExtractor implements Runnable, DataExtractor {
     SpectrumIdentificationProtocol sip;
     String fixedModifications = "";
     String variableModifications = "";
-    DatabaseAccess db;
+    DataAccess db;
 
     public MetadataExtractor(String inputFile, String outputFile) {
 
@@ -43,8 +43,8 @@ public class MetadataExtractor implements Runnable, DataExtractor {
         this.outputFile = outputFile;
 
         try {
-            //   this.unmash = DatabaseAccess.getUnmarshaller(this.inputFile);
-            db = DatabaseAccess.getInstance(inputFile);
+            //   this.unmash = DataAccess.getUnmarshaller(this.inputFile);
+            db = DataAccess.getInstance(inputFile);
         } catch (Exception e) {
             System.err.println("File Reading Error:" + e.getMessage());
         }
@@ -57,7 +57,7 @@ public class MetadataExtractor implements Runnable, DataExtractor {
         MetadataRecord metadata = new MetadataRecord();
 
         // find both fixed and variable modifications
-        // sip = DatabaseAccess.getSpectrumIdentificationProtocol(unmash);
+        // sip = DataAccess.getSpectrumIdentificationProtocol(unmash);
         sip = db.getSpectrumIdentificationProtocol();
         findModifications();
 
@@ -176,7 +176,7 @@ public class MetadataExtractor implements Runnable, DataExtractor {
     // <xsd:documentation> The software packages used to perform the analyses  
     String getSoftwareName() {
         ArrayList<String> softwareNameList = new ArrayList();
-//        Map<String, AnalysisSoftware> asList = DatabaseAccess.getAnalysisSoftwareHashMap(unmash);
+//        Map<String, AnalysisSoftware> asList = DataAccess.getAnalysisSoftwareHashMap(unmash);
         Map<String, AnalysisSoftware> asList = db.getAnalysisSoftwareHashMap();
         for (AnalysisSoftware as : asList.values()) {
             Param softwareType = as.getSoftwareName();

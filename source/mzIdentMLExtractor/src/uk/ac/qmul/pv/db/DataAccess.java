@@ -1,5 +1,5 @@
 /*
- * @(#) DatabaseAccess    Version 1.0.0    02-09-2016
+ * @(#) DataAccess    Version 1.0.0    02-09-2016
  *
  */
 package uk.ac.qmul.pv.db;
@@ -29,10 +29,10 @@ import uk.ac.ebi.jmzidml.xml.io.MzIdentMLUnmarshaller;
  *
  * @author Suresh Hewapathirana
  */
-public class DatabaseAccess {
+public class DataAccess {
 
     private MzIdentMLUnmarshaller unmash = null;
-    private static volatile DatabaseAccess instance = null;
+    private static volatile DataAccess instance = null;
     private Map<String, PeptideEvidence> peptideEvidenceIdHashMap = null;
     private Map<String, Peptide> peptideIdHashMap = null;
     private Map<String, DBSequence> dbSequenceIdHashMap = null;
@@ -44,7 +44,7 @@ public class DatabaseAccess {
 
     private static SpectrumIdentificationProtocol sip = null;
 
-    private DatabaseAccess(String inputfile) {
+    private DataAccess(String inputfile) {
         File file = new File(inputfile);
 
         if (file.exists()) {
@@ -67,12 +67,12 @@ public class DatabaseAccess {
         }
     }
 
-    public static DatabaseAccess getInstance(String inputfile) {
+    public static DataAccess getInstance(String inputfile) {
         try {
             if (instance == null) {
-                synchronized (DatabaseAccess.class) {
+                synchronized (DataAccess.class) {
                     if (instance == null) {
-                        instance = new DatabaseAccess(inputfile);
+                        instance = new DataAccess(inputfile);
                     }
                 }
             }

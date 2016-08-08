@@ -17,7 +17,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.ebi.jmzidml.model.mzidml.ProteinAmbiguityGroup;
 import uk.ac.ebi.jmzidml.model.mzidml.ProteinDetectionHypothesis;
-import uk.ac.qmul.pv.db.DatabaseAccess;
+import uk.ac.qmul.pv.db.DataAccess;
 import uk.ac.qmul.pv.util.CoverageUtil;
 import uk.ac.qmul.pv.model.Interval;
 import uk.ac.qmul.pv.util.CV;
@@ -32,7 +32,7 @@ public class ProteinExtractor implements DataExtractor {
     private String inputFile;
     private String outputFile;
 
-    DatabaseAccess db;
+    DataAccess db;
     private Map<String, DBSequence> dbSequenceIdHashMap;
     private Map<String, ProteinAmbiguityGroup> pagHashMap;
     private Map<String, PeptideEvidence> peptideEvidenceMap;
@@ -57,7 +57,7 @@ public class ProteinExtractor implements DataExtractor {
 
         try {
 
-            this.db = DatabaseAccess.getInstance(this.inputFile);
+            this.db = DataAccess.getInstance(this.inputFile);
             this.pagHashMap = db.getPagIdHashMap();
             this.dbSequenceIdHashMap = dbSequenceIdHashMap;
             this.peptideEvidenceMap = peptideEvidenceMap;
@@ -290,7 +290,7 @@ public class ProteinExtractor implements DataExtractor {
             ArrayList<Interval> mergedCoords = coverage.merge(currentPeptideCoords);
             //System.out.println("mergedCoords length:" + mergedCoords.size());
 
-            // get the total lenght of each non-overlaping ranges
+            // get the total length of each non-overlaping ranges
             // used concurrent programming with parallel stream
             totalcoverage = mergedCoords
                     .parallelStream()

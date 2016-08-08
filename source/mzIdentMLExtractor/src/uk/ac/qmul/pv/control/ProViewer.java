@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
-import uk.ac.qmul.pv.db.DatabaseAccess;
+import uk.ac.qmul.pv.db.DataAccess;
 
 /**
  * This is the controller class to handle the flow of execution
@@ -26,7 +26,7 @@ public class ProViewer {
     public static void main(String[] args) {
         
         String inputFile = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/TestData/Galaxy5-[MSGF__MSMS_Search_on_data_33_and_data_3].mzid"; 
-        String datasetId = "Galaxy5";
+        String datasetId = "largest";
         String outputFile = "/Users/sureshhewapathirana/Desktop/1/";
         boolean isThreading = true;
 
@@ -62,7 +62,7 @@ public class ProViewer {
                 + isThreading);
 
         // initialised database access object
-        DatabaseAccess db = DatabaseAccess.getInstance(inputFile);
+        DataAccess db = DataAccess.getInstance(inputFile);
         
         // get protein sequence and peptide evidance records from input file
         Map<String, DBSequence> dbSequenceIdHashMap = db.getDbSequenceIdHashMap();

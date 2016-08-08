@@ -21,7 +21,7 @@ import uk.ac.ebi.jmzidml.model.mzidml.Modification;
 import uk.ac.ebi.jmzidml.model.mzidml.Peptide;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.ebi.jmzidml.model.mzidml.SubstitutionModification;
-import uk.ac.qmul.pv.db.DatabaseAccess;
+import uk.ac.qmul.pv.db.DataAccess;
 
 /**
  * This class handles all the data access methods related to PSM. This class
@@ -35,7 +35,7 @@ public class PeptideExtractor implements Runnable, DataExtractor {
     private String inputfile;
     private String outputfile;
     //private MzIdentMLUnmarshaller unmash;
-    DatabaseAccess db;
+    DataAccess db;
     PeptideLocation pepLocation;
     HashMap<String, ArrayList<Point>> dbSeqCoordsHashMap;
     Map<String, DBSequence> dbSequenceIdHashMap;
@@ -46,8 +46,8 @@ public class PeptideExtractor implements Runnable, DataExtractor {
         this.outputfile = outputfile;
 
         try {
-//            this.unmash = DatabaseAccess.getUnmarshaller(this.inputfile);
-            db = DatabaseAccess.getInstance(inputfile);
+//            this.unmash = DataAccess.getUnmarshaller(this.inputfile);
+            db = DataAccess.getInstance(inputfile);
             this.dbSequenceIdHashMap = dbSequenceIdHashMap;
             this.peptideEvidenceMap = peptideEvidenceMap;
         } catch (Exception e) {
@@ -125,13 +125,11 @@ public class PeptideExtractor implements Runnable, DataExtractor {
         // minOccurs="0" maxOccurs="unbounded"/>
         if (peptide.getModification() != null) {
 
+            // Add a separator between modifications with parallel processing 
             modificationList = peptide.getModification()
                     .parallelStream()
                     .map((modification) -> modificationsToString(modification) + ";")
-                    .reduce(modificationList, String::concat);//                if (i > 0) {
-//                    modificationList += ";"; //Add a separator between mods                                        
-//                }
-            // i++;
+                    .reduce(modificationList, String::concat);
         }
 
         // Substitution Modification - 
