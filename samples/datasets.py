@@ -104,10 +104,10 @@ class DatasetsController( BaseAPIController, UsesVisualizationMixin ):
         root = kwd.get('root')
         rval = inputfile
         # Web plugin loading time
-        if kwd.get('mode') == 'initial_load':
+        if kwd.get('event') == 'initial_load':
             converter = MzIdentMLToJSON()
             converter.extract(inputfile, datasetId, root)
-        elif kwd.get('mode') == 'sequence':
+        elif kwd.get('event') == 'protein_expand':
             seqEx = SequenceExtractor()
             rval = seqEx.extract(inputfile, kwd.get('dbSequenceId'))
         return rval

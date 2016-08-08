@@ -150,7 +150,7 @@
             var dataUrl   = "${h.url_for( controller='/api/datasets')}/" + hdaId +
                             "?data_type=" + extension +
                             "&inputFile=" + inputFile +
-                            "&mode=initial_load" +
+                            "&event=initial_load" +
                             "&datasetId=" + hdaId +
                             "&root=" + rootLocation;
 
@@ -293,7 +293,7 @@
                 var dataUrl = "${h.url_for( controller='/api/datasets')}/" + hdaId +
                                 "?data_type=" + extension +
                                 "&inputFile=" + inputFile +
-                                "&mode=sequence" +
+                                "&event=protein_expand" +
                                 "&datasetId=" + hdaId +
                                 "&dbSequenceId=" + dbSeqId +
                                 "&root=" + rootLocation;
