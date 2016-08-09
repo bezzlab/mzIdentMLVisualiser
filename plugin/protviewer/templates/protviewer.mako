@@ -363,16 +363,15 @@
                 var isfound = false;
                 var content = "";
 
-                // get each modification by spliting by semi-colon
+                // all the modifications seperated by semi-colon in JSON file
+                // Here we split modifications by semi-colon to get all the modifications
                 var splitmodification = modification.split(";");
 
                 // remove last  index (mistakenly) generated from last semicolon
                 if(splitmodification.length>0){
-                    // remove last element
+                    // remove last element which is a semi-colon
                     splitmodification = splitmodification.slice(0,splitmodification.length-1);
                 }
-
-                $("#peptide-info").empty();
 
                 // travel through each modification
                 for (var i = 0; i < splitmodification.length; i++) {

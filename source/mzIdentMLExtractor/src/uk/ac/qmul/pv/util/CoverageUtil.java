@@ -1,3 +1,7 @@
+/*
+ * @(#) CoverageUtil    Version 1.0.0    02-09-2016
+ *
+ */
 
 package uk.ac.qmul.pv.util;
 

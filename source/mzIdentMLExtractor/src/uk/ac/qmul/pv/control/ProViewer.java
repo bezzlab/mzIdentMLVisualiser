@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
 import uk.ac.qmul.pv.db.DataAccess;
+import uk.ac.qmul.pv.control.test.Log;
 
 /**
  * This is the controller class to handle the flow of execution
@@ -25,10 +26,11 @@ public class ProViewer {
 
     public static void main(String[] args) {
         
-        String inputFile = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/TestData/Galaxy5-[MSGF__MSMS_Search_on_data_33_and_data_3].mzid"; 
+        String inputFile = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/TestData/mzidentml-example.mzid"; 
         String datasetId = "largest";
         String outputFile = "/Users/sureshhewapathirana/Desktop/1/";
         boolean isThreading = true;
+        //Log log = new Log();
 
 //        String inputFile = ""; 
 //        String datasetId = "";
@@ -75,6 +77,7 @@ public class ProViewer {
         DataExtractor psmHandler = new PSMExtractor(inputFile, outputFile + "_psm.json");
 
         if (isThreading == true) {
+           long startTotal = System.currentTimeMillis();
 
             System.out.println("Programme Started!");
 
@@ -91,12 +94,17 @@ public class ProViewer {
             psmThread.start();
 
             System.out.println(LocalDateTime.now() + ": Protein : Started!!!");
-            long start = System.currentTimeMillis();
+            
             proteinHandler.export();
-            long end = System.currentTimeMillis();
+            long endTotal = System.currentTimeMillis();
             System.out.println(LocalDateTime.now() + ": Protein : Finished!!!");
+            long totaltime = TimeUnit.MILLISECONDS.toSeconds(endTotal - startTotal);
+            System.out.println("total" + Long.toString(totaltime));
+            // for testing purpose
+            // log.WriteResults(inputFile, totaltime);
             System.out.println("Protein : Data extraction took " 
-                    + TimeUnit.MILLISECONDS.toSeconds(end - start) + " milliseconds");
+                    + totaltime + " milliseconds");
+            
 
         } else {
 
