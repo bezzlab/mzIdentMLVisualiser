@@ -15,7 +15,7 @@ ftp.nlst('*').each do |year|
         next unless file.match(/mzid$/) || file.match(/mzid.gz$/)
         path = File.join('/pride/data/archive/', year, num, accn, file)
         filesize = ftp.size(file)
-        File.open('mzIdentML.txt', 'a') { |out| out.puts("#{path},#{year},#{filesize},#{filesize.to_f/(2**20)}") }
+        File.open('mzIdentML.txt', 'a') { |out| out.puts("#{path},#{year},#{accn},#{filesize},#{filesize.to_f/(2**20)}") }
       end
     end
   end
