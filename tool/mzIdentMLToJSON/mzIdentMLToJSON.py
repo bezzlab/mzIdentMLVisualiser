@@ -3,7 +3,7 @@
 """
 Convert mzIdentML to JSON
 
-This script invokes mzidParser.jar java library to read mzIdentML file and generate four json files
+This script invokes mzIdentMLExtractor.jar java library to read mzIdentML file and generate four json files
 which inclides protein, peptide,  PSM and metadata.
 
 usage: ProViewer.py  --filename="$input" --datasetid=$__app__.security.encode_id($input.id) --root=$__root_dir__
@@ -31,6 +31,7 @@ def __main__():
 	outputfile 		= config.get('MzIdentML', 'output_dir')
 	javalib 		= config.get('MzIdentML', 'javalib')
 	multithreading 	= config.get('MzIdentML', 'multithreading')
+	maxMemory		= config.get('MzIdentML', 'maxMemory')
 	tempFile 		= outputfile + datasetId + "_protein.json"
 	print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
 
@@ -38,7 +39,7 @@ def __main__():
 		# if file not already exists
 		if os.path.isfile(tempFile) == False:
 			# execute mzIdentMLExtractor java library
-			return subprocess.call(['java', '-jar',javalib, inputfile, outputfile, datasetId, multithreading])
+			return subprocess.call(['java', '-jar', maxMemory, javalib, inputfile, outputfile, datasetId, multithreading])
 		else:
 			print "MzIdentML Viewer INFO: Data loaded from the cache!"
 	except Exception as err:

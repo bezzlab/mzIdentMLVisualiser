@@ -25,7 +25,7 @@ public class Log {
     public void WriteResults(String filename, long totalTime) {
 
         try {
-            String outputFile = "test/output.csv";
+            String outputFile = "/Users/sureshhewapathirana/Documents/Projects/ResearchProject/mzIdentMLVisualiser/test/output.csv";
             FileWriter fw = new FileWriter(outputFile, true); //the true will append the new data
             fw.write(filename + "," + totalTime + "\n");//appends the string to the file
             fw.close();

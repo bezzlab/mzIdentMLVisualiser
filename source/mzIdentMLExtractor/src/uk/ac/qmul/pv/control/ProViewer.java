@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import uk.ac.ebi.jmzidml.model.mzidml.DBSequence;
 import uk.ac.ebi.jmzidml.model.mzidml.PeptideEvidence;
+import uk.ac.qmul.pv.control.test.Log;
 import uk.ac.qmul.pv.db.DataAccess;
 
 /**
@@ -24,12 +25,11 @@ import uk.ac.qmul.pv.db.DataAccess;
 public class ProViewer {
 
     public static void main(String[] args) {
-        
-        String inputFile = "/Users/sureshhewapathirana/Desktop/Testdata/Galaxy5-[MSGF__MSMS_Search_on_data_33_and_data_3].mzid"; 
-        String datasetId = "Galaxy5";
+        String inputFile = "/Users/sureshhewapathirana/Desktop/Testdata/Mudpit_2014_12_12_VP26_01.mzid"; 
+        String datasetId = "Mudpit_2014_12_12_VP26_01";
         String outputFile = "/Users/sureshhewapathirana/Desktop/1/";
-        boolean isThreading = true;
-        //Log log = new Log();
+        boolean isThreading = false;
+        Log log = new Log();
 
 //        String inputFile = ""; 
 //        String datasetId = "";
@@ -100,7 +100,7 @@ public class ProViewer {
             long totaltime = TimeUnit.MILLISECONDS.toSeconds(endTotal - startTotal);
             System.out.println("total" + Long.toString(totaltime));
             // for testing purpose
-            // log.WriteResults(inputFile, totaltime);
+//             log.WriteResults(inputFile, totaltime);
             System.out.println("Protein : Data extraction took " 
                     + totaltime + " milliseconds");
             
@@ -139,7 +139,6 @@ public class ProViewer {
             System.out.println("Peptide Spectrum Match : Data extraction took " + (end - start) + " milliseconds");
 
             long endTotal = System.currentTimeMillis();
-            System.out.println("Programme Finished!");
             System.out.println("Data extraction took " + (endTotal - startTotal) + " milliseconds");
         }
         

@@ -43,7 +43,6 @@ public class MetadataExtractor implements Runnable, DataExtractor {
         this.outputFile = outputFile;
 
         try {
-            //   this.unmash = DataAccess.getUnmarshaller(this.inputFile);
             db = DataAccess.getInstance(inputFile);
         } catch (Exception e) {
             System.err.println("File Reading Error:" + e.getMessage());
@@ -57,7 +56,6 @@ public class MetadataExtractor implements Runnable, DataExtractor {
         MetadataRecord metadata = new MetadataRecord();
 
         // find both fixed and variable modifications
-        // sip = DataAccess.getSpectrumIdentificationProtocol(unmash);
         sip = db.getSpectrumIdentificationProtocol();
         findModifications();
 
@@ -152,7 +150,9 @@ public class MetadataExtractor implements Runnable, DataExtractor {
                 if (modificationName.size() > 0) {
                     sb.append(" on ");
                     String mod = modificationName.get(0);
-                    if (mod.equals(".")) {//For N or C terminal modifications that can occur on any residue, the . character should be used to specify any
+                    if (mod.equals(".")) {
+                        //For N or C terminal modifications that can occur on any residue, 
+                        // the . character should be used to specify any
                         mod = "Any";
                     }
                     sb.append(mod);

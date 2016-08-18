@@ -12,10 +12,10 @@ ftp.nlst('*').each do |year|
     ftp.nlst('*').each do |accn|
       ftp.chdir(File.join('/pride/data/archive/', year, num, accn)) rescue ''
       ftp.nlst('*mzid*').each do |file|
-        next unless file.match(/mzid$/) || file.match(/mzid.gz$/)
+        next unless file.match(/mzid$/) #|| file.match(/mzid.gz$/)
         path = File.join('/pride/data/archive/', year, num, accn, file)
         filesize = ftp.size(file)
-        File.open('mzIdentML.txt', 'a') { |out| out.puts("#{path},#{year},#{accn},#{filesize},#{filesize.to_f/(2**20)}") }
+        File.open('mzIdentML_12_08_2016_mzid.txt', 'a') { |out| out.puts("#{path},#{year},#{accn},#{filesize},#{filesize.to_f/(1000000)}") }
       end
     end
   end

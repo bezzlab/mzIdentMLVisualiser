@@ -3,7 +3,7 @@
 """
 Convert mzIdentML to JSON from mzIdentML Viewer visualisation plugin
 
-This script invokes mzidParser.jar java library to read mzIdentML file and generate four json files
+This script invokes mzIdentMLExtractor.jar java library to read mzIdentML file and generate four json files
 which inclides protein, peptide,  PSM and metadata.
 
 """
@@ -23,6 +23,7 @@ class MzIdentMLToJSON():
 		outputfile 		= config.get('MzIdentML', 'output_dir')
 		javalib 		= config.get('MzIdentML', 'javalib')
 		multithreading 	= config.get('MzIdentML', 'multithreading')
+		maxMemory		= config.get('MzIdentML', 'maxMemory')
 		tempFile 		= outputfile + datasetId + "_protein.json"
 		print "MzIdentML Viewer INFO:java -jar " + javalib + " " + inputfile + " " + outputfile + " " + datasetId + " " + multithreading
 
@@ -30,7 +31,7 @@ class MzIdentMLToJSON():
 			# if file not already exists
 			if os.path.isfile(tempFile) == False:
 				# execute mzIdentMLExtractor java library
-				return subprocess.call(['java', '-jar',javalib, inputfile, outputfile, datasetId, multithreading])
+				return subprocess.call(['java', '-jar', maxMemory, javalib, inputfile, outputfile, datasetId, multithreading])
 			else:
 				print "MzIdentML Viewer INFO: Data loaded from the cache!"
 		except Exception as err:
