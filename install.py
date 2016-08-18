@@ -11,7 +11,7 @@ def main():
 
 	print "\n"
 	print " ################################################"
-	print "     Welcome to mzIdentML Viewer Admin Tool!     "
+	print "     Welcome to ProViewer Installation Setup!     "
 	print " ################################################\n"
 
 	print "What do you want to do:"
@@ -29,6 +29,7 @@ def main():
 		rerun()
 	elif (option == '4'):
 		exit()
+	exit()
 
 def quickInstall():
 	'''
@@ -97,7 +98,7 @@ def quickInstall():
 	print "These settings are only specific to mzIdentML visualization plugin\n"
 
 	galaxy_ini = os.path.join(galaxy_root_location, 'config/galaxy.ini')
-	settings = "\n\n# ---- mzIdentML Viewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
+	settings = "\n\n# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
 	confirmation = raw_input("\nSettings are accurate?(Y/N):")
@@ -111,6 +112,7 @@ def quickInstall():
 		print "Success! Settings were added to mzidentml_setttings.ini settings file!\n\n"
 
 	print "------------- Installation Completed -------------"
+	time.sleep( 2 )
 
 def advancedInstall():
 	'''
@@ -197,7 +199,7 @@ def advancedInstall():
 	print "These settings are only specific to mzIdentML visualization plugin\n"
 
 	galaxy_ini = os.path.join(galaxy_root_location, 'config/galaxy.ini')
-	settings = "\n\n# ---- mzIdentML Viewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
+	settings = "\n\n# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
 	confirmation = raw_input("\nSettings are accurate?(Y/N):")
@@ -211,6 +213,7 @@ def advancedInstall():
 		print "Success! Settings were added to mzidentml_setttings.ini settings file!\n\n"
 
 	print "------------- Installation Completed -------------"
+	time.sleep( 2 )
 
 def copy(from_dir, to_dir):
 	'''
@@ -235,6 +238,7 @@ def copy(from_dir, to_dir):
 
 def Uninstall():
 	print "\033[1;33;40m\n*** Sorry, Under Constructions ***\n"
+	time.sleep( 2 )
 
 def printMainTitle(title):
 	os.system('clear')
