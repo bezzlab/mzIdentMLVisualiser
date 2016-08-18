@@ -8,29 +8,35 @@ from distutils.dir_util import copy_tree
 import time
 
 def main():
-	os.system('clear')
 
-	print "\n"
-	print " ################################################"
-	print "     Welcome to ProViewer Installation Setup!     "
-	print " ################################################\n"
+	# initialise to enter to the loop
+	option = 5
 
-	print "What do you want to do:"
-	print "\t1. Quick Install"
-	print "\t2. Advance Install"
-	print "\t3. Uninstall"
-	print "\t4. Exit"
+	while (option != 4):
+		os.system('clear')
 
-	option = raw_input("\nPlease type option number:")
-	if (option == '1'):
-		quickInstall()
-	elif (option == '2'):
-		advancedInstall()
-	elif (option == '3'):
-		rerun()
-	elif (option == '4'):
-		exit()
-	exit()
+		print "\n"
+		print " ################################################"
+		print "     Welcome to ProViewer Installation Setup!     "
+		print " ################################################\n"
+
+		print "What do you want to do:"
+		print "\t1. Quick Install"
+		print "\t2. Advance Install"
+		print "\t3. Uninstall"
+		print "\t4. Exit"
+
+		option = raw_input("\nPlease type option number:")
+		if (option == '1'):
+			quickInstall()
+		elif (option == '2'):
+			advancedInstall()
+		elif (option == '3'):
+			confirmation = raw_input("\nAre you sure, you want to uninstall?(Y/N):")
+			if (confirmation == 'Y' or confirmation == 'y'):
+				uninstall()
+		elif (option == '4' or option == 'exit'):
+			exit()
 
 def quickInstall():
 	'''
@@ -105,7 +111,7 @@ def quickInstall():
 	confirmation = raw_input("\nSettings are accurate?(Y/N):")
 
 	if (confirmation == 'Y' or confirmation == 'y'):
-		setting_location = galaxy_root_location + "/config/mzidentml_setttings.ini"
+		setting_location = galaxy_root_location + "/config/proviewer_setttings.ini"
 		print "Saving at : " + setting_location
 		target = open(setting_location, 'w+')
 		target.write(settings)
@@ -206,7 +212,7 @@ def advancedInstall():
 	confirmation = raw_input("\nSettings are accurate?(Y/N):")
 
 	if (confirmation == 'Y' or confirmation == 'y'):
-		setting_location = galaxy_root_location + "/config/mzidentml_setttings.ini"
+		setting_location = galaxy_root_location + "/config/proviewer_setttings.ini"
 		print "Saving at : " + setting_location
 		target = open(setting_location, 'w+')
 		target.write(settings)
@@ -230,15 +236,14 @@ def copy(from_dir, to_dir):
 		except Exception as err:
 			print("File Copying Error\n: {0}".format(err))
 			exit()
-		# print "Files/folders : "%os.listdir(to_dir)
 		print "\n> Success! Plugin files were copied/replaced!\n\n"
 	else:
 		print("\033[1;33;40m Sorry, folder path is invalid!\n")
 		exit()
 
 
-def Uninstall():
-	print "\033[1;33;40m\n*** Sorry, Under Constructions ***\n"
+def uninstall():
+	print "\033[1;33;40m\n*** Thank you for using ProViewer! ***\n"
 	time.sleep( 2 )
 
 def printMainTitle():
