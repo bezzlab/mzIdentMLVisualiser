@@ -10,9 +10,9 @@ import time
 def main():
 
 	# initialise to enter to the loop
-	option = 5
+	menuoption = 5
 
-	while (option != 4):
+	while (menuoption != 4):
 		os.system('clear')
 
 		print "\n"
@@ -26,16 +26,18 @@ def main():
 		print "\t3. Uninstall"
 		print "\t4. Exit"
 
-		option = raw_input("\nPlease type option number:")
-		if (option == '1'):
+		menuoption = raw_input("\nPlease type option number:")
+		if   (menuoption == '1'):
 			quickInstall()
-		elif (option == '2'):
+		elif (menuoption == '2'):
 			advancedInstall()
-		elif (option == '3'):
+		elif (menuoption == '3'):
 			confirmation = raw_input("\nAre you sure, you want to uninstall?(Y/N):")
 			if (confirmation == 'Y' or confirmation == 'y'):
 				uninstall()
-		elif (option == '4' or option == 'exit'):
+		elif (menuoption == '4' or menuoption == 'exit'):
+			print "\033[1;33;40m\n*** Thank you for using ProViewer! ***\n"
+			time.sleep( 3 )
 			exit()
 
 def quickInstall():
@@ -256,26 +258,23 @@ def uninstall():
 		filesFailedToRemove['setting'] = filepath
 
 	# STEP 3 - Remove files in the webcontroller folder
-	# namely: mzIdentMLHandler.py and SequenceExtratctor.py
+	# namely: mzIdentMLHandler.py, MzIdentMLToJSON.py and SequenceExtratctor.py
 	# DatasetController will not get deleted. It has to be manually removed,
 	# because it contains other critical functions that shouldn't be deleted!
-	webcontroller = galaxy_root_location + "/lib/galaxy/webapps/galaxy/api/"
-	filepath  = webcontroller + "MzIdentMLHandler.py"
-	if os.path.isfile(filepath):
-		os.remove(filepath)
-		print "\nRemoved : " + filepath
-	else:
-		filesFailedToRemove['MzIdentMLHandler'] = filepath
 
-	filepath  = webcontroller + "SequenceExtractor.py"
-	if os.path.isfile(filepath):
-		os.remove(filepath)
-		print "\nRemoved : " + filepath
-	else:
-		filesFailedToRemove['SequenceExtractor'] = filepath
+	webcontrollerPath = galaxy_root_location + "/lib/galaxy/webapps/galaxy/api/"
+	filelist = ['MzIdentMLHandler','MzIdentMLToJSON','SequenceExtractor']
+
+	for filename in filelist:
+		filepath  = webcontroller + filename + ".py"
+		if os.path.isfile(filepath):
+			os.remove(filepath)
+			print "\nRemoved : " + filepath
+		else:
+			filesFailedToRemove[filename] = filepath
 
 	# STEP 3 - Remove ProViewer client side folder
-	filepath = galaxy_root_location + "/config/plugins/visualizations/"
+	filepath = galaxy_root_location + "/config/plugins/visualizations/proviewer/"
 	if os.path.isdir(filepath):
 		# remove everyting in this directory
 		shutil.rmtree(filepath)
@@ -292,8 +291,11 @@ def uninstall():
 	else:
 		filesFailedToRemove['mzIdentMLToJSON'] = filepath
 
+	print "These files/folders cannot be deleted. Please remove them manually:"
+	for key, value in filesFailedToRemove.iteritems():
+		print "\n" + key + " : " + value
 
-	print "\033[1;33;40m\n*** Thank you for using ProViewer! ***\n"
+	print "\n*** Thank you for using ProViewer! ***\n"
 	time.sleep( 2 )
 
 def printMainTitle():
