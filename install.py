@@ -32,8 +32,8 @@ def main():
 		elif (menuoption == '2'):
 			advancedInstall()
 		elif (menuoption == '3'):
-			confirmation = raw_input("\nAre you sure, you want to uninstall?(Y/N):")
-			if (confirmation == 'Y' or confirmation == 'y'):
+			confirm = raw_input("\nAre you sure, you want to uninstall?(Y/N):")
+			if (confirm == 'Y' or confirm == 'y'):
 				uninstall()
 		elif (menuoption == '4' or menuoption == 'exit'):
 			print "\033[1;33;40m\n*** Thank you for using ProViewer! ***\n"
@@ -107,9 +107,9 @@ def quickInstall():
 	settings = "\n\n# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
-	confirmation = raw_input("\nSettings are accurate?(Y/N):")
+	confirm = raw_input("\nSettings are accurate?(Y/N):")
 
-	if (confirmation == 'Y' or confirmation == 'y'):
+	if (confirm == 'Y' or confirm == 'y'):
 		setting_location = galaxy_root_location + "/config/proviewer_setttings.ini"
 		print "Saving at : " + setting_location
 		target = open(setting_location, 'w+')
@@ -140,7 +140,7 @@ def advancedInstall():
 	suggested_path = galaxy_root_location + "/config/plugins/visualizations/"
 	print "Defalut location :" + suggested_path
 	confirm = raw_input("Save to default location(Y/N):")
-	if (confirmation == 'Y' or confirmation == 'y'):
+	if (confirm == 'Y' or confirm == 'y'):
 		vis_plugin_dir = suggested_path
 	else:
 		vis_plugin_dir = raw_input("Customized Visualisation Plugin Directory :")
@@ -154,7 +154,7 @@ def advancedInstall():
 	suggested_path = galaxy_root_location + "/lib/galaxy/webapps/galaxy/api/"
 	print "Defalut location :" + suggested_path
 	confirm = raw_input("Save to default location(Y/N):")
-	if (confirmation == 'Y' or confirmation == 'y'):
+	if (confirm == 'Y' or confirm == 'y'):
 		web_api_dir = suggested_path
 	else:
 		web_api_dir = raw_input("Customized Web API Directory :")
@@ -167,7 +167,7 @@ def advancedInstall():
 	suggested_path = galaxy_root_location + "/tools/mzIdentMLToJSON/"
 	print "Defalut location :" + suggested_path
 	confirm = raw_input("Save to default location(Y/N):")
-	if (confirmation == 'Y' or confirmation == 'y'):
+	if (confirm == 'Y' or confirm == 'y'):
 		tool_dir = suggested_path
 	else:
 		tool_dir 	= raw_input("Customized Tool directory(wrapper):")
@@ -176,7 +176,7 @@ def advancedInstall():
 
 	print "\n ProExtractor.jar java library saves in the same folder as other tool files\n"
 	confirm = raw_input("Do you want to use default location(Y/N):")
-	if (confirmation == 'Y' or confirmation == 'y'):
+	if (confirm == 'Y' or confirm == 'y'):
 		javalib_dir = tool_dir
 	else:
 		javalib_dir = raw_input("what is the directory you have your ProExtractor.jar java library (absolute path):")
@@ -186,7 +186,7 @@ def advancedInstall():
 	print "\nOutput directory: folder where temporary JSON files generated from java library get saved\n"
 	suggested_path = galaxy_root_location + "/config/plugins/visualizations/proviewer/static/data/"
 	confirm = raw_input("is your Output Directory \n "+ suggested_path +"(Y/N):")
-	if (confirmation == 'Y' or confirmation == 'y'):
+	if (confirm == 'Y' or confirm == 'y'):
 		output_dir = suggested_path
 		rel_output_dir = "/plugins/visualizations/proviewer/static/data/"
 	else:
@@ -205,9 +205,9 @@ def advancedInstall():
 	settings = "\n\n# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
-	confirmation = raw_input("\nSettings are accurate?(Y/N):")
+	confirm = raw_input("\nSettings are accurate?(Y/N):")
 
-	if (confirmation == 'Y' or confirmation == 'y'):
+	if (confirm == 'Y' or confirm == 'y'):
 		setting_location = galaxy_root_location + "/config/proviewer_setttings.ini"
 		print "Saving at : " + setting_location
 		target = open(setting_location, 'w+')
