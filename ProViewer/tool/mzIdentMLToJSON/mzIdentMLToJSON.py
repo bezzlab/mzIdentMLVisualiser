@@ -30,7 +30,7 @@ def __main__():
 
 	# get settings from configuration settings file
 	config 			= ConfigParser.ConfigParser()
-	print config.read(root + '/config/mzidentml_setttings.ini')
+	print config.read(root + '/config/proviewer_setttings.ini')
 	outputfile 		= config.get('MzIdentML', 'output_dir')
 	javalib 		= config.get('MzIdentML', 'javalib')
 	multithreading 	= config.get('MzIdentML', 'multithreading')

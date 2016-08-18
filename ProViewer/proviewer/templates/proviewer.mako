@@ -6,7 +6,7 @@
     app_root = root + "plugins/visualizations/proviewer/static/"
 
     galaxy_root_dir = os.getcwd()
-    galaxy_ini_file = os.path.join(galaxy_root_dir,'config/mzidentml_setttings.ini')
+    galaxy_ini_file = os.path.join(galaxy_root_dir,'config/proviewer_setttings.ini')
     config          = ConfigParser.ConfigParser()
     config.read(galaxy_ini_file)
 
