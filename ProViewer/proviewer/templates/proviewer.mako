@@ -18,7 +18,7 @@
     <html>
     <head>
         <meta charset="UTF-8">
-        <title>MzIdentML Viewer</title>
+        <title>ProViewer</title>
         <!--Import Google Icon Font-->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         ${h.stylesheet_link( app_root + 'css/materialize.min.css' )}
@@ -31,12 +31,12 @@
     <body>
         <nav>
             <div class="nav-wrapper blue darken-4" width="100%">
-                <a href="" class="col s12 brand-logo center">MzIdentML Viewer</a>
+                <a href="" class="col s12 brand-logo center">ProViewer</a>
             </div>
         </nav>
         <div class="container">
             <div id="errormessage" class="alert alert-danger" style="display:none">
-                <p><strong>Sorry!</strong> An error has occurred. Please report to <a href="mailto:${error_report_to}?Subject=Mzidentml Viewer Plugin Error" target="_top">administrator</a></p>
+                <p><strong>Sorry!</strong> An error has occurred. Please report to <a href="mailto:${error_report_to}?Subject=ProViewer Plugin Error" target="_top">administrator</a></p>
             </div>
             <!-- Progress bar modal -->
             <div id="progress-bar" class="modal modal-trigger">
