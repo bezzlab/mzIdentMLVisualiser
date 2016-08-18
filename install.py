@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding: utf-8
 
 from sys import argv
 import os
@@ -49,11 +50,11 @@ def quickInstall():
 
 	# STEP 2 - Copy Visualisation Plugin
 	printTitle("STEP 2 - Copy Visualisation Plugin")
-    print "\nVisualizations plugin directory: absolute folder path where to look for individual visualization plugins.\n"
-	vis_plugin_dir = galaxy_root_location + "/config/plugins/visualizations/"
+	print "\nVisualizations plugin directory: absolute folder path where to look for individual visualization plugins.\n"
+	suggested_path = galaxy_root_location + "/config/plugins/visualizations/"
 	print "Defalut location :" + suggested_path
 	print "Save to default location...\n"
-	to_dir 		= os.path.join(vis_plugin_dir, 'proviewer')
+	to_dir 		= os.path.join(suggested_path, 'proviewer')
 	from_dir    = os.path.join(current_dir, 'ProViewer/proviewer')
 	copy(from_dir, to_dir)
 
@@ -133,7 +134,7 @@ def advancedInstall():
 
 	# STEP 2 - Copy Visualisation Plugin
 	printTitle("STEP 2 - Copy Visualisation Plugin")
-    print "\nVisualizations plugin directory: absolute folder path where to look for individual visualization plugins.\n"
+	print "\nVisualizations plugin directory: absolute folder path where to look for individual visualization plugins.\n"
 	suggested_path = galaxy_root_location + "/config/plugins/visualizations/"
 	print "Defalut location :" + suggested_path
 	confirm = raw_input("Save to default location(Y/N):")
@@ -240,7 +241,7 @@ def Uninstall():
 	print "\033[1;33;40m\n*** Sorry, Under Constructions ***\n"
 	time.sleep( 2 )
 
-def printMainTitle(title):
+def printMainTitle():
 	os.system('clear')
 	print "\n"
 	print " ========================================================================================="
