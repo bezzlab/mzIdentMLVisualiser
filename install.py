@@ -49,10 +49,7 @@ def quickInstall():
 	printMainTitle()
 
 	# STEP 1 - Get galaxy root folder
-	printTitle("STEP 1 - Set your galaxy root directory")
-	print "\nThis is the absolute file path for your galaxy main folder\n"
-	print "\nExample : /home/galaxy/Downloads/galaxy\n"
-	galaxy_root_location= raw_input("Galaxy instance root directory:")
+	galaxy_root_location = getGalaxyRootDir()
 
 	# STEP 2 - Copy Visualisation Plugin
 	printTitle("STEP 2 - Copy Visualisation Plugin")
@@ -133,10 +130,7 @@ def advancedInstall():
 	printMainTitle()
 
 	# STEP 1 - Get galaxy root folder
-	printTitle("STEP 1 - Set your galaxy root directory")
-	print "\nThis is the absolute file path for your galaxy main folder\n"
-	print "\nExample : /home/galaxy/Downloads/galaxy\n"
-	galaxy_root_location= raw_input("Galaxy instance root directory:")
+	galaxy_root_location = getGalaxyRootDir()
 
 	# STEP 2 - Copy Visualisation Plugin
 	printTitle("STEP 2 - Copy Visualisation Plugin")
@@ -241,12 +235,69 @@ def copy(from_dir, to_dir):
 		print("\033[1;33;40m Sorry, folder path is invalid!\n")
 		exit()
 
-
 def uninstall():
+
+	# This is a dictionary of filepaths that are failing to removed from this method
+	# they should be namuallly remoed
+	filesFailedToRemove = {}
+
+	# get the current working directory. By default it is the galaxy/config folder
+	current_dir = os.getcwd()
+
+	# STEP 1 - Get galaxy root folder
+	galaxy_root_location = getGalaxyRootDir()
+
+	# STEP 2 - remove proviewer_settings.ini setting file from galaxy/config folder
+	filepath = galaxy_root_location + "/config/proviewer_setttings.ini"
+	if os.path.isfile(filepath):
+		os.remove(filepath)
+		print "\nRemoved : " + filepath
+	else:
+		filesFailedToRemove['setting'] = filepath
+
+	# STEP 3 - Remove files in the webcontroller folder
+	# namely: mzIdentMLHandler.py and SequenceExtratctor.py
+	# DatasetController will not get deleted. It has to be manually removed,
+	# because it contains other critical functions that shouldn't be deleted!
+	webcontroller = galaxy_root_location + "/lib/galaxy/webapps/galaxy/api/"
+	filepath  = webcontroller + "MzIdentMLHandler.py"
+	if os.path.isfile(filepath):
+		os.remove(filepath)
+		print "\nRemoved : " + filepath
+	else:
+		filesFailedToRemove['MzIdentMLHandler'] = filepath
+
+	filepath  = webcontroller + "SequenceExtractor.py"
+	if os.path.isfile(filepath):
+		os.remove(filepath)
+		print "\nRemoved : " + filepath
+	else:
+		filesFailedToRemove['SequenceExtractor'] = filepath
+
+	# STEP 3 - Remove ProViewer client side folder
+	filepath = galaxy_root_location + "/config/plugins/visualizations/"
+	if os.path.isdir(filepath):
+		# remove everyting in this directory
+		shutil.rmtree(filepath)
+		print "\nRemoved : " + filepath
+	else:
+		filesFailedToRemove['proviewer'] = filepath
+
+	# STEP 4 - Remove mzIdentMLToJSON tool
+	filepath = galaxy_root_location + "/tools/mzIdentMLToJSON/"
+	if os.path.isdir(filepath):
+		# remove everyting in this directory
+		shutil.rmtree(filepath)
+		print "\nRemoved : " + filepath
+	else:
+		filesFailedToRemove['mzIdentMLToJSON'] = filepath
+
+
 	print "\033[1;33;40m\n*** Thank you for using ProViewer! ***\n"
 	time.sleep( 2 )
 
 def printMainTitle():
+
 	os.system('clear')
 	print "\n"
 	print " ========================================================================================="
@@ -257,8 +308,17 @@ def printMainTitle():
 	print "You can refer examples given below as a guide.\n\n"
 
 def printTitle(title):
+
 	print "\n" + title
 	print "---------------------------------------------------\n"
+
+def getGalaxyRootDir():
+
+	printTitle("STEP 1 - Set your galaxy root directory")
+	print "\nThis is the absolute file path for your galaxy main folder\n"
+	print "\nExample : /home/galaxy/Downloads/galaxy\n"
+	galaxy_root_location= raw_input("Galaxy instance root directory:")
+	return galaxy_root_location
 
 if __name__ == "__main__":
     main()
