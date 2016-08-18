@@ -195,6 +195,7 @@ def advancedInstall():
 
 	error_report_sent_to = "admin@somewhere.com"
 	multithreading = "true"
+	maxMemory = "-Xmx7000M"
 
 	# STEP 6 - add settings to configuration file
 	printTitle("STEP 6 - create a setting file")
@@ -266,7 +267,7 @@ def uninstall():
 	filelist = ['MzIdentMLHandler','MzIdentMLToJSON','SequenceExtractor']
 
 	for filename in filelist:
-		filepath  = webcontroller + filename + ".py"
+		filepath  = webcontrollerPath + filename + ".py"
 		if os.path.isfile(filepath):
 			os.remove(filepath)
 			print "\nRemoved : " + filepath
