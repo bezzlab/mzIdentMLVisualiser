@@ -26,7 +26,7 @@ In order to proceed, please download our repository to your machine by cloning t
 
 #### Step 1 - Edit the configuration file
 
-You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini* configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file . If this setting has not already set, assign your visualisation directory/uncomment the (last) line as follows :
+You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini*  configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a  *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file. If this setting has not already set, assign your visualisation directory/uncomment the (last) line as follows:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -37,11 +37,11 @@ visualization_plugins_directory = config/plugins/visualizations
 
 #### Step 2 - Run the installation setup file
 
-Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. Qiuck install will use all the default settings where advanced install alllows to customise settings at the time of the instalation. Examples are provided as a giude. This setup will copy installlation files to your server and add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location.
+Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided as a guide. This setup will copy installation files to your server and add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location.
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
 
-Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and you should be able to find a file called **datasets.py**. There, copy and paste following codes:
+Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and you should be able to find a file called  **datasets.py**. There, copy and paste following codes:
 
   * Import these modules first:
    ```python
@@ -83,7 +83,7 @@ Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and
 
 #### Step 1 - Configure Tool
 
-Locate the *tool_conf.xml* configuration file in ```<your galaxy directory>/config/``` location. If you do not find a *tool_conf.xml* file, but have a *tool_conf.xml.sample* file, make a copy of it and rename new file as *tool_conf.xml*
+Locate the *tool_conf.xml* configuration file in ```<your galaxy directory>/config/``` location. If you do not find a *tool_conf.xml* file, but have a *tool_conf.xml.sample* file, make a copy of it and rename new file as *tool_conf.xml*.
 There, add these parameters anywhere of  the file under ```<toolbox>``` tag:
 
 ```XML
