@@ -9,7 +9,7 @@ ProViewer is an interactive web visualisation plug-in for the [mzIdentML](http:/
   * webcontroller - server-side of the plugin
   * tool/mzIdentMLToJSON - Galaxy tool
   * samples - sample configurations and other sample files
-* ProExtractor - Java library developed for mzIdentML data extraction [Not required for the installation
+* ProExtractor - source code of thr Java library developed for mzIdentML data extraction
 * install.py - installation setup
 * Test
 * Documentation
