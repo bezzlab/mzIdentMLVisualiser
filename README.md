@@ -14,7 +14,7 @@ ProViewer is an interactive web visualisation plug-in for the [mzIdentML](http:/
 * Test
 * Documentation
 
-Galaxy visualisation plugin cient-side and server-side files are organised into two folders which are called *protviewer* and *webcontroller* respectively. Additionally, we have a Galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You must integrate both plugin and tool in order to work with the visualisation, as Galaxy tool contains dependency files for the visualisation plugin too. Although the integration of both plugin and tool is mandatory for installation, you can use plugin independently without using Galaxy tool. However, we strongly recommend to use our Galaxy tool prior to visualise mzIdentML files for a much faster visualising speed.
+Galaxy visualisation plugin cient-side and server-side files are organised into two folders which are called *proviewer* and *webcontroller* respectively. Additionally, we have a Galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You must integrate both plugin and tool in order to work with the visualisation, as Galaxy tool contains dependency files for the visualisation plugin too. Although the integration of both plugin and tool is mandatory for installation, you can use plugin independently without using Galaxy tool. However, we strongly recommend to use our Galaxy tool prior to visualise mzIdentML files for a much faster visualising speed.
 
 ## Installation
 
