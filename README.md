@@ -44,6 +44,7 @@ Go to the downloaded folder of the repository from the command-line, and execute
 Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and you should be able to find a file called  **datasets.py**. There, copy and paste following codes:
 
   * Import these modules first:
+
    ```python
       from MzIdentMLToJSON import MzIdentMLToJSON
       from SequenceExtractor import SequenceExtractor
