@@ -1,6 +1,6 @@
 # mzIdentMLVisualiser
 
-![Alt text](samples/snapshots/protein.png)
+![Alt text](Documentation/protein.png)
 
 This is an interactive web visualisation plug-in for the [mzIdentML](http://www.psidev.info/mzidentml) file within the [Galaxy bioinformatics platform](https://galaxyproject.org). In the repository, we provide the necessary files to install mzIdentML Viewer plugin into your existing Galaxy instance accomplished with the source codes of the underneath functionality which converts mzIdentML into JSON files to be viewed in the main panel. There are four main folders:
 
@@ -103,13 +103,13 @@ That's it! You are ready to use the visualisation plug-in and the tool.
 
 ## How to use visualisation plugin
 
-<img src="samples/snapshots/how_to_use.png" alt="menu"  width="1137" height="373"/>
+<img src="Documentation/how_to_use.png" alt="menu"  width="1137" height="373"/>
 
 User *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled for mzIdentML files only. Once you upload mzIdentML file(.mzid file extension), it will be added to the history panel. You can visualise the input mzIdentML file by clicking on the visualisation button and selecting the *mzIdentML viewer* from the menu. Time taken to load data into the viewer depends on the size of the input file.
 
 ## How to use visualisation tool
 
-<img src="samples/snapshots/galaxytool.png" alt="How to used Galaxy Tool"/>
+<img src="Documentation/galaxytool.png" alt="How to used Galaxy Tool"/>
 
 You can integrate this tool into your protein identification workflows or can execute individually. If you are using search tool in the workflow, the output mzIdentML file of the search tool is the input for this galaxy tool.
 
