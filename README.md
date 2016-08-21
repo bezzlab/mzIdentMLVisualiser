@@ -116,7 +116,7 @@ User *MUST* **login** to the server in order to use visualisation functionality.
 
 You can integrate this tool into your protein identification workflows or can execute individually. If you are using search tool in the workflow, the output mzIdentML file of the search tool is the input for this galaxy tool.
 
-## Dependancies
+## Dependencies
 
 * Python 2.7
 * JRE 8
