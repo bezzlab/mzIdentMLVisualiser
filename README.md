@@ -37,7 +37,7 @@ visualization_plugins_directory = config/plugins/visualizations
 
 #### Step 2 - Run the installation setup file
 
-Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided as a guide. This setup will copy installation files to your server and add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location.
+Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided for advanced installation as a guide. This setup will copy installation files to your server and add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location.
 
 #### Step 3 - Copy *webcontroller* files into your web API Controller 
 
