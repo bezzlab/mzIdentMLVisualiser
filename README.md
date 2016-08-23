@@ -73,7 +73,7 @@ def _mzIdentMLProcess( self, **kwd):
         if kwd.get('event') == 'initial_load':
             converter = MzIdentMLToJSON()
             converter.extract(inputfile, datasetId, root)
-        elif kwd.get('event') == 'sequence':
+        elif kwd.get('event') == 'protein_expand':
             seqEx = SequenceExtractor()
             rval = seqEx.extract(inputfile, kwd.get('dbSequenceId'))
         return rval
