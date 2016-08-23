@@ -313,6 +313,12 @@ def uninstall():
 	print "\n*** Thank you for using ProViewer! ***\n"
 	time.sleep( 2 )
 
+	confirm = raw_input("\nDo you want to continue?(Y/N):")
+	if (confirm == 'Y' or confirm == 'y'):
+		pass
+	else:
+		exit()
+
 def printMainTitle():
 
 	os.system('clear')
