@@ -6,6 +6,7 @@ import os
 import shutil
 from distutils.dir_util import copy_tree
 import time
+import datetime
 
 def main():
 
@@ -68,6 +69,11 @@ def quickInstall():
 	print "\nWeb API directory: absolute folder path where you have galaxy webapp api files\n"
 	suggested_path = galaxy_root_location + "/lib/galaxy/webapps/galaxy/api/"
 	print "Defalut location :" + suggested_path
+	print "Creating a backup for datasets.py..."
+	original_name = suggested_path + 'datasets.py'
+	backup_name = '%sdatasets_%s.py' % suggested_path, datetime.datetime.now()
+	os.rename(original_name, backup_name)
+	print "Backup created for %s" % backup_name
 	print "Save to default location...\n"
 	web_api_dir = suggested_path
 	from_dir    = os.path.join(current_dir, 'ProViewer/webcontroller')
@@ -154,10 +160,18 @@ def advancedInstall():
 	suggested_path = galaxy_root_location + "/lib/galaxy/webapps/galaxy/api/"
 	print "Defalut location :" + suggested_path
 	confirm = raw_input("Save to default location(Y/N):")
+
 	if (confirm == 'Y' or confirm == 'y'):
 		web_api_dir = suggested_path
 	else:
 		web_api_dir = raw_input("Customized Web API Directory :")
+
+	print "Creating a backup for datasets.py..."
+	original_name = '%sdatasets.py' % web_api_dir
+	backup_name = '%sdatasets_%s.py' % web_api_dir, datetime.datetime.now()
+	os.rename(original_name, backup_name)
+	print "Backup created for %s" % backup_name
+
 	from_dir    = os.path.join(current_dir, 'ProViewer/webcontroller')
 	copy(from_dir, web_api_dir)
 
