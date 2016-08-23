@@ -46,37 +46,37 @@ Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and
   * Import these modules first:
 
    ```python
-      from MzIdentMLToJSON import MzIdentMLToJSON
-      from SequenceExtractor import SequenceExtractor
-      import os.path
-      import subprocess
+from MzIdentMLToJSON import MzIdentMLToJSON
+from SequenceExtractor import SequenceExtractor
+import os.path
+import subprocess
    ```
   * There, search for Class **DatasetsController** -> method **show** and paste following code inside the method **show**:
    ```python
-      elif data_type == 'mzidentml':
-        rval = self._mzIdentMLProcess(**kwd)
+elif data_type == 'mzidentml':
+    rval = self._mzIdentMLProcess(**kwd)
     ```
     
   * Just after **show** method add this function(Copy from the sample files provided):
   
  ```python
-     def _mzIdentMLProcess( self, **kwd):
-        print  "MzIdentML Viewer INFO: called Web API controller!"
-        # input mzIdentML file
-        inputfile = kwd.get('inputFile')
-        # unique sequrity encoded id assigned for the input file
-        datasetId = kwd.get('datasetId')
-        # galaxy root directory
-        root = kwd.get('root')
-        rval = inputfile
-        # Web plugin loading time
-        if kwd.get('mode') == 'initial_load':
-            converter = MzIdentMLToJSON()
-            converter.extract(inputfile, datasetId, root)
-        elif kwd.get('mode') == 'sequence':
-            seqEx = SequenceExtractor()
-            rval = seqEx.extract(inputfile, kwd.get('dbSequenceId'))
-        return rval
+def _mzIdentMLProcess( self, **kwd):
+    print  "MzIdentML Viewer INFO: called Web API controller!"
+    # input mzIdentML file
+    inputfile = kwd.get('inputFile')
+    # unique sequrity encoded id assigned for the input file
+    datasetId = kwd.get('datasetId')
+    # galaxy root directory
+    root = kwd.get('root')
+    rval = inputfile
+    # Web plugin loading time
+    if kwd.get('event') == 'initial_load':
+        converter = MzIdentMLToJSON()
+        converter.extract(inputfile, datasetId, root)
+    elif kwd.get('event') == 'sequence':
+        seqEx = SequenceExtractor()
+        rval = seqEx.extract(inputfile, kwd.get('dbSequenceId'))
+    return rval
  ```
     Warning: **Mind your indentation!** As a guidance for the above step, you can find a sample *datasets.py* file in *sample* folder.
 
