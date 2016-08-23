@@ -71,7 +71,7 @@ def quickInstall():
 	print "Defalut location :" + suggested_path
 	print "Creating a backup for datasets.py..."
 	original_name = suggested_path + 'datasets.py'
-	backup_name = '%sdatasets_%s.py' % suggested_path, datetime.datetime.now()
+	backup_name = '%sdatasets_%s.py' % (suggested_path, datetime.datetime.now())
 	os.rename(original_name, backup_name)
 	print "Backup created for %s" % backup_name
 	print "Save to default location...\n"
@@ -168,7 +168,7 @@ def advancedInstall():
 
 	print "Creating a backup for datasets.py..."
 	original_name = '%sdatasets.py' % web_api_dir
-	backup_name = '%sdatasets_%s.py' % web_api_dir, datetime.datetime.now()
+	backup_name = '%sdatasets_%s.py' % (web_api_dir, datetime.datetime.now())
 	os.rename(original_name, backup_name)
 	print "Backup created for %s" % backup_name
 
