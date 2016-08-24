@@ -195,7 +195,7 @@ def advancedInstall():
 	else:
 		javalib_dir = raw_input("Directory of ProExtractor.jar java library (absolute path):")
 
-	# STEP 5 - add settings to configuration file
+	# STEP 5 - Set Output directory
 	printTitle("STEP 5 - Set output directory")
 	print "\nOutput directory: folder where temporary JSON files generated from java library get saved\n"
 	suggested_path = galaxy_root_location + "/config/plugins/visualizations/proviewer/static/data/"
@@ -211,7 +211,17 @@ def advancedInstall():
 	multithreading = "true"
 	maxMemory = "-Xmx7000M"
 
-	# STEP 6 - add settings to configuration file
+	# STEP 6 - Copy GIO server Specific files to the server
+	printTitle("STEP 6 - GIO server")
+	confirm = raw_input("\nCopying tool into GIO Server?(Y/N):")
+	if (confirm == 'Y' or confirm == 'y'):
+		wrapper_location = galaxy_root_location + "/tools/gio/Misc/"
+		print "Galaxy tools wrapper location:" + suggested_path
+		from_dir    = os.path.join(current_dir, 'GIOServer')
+		copy(from_dir, wrapper_location)
+
+
+	# STEP 7 - add settings to configuration file
 	printTitle("STEP 6 - create a setting file")
 	print "\nA setting file called mzidentml_setttings.ini will be created in \n"+ galaxy_root_location + "/config/ location\n"
 	print "These settings are only specific to mzIdentML visualization plugin\n"
@@ -306,7 +316,7 @@ def uninstall():
 	else:
 		filesFailedToRemove['mzIdentMLToJSON'] = filepath
 
-	print "These files/folders cannot be deleted. Please remove them manually:"
+	print "\nThese files/folders cannot be deleted. Please remove them manually:"
 	for key, value in filesFailedToRemove.iteritems():
 		print "\n" + key + " : " + value
 
