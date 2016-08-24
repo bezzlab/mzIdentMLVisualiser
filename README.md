@@ -37,48 +37,8 @@ visualization_plugins_directory = config/plugins/visualizations
 
 #### Step 2 - Run the installation setup file
 
-Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided for advanced installation as a guide. This setup will copy installation files to your server and add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location.
+Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided for advanced installation as a guide. This setup will copy installation files to your server and add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location. A backup file will be created for ``` datasets.py``` file  with the file name including current timestamp in ```<your galaxy directory>/lib/webapps/galaxy/api``` location.
 
-#### Step 3 - Copy *webcontroller* files into your web API Controller 
-
-Go to ```<your galaxy directory>/lib/galaxy/webapps/galaxy/api/``` location, and you should be able to find a file called  **datasets.py**. There, copy and paste following codes:
-
-  * Import these modules first:
-
-   ```python
-from MzIdentMLToJSON import MzIdentMLToJSON
-from SequenceExtractor import SequenceExtractor
-import os.path
-import subprocess
-   ```
-  * There, search for Class **DatasetsController** -> method **show** and paste following code inside the method **show**:
-   ```python
-elif data_type == 'mzidentml':
-        rval = self._mzIdentMLProcess(**kwd)
-    ```
-    
-  * Just after **show** method add this function(Copy from the sample files provided):
-  
- ```python
-def _mzIdentMLProcess( self, **kwd):
-        print  "MzIdentML Viewer INFO: called Web API controller!"
-        # input mzIdentML file
-        inputfile = kwd.get('inputFile')
-        # unique sequrity encoded id assigned for the input file
-        datasetId = kwd.get('datasetId')
-        # galaxy root directory
-        root = kwd.get('root')
-        rval = inputfile
-        # Web plugin loading time
-        if kwd.get('event') == 'initial_load':
-            converter = MzIdentMLToJSON()
-            converter.extract(inputfile, datasetId, root)
-        elif kwd.get('event') == 'protein_expand':
-            seqEx = SequenceExtractor()
-            rval = seqEx.extract(inputfile, kwd.get('dbSequenceId'))
-        return rval
- ```
-    Warning: **Mind your indentation!** As a guidance for the above step, you can find a sample *datasets.py* file in *sample* folder.
 
 ### Install Galaxy Tool
 
@@ -107,7 +67,7 @@ That's it! You are ready to use the visualisation plug-in and the tool.
 
 ## How to use visualisation plugin
 
-<img src="Documentation/how_to_use.png" alt="menu"  width="1137" height="373"/>
+<img src="/Documentation/HowToUse.png" alt="menu"  width="1137" height="373"/>
 
 User *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled for mzIdentML files only. Once you upload mzIdentML file(.mzid file extension), it will be added to the history panel. You can visualise the input mzIdentML file by clicking on the visualisation button and selecting the *mzIdentML viewer* from the menu. Time taken to load data into the viewer depends on the size of the input file.
 
