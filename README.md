@@ -40,7 +40,7 @@ visualization_plugins_directory = config/plugins/visualizations
 
 #### Step 2 - Run the installation setup file
 
-Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided for both quick and advanced installation as a guide. Please follow same format when you provide file paths, epecially ```/``` at the end. This setup will perform following actions:
+Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided for both quick and advanced installation as a guide. Please follow same format when you provide file paths, epecially ```/``` at the end where required. This setup will perform following actions:
  * copy installation files to your server 
  * add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location
  * A backup file will be created for ``` datasets.py``` file  with the file name including current timestamp in ```<your galaxy directory>/lib/webapps/galaxy/api``` location.
@@ -51,7 +51,7 @@ Go to the downloaded folder of the repository from the command-line, and execute
  * Step 3 - Y
  * Step 4 - N 
            ```/home/galaxy/gio_applications/misc/``` 
-            Y
+            Y (recommended)
  * Step 5 - Y
  * Step 6 - Y (this will copy wrapper into ```<your galaxy directory>/tools/gio/Misc/```)
  * Conform Settings - Y
