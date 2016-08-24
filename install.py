@@ -184,7 +184,7 @@ def advancedInstall():
 	if (confirm == 'Y' or confirm == 'y'):
 		tool_dir = suggested_path
 	else:
-		tool_dir 	= raw_input("Customized Tool directory(wrapper):")
+		tool_dir 	= raw_input("Customized Tool directory(executable):")
 	from_dir    = os.path.join(current_dir, 'ProViewer/tool/mzIdentMLToJSON')
 	copy(from_dir, tool_dir)
 
@@ -193,7 +193,7 @@ def advancedInstall():
 	if (confirm == 'Y' or confirm == 'y'):
 		javalib_dir = tool_dir
 	else:
-		javalib_dir = raw_input("what is the directory you have your ProExtractor.jar java library (absolute path):")
+		javalib_dir = raw_input("Directory of ProExtractor.jar java library (absolute path):")
 
 	# STEP 5 - add settings to configuration file
 	printTitle("STEP 5 - Set output directory")
