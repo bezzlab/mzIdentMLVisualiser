@@ -67,7 +67,7 @@ That's it! You are ready to use the visualisation plug-in and the tool.
 
 ## How to use visualisation plugin
 
-<img src="Documentation/how_to_use.png" alt="menu"  width="1137" height="373"/>
+<img src="/Documentation/HowToUse.png" alt="menu"  width="1137" height="373"/>
 
 User *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled for mzIdentML files only. Once you upload mzIdentML file(.mzid file extension), it will be added to the history panel. You can visualise the input mzIdentML file by clicking on the visualisation button and selecting the *mzIdentML viewer* from the menu. Time taken to load data into the viewer depends on the size of the input file.
 
