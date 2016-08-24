@@ -1,7 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+# python 2.7
+# import ConfigParser
 from sys import argv
+import sys
 import os
 import shutil
 from distutils.dir_util import copy_tree
@@ -92,6 +95,7 @@ def quickInstall():
 	print "\n ProExtractor.jar java library saves in the same folder as other tool files\n"
 	print "Save to default location...\n"
 	javalib_dir = tool_dir
+	progressbar()
 
 	# STEP 5 - add settings to configuration file
 	printTitle("STEP 5 - Set output directory")
@@ -110,21 +114,23 @@ def quickInstall():
 	print "These settings are only specific to mzIdentML visualization plugin\n"
 
 	galaxy_ini = os.path.join(galaxy_root_location, 'config/galaxy.ini')
-	settings = "\n\n# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
+	settings = "# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
-	confirm = raw_input("\nSettings are accurate?(Y/N):")
+	setting_location = galaxy_root_location + "/config/proviewer_setttings.ini"
+	print "Settings will be added to : " + setting_location
+	target = open(setting_location, 'w+')
+	target.write(settings)
+	target.close()
+	progressbar()
 
+	print "\nInstallation Completed!!!"
+
+	confirm = raw_input("\nDo you want to continue?(Y/N):")
 	if (confirm == 'Y' or confirm == 'y'):
-		setting_location = galaxy_root_location + "/config/proviewer_setttings.ini"
-		print "Saving at : " + setting_location
-		target = open(setting_location, 'w+')
-		target.write(settings)
-		target.close()
-		print "Success! Settings were added to mzidentml_setttings.ini settings file!\n\n"
-
-	print "------------- Installation Completed -------------"
-	time.sleep( 2 )
+		pass
+	else:
+		exit()
 
 def advancedInstall():
 	'''
@@ -227,21 +233,26 @@ def advancedInstall():
 	print "These settings are only specific to mzIdentML visualization plugin\n"
 
 	galaxy_ini = os.path.join(galaxy_root_location, 'config/galaxy.ini')
-	settings = "\n\n# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
+	settings = "# ---- ProViewer Config ------\n\n[MzIdentML]" + "\noutput_dir = " + output_dir + "\nrel_output_dir = " + rel_output_dir + "\njavalib = " + javalib_dir + "ProExtractor.jar" + "\nmultithreading = " + multithreading + "\nmaxMemory = " + maxMemory + "\nerror_report_sent_to = " + error_report_sent_to
 	print settings
 
 	confirm = raw_input("\nSettings are accurate?(Y/N):")
 
 	if (confirm == 'Y' or confirm == 'y'):
 		setting_location = galaxy_root_location + "/config/proviewer_setttings.ini"
-		print "Saving at : " + setting_location
+		print "Settings will be added to : " + setting_location
 		target = open(setting_location, 'w+')
 		target.write(settings)
 		target.close()
-		print "Success! Settings were added to mzidentml_setttings.ini settings file!\n\n"
+		progressbar()
 
-	print "------------- Installation Completed -------------"
-	time.sleep( 2 )
+	print "\nInstallation Completed!!!"
+
+	confirm = raw_input("\nDo you want to continue?(Y/N):")
+	if (confirm == 'Y' or confirm == 'y'):
+		pass
+	else:
+		exit()
 
 def copy(from_dir, to_dir):
 	'''
@@ -249,7 +260,6 @@ def copy(from_dir, to_dir):
 	'''
 	if os.path.isdir(from_dir) or os.path.isfile(from_dir):
 		print "File copying started..."
-		time.sleep( 2 )
 		print "\nCopying "+ from_dir + " \n--> " + to_dir + "\n"
 		try:
 			copy_tree(from_dir, to_dir)
@@ -257,15 +267,15 @@ def copy(from_dir, to_dir):
 		except Exception as err:
 			print("File Copying Error\n: {0}".format(err))
 			exit()
-		print "\n> Success! Plugin files were copied/replaced!\n\n"
+		progressbar()
 	else:
 		print("\033[1;33;40m Sorry, folder path is invalid!\n")
 		exit()
 
 def uninstall():
 
-	# This is a dictionary of filepaths that are failing to removed from this method
-	# they should be namuallly remoed
+	# This is a dictionary of filepaths which are failing to delete from this method
+	# they should be manually deleted
 	filesFailedToRemove = {}
 
 	# get the current working directory. By default it is the galaxy/config folder
@@ -273,6 +283,11 @@ def uninstall():
 
 	# STEP 1 - Get galaxy root folder
 	galaxy_root_location = getGalaxyRootDir()
+
+	# reading folder locations from configuration settings file
+	# config = ConfigParser.ConfigParser()
+	# config.read(galaxy_root_location + "/config/proviewer_setttings.ini")
+	# outputfile = config.get('MzIdentML', 'output_dir')
 
 	# STEP 2 - remove proviewer_settings.ini setting file from galaxy/config folder
 	filepath = galaxy_root_location + "/config/proviewer_setttings.ini"
@@ -352,6 +367,48 @@ def getGalaxyRootDir():
 	print "\nExample : /home/galaxy/Downloads/galaxy\n"
 	galaxy_root_location= raw_input("Galaxy instance root directory:")
 	return galaxy_root_location
+
+def progressbar():
+	"""
+	This function  increases the value of the progress bar
+	However, this is just to show to the user, that something is happening
+	Nothing to do with the value of the progress bar
+	"""
+	items = list(range(0, 100))
+	i     = 0
+	l     = len(items)
+
+	# Initial call to print 0% progress
+	printProgress(i, l, prefix = 'Progress:', suffix = 'Complete', barLength = 50)
+	for item in items:
+    		time.sleep( 0.01 )
+    		# Update Progress Bar
+    		i += 1
+    		printProgress(i, l, prefix = 'Progress:', suffix = 'Complete', barLength = 50)
+
+
+# Print iterations progress
+# This function was take from http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
+def printProgress (iteration, total, prefix = '', suffix = '', decimals = 1, barLength = 100):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        barLength   - Optional  : character length of bar (Int)
+    """
+    formatStr       = "{0:." + str(decimals) + "f}"
+    percents        = formatStr.format(100 * (iteration / float(total)))
+    filledLength    = int(round(barLength * iteration / float(total)))
+    bar             = '█' * filledLength + '-' * (barLength - filledLength)
+    sys.stdout.write('\r%s |%s| %s%s %s' % (prefix, bar, percents, '%', suffix)),
+    sys.stdout.flush()
+    if iteration == total:
+        sys.stdout.write('\n')
+        sys.stdout.flush()
 
 if __name__ == "__main__":
     main()
