@@ -69,7 +69,7 @@ There, add these parameters anywhere of  the file under ```<toolbox>``` tag:
 </section>
 ```
 
-##### GIO specific instructions: please include following line in section "GIO:Miscellaneous":
+##### GIO specific instructions: please include following line in section "GIO:Miscellaneous" in both ```<your galaxy directory>/config/tool_conf.xml``` and ```<your galaxy directory>/tools/gio/Misc/tool_conf_Misc.xml``` files:
 
 ```XML
 <tool file="gio/Misc/mzIdentMLToJSON.xml"/>
