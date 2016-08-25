@@ -46,7 +46,7 @@ Go to the downloaded folder of the repository from the command-line, and execute
  * A backup file will be created for ``` datasets.py``` file  with the file name including current timestamp in ```<your galaxy directory>/lib/webapps/galaxy/api``` location.
 
 ##### GIO specific instructions - Recommented to used advance installation option. 
- * Step 1 - home/galaxy/galaxy
+ * Step 1 - /home/galaxy/galaxy
  * Step 2 - Y
  * Step 3 - Y
  * Step 4 - N 
@@ -87,7 +87,7 @@ That's it! You are ready to use the visualisation plug-in and the tool.
 
 <img src="/Documentation/HowToUse.png" alt="menu"  width="1137" height="373"/>
 
-User *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled for mzIdentML files only. Once you upload mzIdentML file(.mzid file extension), it will be added to the history panel. You can visualise the input mzIdentML file by clicking on the visualisation button and selecting the *mzIdentML viewer* from the menu. Time taken to load data into the viewer depends on the size of the input file.
+User *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled for mzIdentML files only. Once you upload mzIdentML file(.mzid file extension), it will be added to the history panel. You can visualise the input mzIdentML file by clicking on the visualisation button and selecting the *ProViewer* from the menu. Time taken to load data into the viewer depends on the size of the input file.
 
 ## How to use visualisation tool
 
