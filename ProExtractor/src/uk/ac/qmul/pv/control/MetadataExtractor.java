@@ -20,33 +20,31 @@ import uk.ac.ebi.jmzidml.model.mzidml.SpecificityRules;
 import uk.ac.ebi.jmzidml.model.mzidml.SpectrumIdentificationProtocol;
 import uk.ac.qmul.pv.db.DataAccess;
 import uk.ac.qmul.pv.model.MetadataRecord;
+import uk.ac.qmul.pv.util.CV;
 import uk.ac.qmul.pv.util.JavaToJSON;
 
 /**
  * This class handles all the data access methods related to Metadata.
  * 
  * Some functions of this class was originally written by
- *
  * Chan, A.S.L. (2015) New Tool for Visualising Proteomics Results. Unpublished
  * MSc thesis. Queen Mary - University of London.
  * 
- * Modified and optimised.
+ * They were modified and optimised.
  *
  * @author Suresh Hewapathirana
  */
 public class MetadataExtractor implements Runnable, DataExtractor {
 
-    private String inputFile;
     private String outputFile;
 
-    SpectrumIdentificationProtocol sip;
+    SpectrumIdentificationProtocol protocol;
     String fixedModifications = "";
     String variableModifications = "";
     DataAccess db;
 
     public MetadataExtractor(String inputFile, String outputFile) {
 
-        this.inputFile = inputFile;
         this.outputFile = outputFile;
 
         try {
@@ -63,7 +61,7 @@ public class MetadataExtractor implements Runnable, DataExtractor {
         MetadataRecord metadata = new MetadataRecord();
 
         // find both fixed and variable modifications
-        sip = db.getSpectrumIdentificationProtocol();
+        protocol = db.getSpectrumIdentificationProtocol();
         findModifications();
 
         // assign vaules to the MetadataRecord object
@@ -80,20 +78,20 @@ public class MetadataExtractor implements Runnable, DataExtractor {
 
     private void findModifications() {
 //    <xsd:element name="ModificationParams" type="ModificationParamsType" minOccurs="0"/>
-        ModificationParams mp = sip.getModificationParams();
-        if (mp == null) {
+        ModificationParams modifParams = protocol.getModificationParams();
+        if (modifParams == null) {
             fixedModifications += "No modifications";
             variableModifications += "No modifications";
             return;
         }
 //    <xsd:element name="SearchModification" type="SearchModificationType" maxOccurs="unbounded"/>
-        List<SearchModification> modList = mp.getSearchModification();
-        if (modList.isEmpty()) {
+        List<SearchModification> modifList = modifParams.getSearchModification();
+        if (modifList.isEmpty()) {
             fixedModifications += "No modifications";
             variableModifications += "No modifications";
             return;
         } else {
-            for (SearchModification modification : modList) {
+            for (SearchModification modification : modifList) {
                 boolean fixed = modification.isFixedMod();
                 String modStr = getModificationString(modification);
                 if (fixed) {
@@ -113,68 +111,60 @@ public class MetadataExtractor implements Runnable, DataExtractor {
     }
 
     private String getModificationString(SearchModification modification) {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder modificationString = new StringBuilder();
         List<String> modificationName = modification.getResidues();
         List<CvParam> cvs = modification.getCvParam();
         
         for (CvParam cv : cvs) {
             if (cv.getCvRef().equals("PSI-MOD") || cv.getCvRef().equals("UNIMOD")) {
-                sb.append(cv.getName());
+                modificationString.append(cv.getName());
                 
 //              <xsd:element name="SpecificityRules" type="SpecificityRulesType" minOccurs="0" maxOccurs="unbounded"/>
                 List<SpecificityRules> rules = modification.getSpecificityRules();
                 if (rules != null && rules.size() > 0) {
 //                  <xsd:element name="cvParam" type="CVParamType" minOccurs="1" maxOccurs="unbounded"/>
                     for (CvParam specificityCV : rules.get(0).getCvParam()) {
-                        //id: MS:1001189
-                        //name: modification specificity peptide N-term
-                        //id: MS:1001190
-                        //name: modification specificity peptide C-term
-                        //id: MS:1002057
-                        //name: modification specificity protein N-term
-                        //id: MS:1002058
-                        //name: modification specificity protein C-term
                         if (specificityCV.getCvRef().equals("PSI-MS")) {
                             String acc = specificityCV.getAccession();
-                            sb.append(" on ");
+                            modificationString.append(" on ");
                             switch (acc) {
-                                case "MS:1001189":
-                                    sb.append("N-term ");
+                                case CV.N_TERM_PEPTIDE_MOD:
+                                    modificationString.append("Peptide N-term ");
                                     break;
-                                case "MS:1001190":
-                                    sb.append("C-term ");
+                                case CV.C_TERM_PEPTIDE_MOD:
+                                    modificationString.append("Peptide C-term ");
                                     break;
-                                case "MS:1002057":
-                                    sb.append("Protein N-term ");
+                                case CV.N_TERM_PROTEIN_MOD:
+                                    modificationString.append("Protein N-term ");
                                     break;
-                                case "MS:1002058":
-                                    sb.append("Protein C-term ");
+                                case CV.C_TERM_PROTEIN_MOD:
+                                    modificationString.append("Protein C-term ");
                             }
                         }
-                        return sb.toString();
+                        return modificationString.toString();
                     }
                 }
                 if (modificationName.size() > 0) {
-                    sb.append(" on ");
+                    modificationString.append(" on ");
                     String mod = modificationName.get(0);
                     if (mod.equals(".")) {
                         //For N or C terminal modifications that can occur on any residue, 
                         // the . character should be used to specify any
                         mod = "Any";
                     }
-                    sb.append(mod);
+                    modificationString.append(mod);
                 }
                 break;
             }
         }
-        return sb.toString();
+        return modificationString.toString();
     }
 
     // Search type 
     // <xsd:element name="SearchType" type="ParamType">  which means minOccurs=1 maxOccurs=1
     // <xsd:documentation> The type of search performed e.g. PMF, Tag searches, MS-MS
     String getSearchType() {
-        Param searchTypeParam = sip.getSearchType();
+        Param searchTypeParam = protocol.getSearchType();
         return searchTypeParam.getCvParam().getName();
     }
 
@@ -205,7 +195,7 @@ public class MetadataExtractor implements Runnable, DataExtractor {
     // <xsd:element name="Enzymes" type="EnzymesType" minOccurs="0"/>
     String getEnzymesUsed() {
 //        <xsd:element name="Enzymes" type="EnzymesType" minOccurs="0"/>
-        Enzymes enzymes = sip.getEnzymes();
+        Enzymes enzymes = protocol.getEnzymes();
         if (enzymes == null) {
             return "Information not available";
         }
@@ -226,7 +216,7 @@ public class MetadataExtractor implements Runnable, DataExtractor {
                 enzymeBuilder.append(" ");
             }
         }
-        if (enzymeBuilder.length() == 0) {//no enzyme name contained
+        if (enzymeBuilder.length() == 0) {//no enzyme name available
             return "Information not available";
         }
         enzymeBuilder.deleteCharAt(enzymeBuilder.length() - 1);

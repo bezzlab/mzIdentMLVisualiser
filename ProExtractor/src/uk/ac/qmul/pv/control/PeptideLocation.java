@@ -12,10 +12,9 @@ import uk.ac.qmul.pv.model.Interval;
 
 /**
  * This class was originally written by
- *
- * Chan, A.S.L. (2015) New Tool for Visualising Proteomics Results. Unpublished
+ * Chan, A. (2015) New Tool for Visualising Proteomics Results. Unpublished
  * MSc thesis. Queen Mary - University of London.
- *
+ * 
  * Modified and optimised this class by introducing parallel streaming
  *
  * @author Modified by Suresh Hewapathirana

@@ -226,21 +226,20 @@ public class ProteinExtractor implements DataExtractor {
                     protein.setCoverage(Double.parseDouble(cvParam.getValue()));
                     isCoverageAvailable = true;
                 }
-                
-//                // match with CV parameters
-//                switch (cvParam.getAccession()) {
-//                    case CV.DISTINCT_PEPTIDES:
-//                        protein.setDistinctPeptides(Integer.parseInt(cvParam.getValue()));
-//                    case CV.PDH_SCORE:
-//                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
-//                        break;
-//                    case CV.MASCOT_SCORE:
-//                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
-//                        break;
-//                     case CV.PEPTIDESHAKER_SCORE:
-//                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
-//                        break;
-//                }
+                // match with CV parameters
+                switch (cvParam.getAccession()) {
+                    case CV.DISTINCT_PEPTIDES:
+                        protein.setDistinctPeptides(Integer.parseInt(cvParam.getValue()));
+                    case CV.PDH_SCORE:
+                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+                        break;
+                    case CV.MASCOT_SCORE:
+                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+                        break;
+                     case CV.PEPTIDESHAKER_SCORE:
+                        protein.setPhdScore(Double.parseDouble(cvParam.getValue()));
+                        break;
+                }
             }
         }
         // protein coverage
@@ -305,7 +304,6 @@ public class ProteinExtractor implements DataExtractor {
 
             try {
                 if ((proteinLength != 0) && (proteinLength != -1)) {
-                    //System.out.println("totalcoverage/proteinLength: " + totalcoverage + "/" + proteinLength);
                     totalPeptideCoverage = (totalcoverage / (double) proteinLength) * 100;
                 } else {
                     return 0.00;
@@ -314,14 +312,13 @@ public class ProteinExtractor implements DataExtractor {
                 System.err.println("Protein Coverage calculation error: " + e.getMessage());
                 return totalPeptideCoverage;
             } catch (Exception e) {
-                System.err.println("Protein Coverage calculation error: " + e.getMessage());
+                System.err.println("Protein Coverage error: " + e.getMessage());
                 return totalPeptideCoverage;
             }
         } else {
             // no peptide found
             return totalPeptideCoverage;
         }
-
         return totalPeptideCoverage;
     }
 }

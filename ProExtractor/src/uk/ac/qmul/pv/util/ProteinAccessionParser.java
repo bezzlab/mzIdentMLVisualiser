@@ -35,7 +35,6 @@ public class ProteinAccessionParser {
 
         ProteinRecord protein = new ProteinRecord();
         String speciesName = "NA";
-        
 
         // 1) Set accession
         String proteinDbAccession = proteinDbSeq.getAccession();
@@ -50,9 +49,7 @@ public class ProteinAccessionParser {
         while (it.hasNext()) {
             CvParam DbSeqCvParam = it.next();
             if (DbSeqCvParam.getAccession().equals(CV.PROTEIN_DESCRIPTION)) {
-
                 String proteinNameFull = DbSeqCvParam.getValue();
-
                 // Regex to extract the accession code, species name and protein name from CvParam
                 // This is not always available, filler values e.g. "Not Available"
                 // or short forms extracted from DB Sequence will be put if this is not available             
@@ -72,14 +69,14 @@ public class ProteinAccessionParser {
                         speciesName = matcherSpeShort.group(1); // species short name
                     }
                 }
-
                 // Full name of protein (replace default "Not Available" value)               
                 Pattern patternName = Pattern.compile("\\s(.*?)OS=");
                 Matcher matcherName = patternName.matcher(proteinNameFull);
                 if (matcherName.find()) {
                     protein.setProteinName(matcherName.group(1));
                 }else{
-                    // shorten protein description
+                    // if protein details not in UniProt format, use the entire description
+                    // if protein description is too long make it short
                     if(proteinNameFull.length()>50){
                         proteinNameFull = proteinNameFull.substring(0, 50) + "...";
                     }
@@ -87,7 +84,6 @@ public class ProteinAccessionParser {
                 }
             }
         }
-
         protein.setSpeciesName(speciesName);
 
         return protein;

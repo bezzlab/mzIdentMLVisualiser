@@ -1,20 +1,34 @@
 #!/usr/bin/env python
 # coding: utf-8
+# -----------------------------------------------------------------------------------------
+# Filename      : 	install.py
+# Authors       : 	Suresh Hewapathirana
+# Date          : 	2016-09-02
+# Description   : 	This script is used to install and uninstall ProViewer plugin to the server.
+#					This will copy installation files to relevant location of the server,
+#					takes backups where nessasary and creates a setting file. It is recommended
+#					to use quick installation, except for GIO Server installation. Furthermore,
+#					Uninstallation will delete files from the server.
+#
+#					This script can be further improved by organising some repititive steps
+#					into functions and wrapping with exeption handling.
+# -----------------------------------------------------------------------------------------
 
 # python 2.7
 # import ConfigParser
-from sys import argv
 import sys
 import os
 import shutil
-from distutils.dir_util import copy_tree
 import time
 import datetime
+from distutils.dir_util import copy_tree
+from sys import argv
+
 
 def main():
 
 	# initialise to enter to the loop
-	menuoption = 5
+	menuoption = 0
 
 	while (menuoption != 4):
 		os.system('clear')
@@ -254,24 +268,6 @@ def advancedInstall():
 	else:
 		exit()
 
-def copy(from_dir, to_dir):
-	'''
-	Copy file or folder to another folder
-	'''
-	if os.path.isdir(from_dir) or os.path.isfile(from_dir):
-		print "File copying started..."
-		print "\nCopying "+ from_dir + " \n--> " + to_dir + "\n"
-		try:
-			copy_tree(from_dir, to_dir)
-			print "copied to " + to_dir
-		except Exception as err:
-			print("File Copying Error\n: {0}".format(err))
-			exit()
-		progressbar()
-	else:
-		print("\033[1;33;40m Sorry, folder path is invalid!\n")
-		exit()
-
 def uninstall():
 
 	# This is a dictionary of filepaths which are failing to delete from this method
@@ -344,13 +340,31 @@ def uninstall():
 	else:
 		exit()
 
+def copy(from_dir, to_dir):
+	'''
+	Copy file or folder to another folder
+	'''
+	if os.path.isdir(from_dir) or os.path.isfile(from_dir):
+		print "File copying started..."
+		print "\nCopying "+ from_dir + " \n--> " + to_dir + "\n"
+		try:
+			copy_tree(from_dir, to_dir)
+			print "copied to " + to_dir
+		except Exception as err:
+			print("File Copying Error\n: {0}".format(err))
+			exit()
+		progressbar()
+	else:
+		print("\033[1;33;40m Sorry, folder path is invalid!\n")
+		exit()
+
 def printMainTitle():
 
 	os.system('clear')
 	print "\n"
-	print " ========================================================================================="
-	print "                                  Install ProViewer                                       "
-	print " =========================================================================================\n"
+	print " ================================================"
+	print "                Install ProViewer                "
+	print " ================================================\n"
 
 	print "Please answer to following questions carefully."
 	print "You can refer examples given below as a guide.\n\n"
@@ -358,7 +372,7 @@ def printMainTitle():
 def printTitle(title):
 
 	print "\n" + title
-	print "---------------------------------------------------\n"
+	print "------------------------------------------------\n"
 
 def getGalaxyRootDir():
 
@@ -368,6 +382,11 @@ def getGalaxyRootDir():
 	galaxy_root_location= raw_input("Galaxy instance root directory:")
 	return galaxy_root_location
 
+# Show progress bar with increamenting value
+# This function was take from :
+# Cordier, B. (2016). Text Progress Bar in the Console. [online] Stackoverflow.com.
+# Available at: http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
+# [Accessed 24 Aug. 2016].
 def progressbar():
 	"""
 	This function  increases the value of the progress bar
@@ -388,7 +407,10 @@ def progressbar():
 
 
 # Print iterations progress
-# This function was take from http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
+# This function was take from :
+# Cordier, B. (2016). Text Progress Bar in the Console. [online] Stackoverflow.com.
+# Available at: http://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
+# [Accessed 24 Aug. 2016].
 def printProgress (iteration, total, prefix = '', suffix = '', decimals = 1, barLength = 100):
     """
     Call in a loop to create terminal progress bar

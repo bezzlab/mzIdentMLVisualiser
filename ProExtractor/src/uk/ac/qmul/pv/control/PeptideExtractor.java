@@ -65,6 +65,7 @@ public class PeptideExtractor implements Runnable, DataExtractor {
         Map<String, Peptide> peptideIdHashMap = db.getPeptideIdHashMap();
         ProteinAccessionParser accessionParser = new ProteinAccessionParser();
 
+        // Travel though peptide evidences
         Iterator it = peptideEvidenceMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
@@ -73,19 +74,24 @@ public class PeptideExtractor implements Runnable, DataExtractor {
             PeptideRecord peptideRecord = new PeptideRecord();
 
             peptideRecord.setID(peptideEvidence.getId());
+            
+            // peptide starting position of the protein
             if(peptideEvidence.getStart() != null){
                 peptideRecord.setStartPossion(peptideEvidence.getStart());
             }
+            // peptide ending position of the protein
             if(peptideEvidence.getEnd() != null){
                 peptideRecord.setEndPossion(peptideEvidence.getEnd());
             }
 
+            // extract accession of the corresponding protien from the DBSequence
             DBSequence dbSeq = dbSequenceIdHashMap.get(peptideEvidence.getDBSequenceRef());
             if (dbSeq != null) {
                 String accessionID = accessionParser.getAccessionID(dbSeq.getAccession());
                 peptideRecord.setAccession(accessionID);
             }
-
+            
+            // peptide sequence and other mofification details
             Peptide pep = peptideIdHashMap.get(peptideEvidence.getPeptideRef());
             if (pep != null) {
                 peptideRecord.setSequence(pep.getPeptideSequence());
@@ -93,7 +99,9 @@ public class PeptideExtractor implements Runnable, DataExtractor {
                 peptideRecord.setModifications(modifications);
                 peptideRecord.setNoOfModifications(StringUtils.countMatches(modifications, ":"));
             }
+            // add peptides to the JSON array
             peptideList.add(JavaToJSON.peptideToJsonArray(peptideRecord));
+            // remove from the iterator to release the memory
             it.remove();
         }
         // Convert Protein list to JSON file
@@ -173,7 +181,6 @@ public class PeptideExtractor implements Runnable, DataExtractor {
                 CvParam cvParam = it.next();
                 modificationName = cvParam.getName();
             }
-
             modificationList += modificationName;
         } else {
 
@@ -199,7 +206,6 @@ public class PeptideExtractor implements Runnable, DataExtractor {
     private String subModToString(SubstitutionModification subMod) {
         return subMod.getOriginalResidue() + " is replaced by "
                 + subMod.getReplacementResidue() + " at :" + subMod.getLocation();
-
     }
 
     /**
@@ -213,7 +219,5 @@ public class PeptideExtractor implements Runnable, DataExtractor {
         long end = System.currentTimeMillis();
         System.out.println(LocalDateTime.now() + ": Peptide : Finished!!!");
         System.out.println("Peptide : Data extraction took " + (end - start) + " milliseconds");
-
     }
-
 }

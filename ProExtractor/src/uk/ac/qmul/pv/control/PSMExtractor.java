@@ -44,7 +44,6 @@ public class PSMExtractor implements Runnable, DataExtractor {
         
         for(SpectrumIdentificationItem sii:siiMap.values()){
             
-            
             List<PeptideEvidenceRef> pepEvidenceRefList = sii.getPeptideEvidenceRef();
             for (PeptideEvidenceRef pepEvidenceRef : pepEvidenceRefList) {
                 psmRecord = new PSMRecord();
