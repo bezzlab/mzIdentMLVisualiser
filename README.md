@@ -46,7 +46,7 @@ Go to the downloaded folder of the repository from the command-line, and execute
  * A backup file will be created for ``` datasets.py``` file  with the file name including current timestamp in ```<your galaxy directory>/lib/webapps/galaxy/api``` location.
 
 ##### GIO specific instructions - Recommented to used advance installation option. 
- * Step 1 - home/galaxy/galaxy
+ * Step 1 - /home/galaxy/galaxy
  * Step 2 - Y
  * Step 3 - Y
  * Step 4 - N 
