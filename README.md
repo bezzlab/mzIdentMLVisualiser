@@ -50,8 +50,8 @@ Go to the downloaded folder of the repository from the command-line, and execute
  * Step 2 - Y
  * Step 3 - Y
  * Step 4 - N 
-           ```/home/galaxy/gio_applications/misc/``` 
-            Y (recommended)
+  - ```/home/galaxy/gio_applications/misc/``` 
+  - Y (recommended)
  * Step 5 - Y
  * Step 6 - Y (this will copy wrapper into ```<your galaxy directory>/tools/gio/Misc/```)
  * Conform Settings - Y
