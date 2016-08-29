@@ -17,7 +17,7 @@ ProViewer is an interactive web visualisation plug-in for the [mzIdentML](http:/
 
 Galaxy visualisation plugin cient-side and server-side files are organised into two folders which are called *proviewer* and *webcontroller* respectively. Additionally, we have a Galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You must integrate both plugin and tool in order to work with the visualisation, as Galaxy tool contains dependency files for the visualisation plugin too. Although the integration of both plugin and tool is mandatory for installation, you can use plugin independently without using Galaxy tool. However, we strongly recommend to use our Galaxy tool prior to visualise mzIdentML files for a much faster visualising speed.
 
-This plugin is already installed into [GIO server](http://gio.sbcs.qmul.ac.uk). Installation instructions for GIO also provided here. 
+This plugin is already installed into [GIO server](http://gio.sbcs.qmul.ac.uk). 
 
 ## Installation
 
@@ -40,21 +40,10 @@ visualization_plugins_directory = config/plugins/visualizations
 
 #### Step 2 - Run the installation setup file
 
-Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings where "advanced install" option alllows to customise settings at the time of the installation. Examples are provided for both quick and advanced installation as a guide. Please follow same format when you provide file paths, epecially ```/``` at the end where required. This setup will perform following actions:
+Go to the downloaded folder of the repository from the command-line, and execute install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings, where "advanced install" option allows to customise settings at the time of the installation. Examples are provided for both quick and advanced installation as a guide. Please follow same format when you provide file paths, especially ```/``` at the end where required. This setup will perform following actions:
  * copy installation files to your server 
  * add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location
  * A backup file will be created for ``` datasets.py``` file  with the file name including current timestamp in ```<your galaxy directory>/lib/webapps/galaxy/api``` location.
-
-##### GIO specific instructions - Recommented to used advance installation option. 
- * Step 1 - /home/galaxy/galaxy
- * Step 2 - Y
- * Step 3 - Y
- * Step 4 - N 
-  - ```/home/galaxy/gio_applications/misc/``` 
-  - Y (recommended)
- * Step 5 - Y
- * Step 6 - Y (this will copy wrapper into ```<your galaxy directory>/tools/gio/Misc/```)
- * Conform Settings - Y
 
 ### Install Galaxy Tool
 
@@ -67,14 +56,6 @@ There, add these parameters anywhere of  the file under ```<toolbox>``` tag:
 <section id="PSI" name="PSI Standards" >
     <tool file="mzIdentMLToJSON/mzIdentMLToJSON.xml" />
 </section>
-```
-
-##### GIO specific instructions: 
-
-please include following line in section "GIO:Miscellaneous" in both ```<your galaxy directory>/config/tool_conf.xml``` and ```<your galaxy directory>/tools/gio/Misc/tool_conf_Misc.xml``` files:
-
-```XML
-<tool file="gio/Misc/mzIdentMLToJSON.xml"/>
 ```
 
 As a guidance for above step, sample configuration file is given in *samples* folder.
