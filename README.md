@@ -29,7 +29,7 @@ In order to proceed, please download our repository to your machine by cloning t
 
 #### Step 1 - Edit the configuration file
 
-You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini*  configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a  *galaxy.ini.sample* file, then make a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file. If this setting has not already set, assign your visualisation directory/uncomment the (last) line as follows:
+You need to make sure, you have enabled visualisation plugins on your Galaxy installation. First, go to your *galaxy.ini*  configuration file (located in ```<your galaxy directory>/config/```). If you do not have a *galaxy.ini* file, but have a  *galaxy.ini.sample* file, then makes a copy of *galaxy.ini.sample* file and rename it to *galaxy.ini*. Secondly, search for *visualization_plugins_directory* setting in that  *galaxy.ini* file. If this setting has not already set, assign your visualisation directory/uncomment the (last) line as follows:
 
 ```bash
 # Visualizations config directory: where to look for individual visualization plugins.
@@ -43,7 +43,7 @@ visualization_plugins_directory = config/plugins/visualizations
 Go to the downloaded folder of the repository from the command-line, and execute the install.py file as ```python install.py``` and follow the given instructions. "Quick install" option will use all the default settings, where "advanced install" option allows to customise settings at the time of the installation. Examples are provided for both quick and advanced installation as a guide. Please follow same format when you provide file paths, especially ```/``` at the end where required. This setup will perform following actions:
  * copy installation files to your server 
  * add all the plugin settings into a settings file called proviewer_settings.ini into ```<your galaxy directory>/config/``` location
- * A backup file will be created for ``` datasets.py``` file  with the file name including current timestamp in ```<your galaxy directory>/lib/webapps/galaxy/api``` location.
+ * A backup file will be created for ``` datasets.py``` file  with the file name including a current timestamp in ```<your galaxy directory>/lib/webapps/galaxy/api``` location.
 
 ### Install Galaxy Tool
 
