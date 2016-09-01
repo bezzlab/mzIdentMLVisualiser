@@ -190,14 +190,14 @@ def advancedInstall():
 	original_name = '%sdatasets.py' % web_api_dir
 	backup_name = '%sdatasets_%s.py.bak' % (web_api_dir, datetime.datetime.now())
 	os.rename(original_name, backup_name)
-	print "Backup created for %s" % backup_name
+	print "Backup created: %s" % backup_name
 
 	from_dir    = os.path.join(current_dir, 'ProViewer/webcontroller')
 	copy(from_dir, web_api_dir)
 
 	#STEP 4 - Copy Galaxy Tool
 	printTitle("STEP 4 - Copy Galaxy Tool")
-	print "\nGalaxy tool folder: absolute folder path where individual tool saved in galaxy\n"
+	print "\nGalaxy tool folder: absolute folder path where tool (both executables and wrapper) saved in galaxy\n"
 	suggested_path = galaxy_root_location + "/tools/mzIdentMLToJSON/"
 	print "Defalut location :" + suggested_path
 	confirm = raw_input("Save to default location(Y/N):")
