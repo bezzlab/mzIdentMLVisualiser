@@ -30,7 +30,6 @@ max(mzid$MB)
 mzid[which((mzid$MB == min(mzid$MB))==TRUE),]
 mzid[which((mzid$MB == max(mzid$MB))==TRUE),]
 
-
 # total number of files
 nrow(mzid)
 # total number of files smaller than 1 GB
@@ -73,7 +72,6 @@ data_by_experiment$x <-  as.numeric(data_by_experiment)
 hist(data_by_experiment$x, breaks = 100, main = "MzIdentML File Sizes Distribution", xlab = "File size(Bytes)", ylab = "Number of files")
 hist(log(data_by_experiment$x), breaks = 100, main = "Histogram of mzIdentML File sizes", xlab = "Log of File size(Bytes)", ylab = "Number of files")
 
-
 # get records from a specific range
 View(data_by_experiment[which(data_by_experiment$Size.Bytes.>500000000 & data_by_experiment$Size.Bytes.<599000000),])
 View(data_by_experiment[which(data_by_experiment$Size.Bytes.>600000000 & data_by_experiment$Size.Bytes.<699000000),])
@@ -83,8 +81,6 @@ View(data_by_experiment[which(data_by_experiment$Size.Bytes.>900000000 & data_by
 # or
 View(data_by_experiment[which(mzid$Size.MB.>500 & mzid$Size.MB.<999),])
 View(data_by_experiment[which(mzid$Size.MB.>220 & mzid$Size.MB.<240),])
-
-
 
 # get records from a specific range
 View(mzid[which(mzid$Size.MB.>500 & mzid$Size.MB.<599),])
@@ -97,5 +93,3 @@ View(mzid[which(mzid$Size.MB.>500 & mzid$Size.MB.<999),])
 View(mzid[which(mzid$Size.MB.>220 & mzid$Size.MB.<240),])
 
 year_average <- aggregate(data_by_experiment[,4,5], list(data_by_experiment$Year), FUN=sum)
-
-
