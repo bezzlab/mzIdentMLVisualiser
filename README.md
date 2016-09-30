@@ -17,7 +17,7 @@ ProViewer is an interactive web visualisation plug-in for the [mzIdentML](http:/
 
 Galaxy visualisation plugin cient-side and server-side files are organised into two folders which are called *proviewer* and *webcontroller* respectively. Additionally, we have a Galaxy tool called "mzIdentMLToJSON" which generates temporary JSON files to speed up data loading for visualisation plugin. You must integrate both plugin and tool in order to work with the visualisation, as Galaxy tool contains dependency files for the visualisation plugin too. Although the integration of both plugin and tool is mandatory for installation, you can use plugin independently without using Galaxy tool. However, we strongly recommend to use our Galaxy tool prior to visualise mzIdentML files for a much faster visualising speed.
 
-This plugin is already installed into [GIO server](http://gio.sbcs.qmul.ac.uk). 
+This plugin is already installed on our own Galaxy server, [GIO](http://gio.sbcs.qmul.ac.uk). Scroll down to the "How to use ProViewer plugin" section to find out how to use it.
 
 ## Installation
 
@@ -64,13 +64,13 @@ That's it! You are ready to use the visualisation plug-in and the tool.
 
 **Note:** You must **restart the server** to reflect the changes.
 
-## How to use visualisation plugin
+## How to use ProViewer plugin
 
 <img src="/Documentation/HowToUse.png" alt="menu"  width="1137" height="373"/>
 
 User *MUST* **login** to the server in order to use visualisation functionality. This visualisation is enabled for mzIdentML files only. Once you upload mzIdentML file(.mzid file extension), it will be added to the history panel. You can visualise the input mzIdentML file by clicking on the visualisation button and selecting the *ProViewer* from the menu. Time taken to load data into the viewer depends on the size of the input file.
 
-## How to use visualisation tool
+## How to use ProViewer tool
 
 <img src="Documentation/galaxytool.png" alt="How to used Galaxy Tool"/>
 
